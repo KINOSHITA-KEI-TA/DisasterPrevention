@@ -70,8 +70,8 @@
 			<h1 id="fh5co-logo"><a href="index.blade.php">Disaster<br>Prevention</a></h1>
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
-					<li class="fh5co-active"><a href="index.blade.php">Home</a></li>
-					<li><a href="blog.blade.php">Blog</a></li>
+					<li class="fh5co-active"><a href="/">Home</a></li>
+					<li><a href="blog.blade.php">Categories</a></li>
 					<li><a href="portfolio.blade.php">Portfolio</a></li>
 					<li><a href="about.blade.php">About</a></li>
 					<li><a href="contact.blade.php">Contact</a></li>
@@ -194,7 +194,7 @@
 						<div class="blog-entry">
 							<a href="#" class="blog-img"><img src="images/img-1.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
 							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
+								<h3><a href="#">震災</a></h3>
 								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
 								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
 								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
@@ -205,7 +205,7 @@
 						<div class="blog-entry">
 							<a href="#" class="blog-img"><img src="images/img-2.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
 							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
+								<h3><a href="#">津波</a></h3>
 								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
 								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
 								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
@@ -216,7 +216,7 @@
 						<div class="blog-entry">
 							<a href="#" class="blog-img"><img src="images/img-3.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
 							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
+								<h3><a href="#">台風</a></h3>
 								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
 								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
 								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
@@ -227,7 +227,7 @@
 						<div class="blog-entry">
 							<a href="#" class="blog-img"><img src="images/img-4.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
 							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
+								<h3><a href="#">パンデミック</a></h3>
 								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
 								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
 								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
