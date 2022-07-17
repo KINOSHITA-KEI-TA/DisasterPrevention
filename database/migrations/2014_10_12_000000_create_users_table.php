@@ -27,7 +27,8 @@ return new class extends Migration
             $table->string("city")->nullable(true);
             $table->string("ku")->nullable(true);
             $table->string("fig")->nullable(true);
-            $table->foreignId('local_government_id')->constrained();
+            $table->foreignId('local_government_id')->default(1);
+            // $table->foreignId('local_government_id')->constrained();
             
             // ボツ
             // $table->foreign('local_government_id')->references('id')->on('localgovernments')->onDelete('cascade');
