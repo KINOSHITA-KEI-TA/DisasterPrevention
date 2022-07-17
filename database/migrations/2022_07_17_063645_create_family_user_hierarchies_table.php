@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('d_m_s', function (Blueprint $table) {
+        Schema::create('family_user_hierarchies', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->foreignId('user_id')->constrained();
-
-            // ぼつ
-            // $table->foreign('to_user_id')->references('id')->on('users')->onDelete('cascade');
-            // $table->foreign('from_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('associate_id')->constrained();
+            $table->foreignId('buddy_id')->constrained();
+            $table->foreignId('family_hierarchy_id')->constrained();
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('d_m_s');
+        Schema::dropIfExists('family_user_hierarchies');
     }
 };
