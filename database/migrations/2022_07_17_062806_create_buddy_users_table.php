@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('d_m_s', function (Blueprint $table) {
+        Schema::create('buddy_users', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
             $table->foreignId('user_id')->constrained();
-
-            // ぼつ
-            // $table->foreign('to_user_id')->references('id')->on('users')->onDelete('cascade');
-            // $table->foreign('from_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('buddy_id')->constrained();
+            $table->boolean("status");
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('d_m_s');
+        Schema::dropIfExists('buddy_users');
     }
 };

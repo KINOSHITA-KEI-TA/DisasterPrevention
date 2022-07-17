@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('buddies', function (Blueprint $table) {
             $table->id();
-            // 未完成
-            // $table->foreignId('user_id')->constrained();
+
+            $table->string("name");
             $table->foreignId('user_id')->constrained();
 
             // ボツ
