@@ -15,9 +15,15 @@ return new class extends Migration
     {
         Schema::create('associates', function (Blueprint $table) {
             $table->id();
-            $table->foreign('parent_user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('child_user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('family_hierarchy_id')->references('id')->on('family_hierarchies')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+            //未完成
+            // $table->foreignId('user_id')->constrained();
+            $table->foreignId('family_hierarchy_id')->constrained();
+
+            // ボツ
+            // $table->foreign('parent_user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('child_user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('family_hierarchy_id')->references('id')->on('family_hierarchies')->onDelete('cascade');
             $table->timestamps();
         });
     }
