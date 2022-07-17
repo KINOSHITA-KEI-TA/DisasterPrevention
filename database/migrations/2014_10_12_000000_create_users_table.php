@@ -21,6 +21,14 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            //追加分
+            $table->string("nickname");
+            $table->string("prefecture");
+            $table->string("city");
+            $table->string("ku");
+            $table->string("fig");
+            $table->foreign('local_government_id')->references('id')->on('localgovernments')->onDelete('cascade');
+            
         });
     }
 

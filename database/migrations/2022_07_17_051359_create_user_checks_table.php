@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('user_checks', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            //期間
-            $table->integer("period"); 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('check_item_id')->references('id')->on('check_items')->onDelete('cascade');
+            $table->boolean("status");
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('user_checks');
     }
 };

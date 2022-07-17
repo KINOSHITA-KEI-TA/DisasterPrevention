@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('family_hierarchies', function (Blueprint $table) {
             $table->id();
+            $table->string("relationship");
             $table->timestamps();
         });
     }
