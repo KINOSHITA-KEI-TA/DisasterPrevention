@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-const glob = require('glob');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,11 +11,6 @@ const glob = require('glob');
  |
  */
 
-glob.sync('resources/js/*.js').map(function (file) {
-    mix.js(file, 'public/js');
-});
-    
-glob.sync('resources/sass/*.scss').map(function(file) {
-    mix.sass(file, 'public/css');
-});
-// mix.sourceMaps();
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .sourceMaps();
