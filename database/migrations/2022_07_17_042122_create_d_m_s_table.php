@@ -16,8 +16,13 @@ return new class extends Migration
         Schema::create('d_m_s', function (Blueprint $table) {
             $table->id();
             $table->text("message");
-            $table->foreign('to_user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('from_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+            // 未完成
+            // $table->foreignId('user_id')->constrained();
+
+            // ぼつ
+            // $table->foreign('to_user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('from_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

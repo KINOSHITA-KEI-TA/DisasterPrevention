@@ -27,7 +27,10 @@ return new class extends Migration
             $table->string("city");
             $table->string("ku");
             $table->string("fig");
-            $table->foreign('local_government_id')->references('id')->on('localgovernments')->onDelete('cascade');
+            $table->foreignId('local_government_id')->constrained();
+            
+            // ボツ
+            // $table->foreign('local_government_id')->references('id')->on('localgovernments')->onDelete('cascade');
             
         });
     }

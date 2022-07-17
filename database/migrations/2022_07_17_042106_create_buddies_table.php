@@ -15,8 +15,13 @@ return new class extends Migration
     {
         Schema::create('buddies', function (Blueprint $table) {
             $table->id();
-            $table->foreign('to_user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('from_user_id')->references('id')->on('users')->onDelete('cascade');
+            // 未完成
+            // $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+
+            // ボツ
+            // $table->foreign('to_user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('from_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean("status");
             $table->timestamps();
         });
