@@ -22,11 +22,11 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             //追加分
-            $table->string("nickname");
-            $table->string("prefecture");
-            $table->string("city");
-            $table->string("ku");
-            $table->string("fig");
+            $table->string("nickname")->nullable(true);
+            $table->string("prefecture")->nullable(true);
+            $table->string("city")->nullable(true);
+            $table->string("ku")->nullable(true);
+            $table->string("fig")->nullable(true);
             $table->foreignId('local_government_id')->constrained();
             
             // ボツ
