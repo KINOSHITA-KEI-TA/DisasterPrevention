@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('disaster_checks', function (Blueprint $table) {
+            // 削除予定
             $table->id();
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

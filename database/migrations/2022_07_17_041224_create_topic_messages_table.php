@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('topic_messages', function (Blueprint $table) {
             $table->id();
+            $table->text("message");
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
