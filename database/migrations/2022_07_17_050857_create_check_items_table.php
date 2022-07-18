@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('check_items', function (Blueprint $table) {
             $table->id();
+            $table->string("check_title");
             $table->timestamps();
         });
     }
