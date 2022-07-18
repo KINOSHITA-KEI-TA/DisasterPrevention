@@ -71,15 +71,15 @@
 			<nav id="fh5co-main-menu" role="navigation">
 				<ul>
 					<li class="fh5co-active"><a href="index.html">Home</a></li>
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="portfolio.html">Portfolio</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="contact.html">Contact</a></li>
+					<li><a href="blog.html">My Page</a></li>
+					<li><a href="portfolio.html">categories</a></li>
+					<li><a href="about.html">buddy</a></li>
+					<li><a href="contact.html">dm</a></li>
 				</ul>
 			</nav>
 
 			<div class="fh5co-footer">
-				<p><small>&copy; 2016 Blend Free HTML5. All Rights Reserved.</span> <span>Designed by <a href="http://freehtml5.co/" target="_blank">FreeHTML5.co</a> </span> <span>Demo Images: <a href="https://unsplash.com/" target="_blank">Unsplash</a></span></small></p>
+				<p><small>&copy; 2016 Blend Free HTML5. All Rights Reserved.</span> <span>Designed by <p href="http://freehtml5.co/" target="_blank">FreeHTML5.co</p> </span> <span>Demo Images: <p href="https://unsplash.com/" target="_blank">Unsplash</p></span></small></p>
 				<ul>
 					<li><a href="#"><i class="icon-facebook2"></i></a></li>
 					<li><a href="#"><i class="icon-twitter2"></i></a></li>
@@ -94,50 +94,47 @@
 			<aside id="fh5co-hero" class="js-fullheight">
 				<div class="flexslider js-fullheight">
 					<ul class="slides">
-				   	<li style="background-image: url(images/img_bg_1.jpg);">
-				   		<div class="overlay"></div>
-				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
-					   				<div class="slider-text-inner">
-					   					<h1>Intuitive <strong></strong> is How Give We the User New Superpowers</h1>
-					   					<h2>Free html5 templates Made by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></h2>
+					<li style="background-image: url(images/658989_m.jpg);">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
+									<div class="slider-text-inner">
+										<h1>東日本大震災の祈り</h1>
 											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-monitor"></i> Live Preview</a> <a class="btn btn-primary btn-learn">Learn More<i class="icon-arrow-right3"></i></a></p>
-					   				</div>
-					   			</div>
-					   		</div>
-				   		</div>
-				   	</li>
-				   	<li style="background-image: url(images/img_bg_2.jpg);">
-				   		<div class="overlay"></div>
-				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
-					   				<div class="slider-text-inner">
-					   					<h1>We are Happy to Create Newest Modern Websites</h1>
-											<h2>Free html5 templates Made by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></h2>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li style="background-image: url(images/080AME0226_TP_V.jpg);">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
+									<div class="slider-text-inner">
+										<h1>くらしを守る</h1>
 											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-monitor"></i> Live Preview</a> <a class="btn btn-primary btn-learn">Learn More<i class="icon-arrow-right3"></i></a></p>
-					   				</div>
-					   			</div>
-					   		</div>
-				   		</div>
-				   	</li>
-				   	<li style="background-image: url(images/img_bg_3.jpg);">
-				   		<div class="overlay"></div>
-				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
-					   				<div class="slider-text-inner">
-					   					<h1>Download our Free HTML5 Bootstrap Template</h1>
-											<h2>Free html5 templates Made by <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></h2>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li style="background-image: url(images/2824559_l.jpg);">
+						<div class="overlay"></div>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
+									<div class="slider-text-inner">
+										<h1>東日本大震災から復興した気仙沼</h1>
 											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-monitor"></i> Live Preview</a> <a class="btn btn-primary btn-learn">Learn More<i class="icon-arrow-right3"></i></a></p>
-					   				</div>
-					   			</div>
-					   		</div>
-				   		</div>
-				   	</li>
-				  	</ul>
-			  	</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					</ul>
+				</div>
 			</aside>
 			
 			<div class="fh5co-narrow-content">
@@ -160,7 +157,7 @@
 								<i class="icon-search4"></i>
 							</div>
 							<div class="fh5co-text">
-								<h3>Explore</h3>
+								<h3>blog</h3>
 								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
 							</div>
 						</div>
@@ -191,49 +188,45 @@
 				</div>
 			</div>
 			<div class="fh5co-narrow-content">
-				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Recent Blog</h2>
+				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Categories</h2>
 				<div class="row row-bottom-padded-md">
 					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
 						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-1.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+							<a href="#" class="blog-img"><img src="images/23880633_s.jpeg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
 							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
+								<h3><a href="#">防災対策</a></h3>
+								<p>防災対策についての部屋</p>
+								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
 						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-2.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+							<a href="#" class="blog-img"><img src="images/24151121_s.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
 							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
+								<h3><a href="#">ハザードマップ</a></h3>
+								<p>各地域のハザードマップ</p>
+								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
 						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-3.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+							<a href="#" class="blog-img"><img src="images/23311032_s.jpeg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
 							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
+								<h3><a href="#">防災グッズ</a></h3>
+								<p>こんなにある防災グッズ</p>
+								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
 						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-4.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+							<a href="#" class="blog-img"><img src="images/23845735_s.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
 							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
+								<h3><a href="#">震災</a></h3>
+								<p>震災について話し合おう</p>
+								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
 							</div>
 						</div>
 					</div>
@@ -244,13 +237,13 @@
 				<div class="fh5co-narrow-content">
 					<div class="row">
 						<div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
-							<h1 class="fh5co-heading-colored">Get in touch</h1>
+							<h1 class="fh5co-heading-colored">お問合せはこちら</h1>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<p class="fh5co-lead">Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-							<p><a href="#" class="btn btn-primary">Learn More</a></p>
+							<p class="fh5co-lead"></p>
+							<p><a href="#" class="btn btn-primary">お問合せ</a></p>
 						</div>
 						
 					</div>
