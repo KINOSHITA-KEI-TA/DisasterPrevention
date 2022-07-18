@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('main');
 });
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::get("/category", [App\Http\Controllers\CategoryController::class, 'index']);
 
 Auth::routes();
 
