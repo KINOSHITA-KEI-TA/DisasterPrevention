@@ -1,33 +1,16 @@
-
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
+
+<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Marble &mdash; Free HTML5 Bootstrap Website Template by FreeHTML5.co</title>
+	<title>DisasterPrevention</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FreeHTML5.co" />
 
-  	<!-- 
-	//////////////////////////////////////////////////////
 
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FreeHTML5.co
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	-->
-
-  	<!-- Facebook and Twitter integration -->
+	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
 	<meta property="og:url" content=""/>
@@ -56,39 +39,15 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 
-	</head>
+</head>
+
+
+
 	<body>
 	<div id="fh5co-page">
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
-
-			<h1 id="fh5co-logo"><a href="index.html">Marble</a></h1>
-			<nav id="fh5co-main-menu" role="navigation">
-				<ul>
-					<li class="fh5co-active"><a href="index.html">Home</a></li>
-					<li><a href="blog.html">My Page</a></li>
-					<li><a href="portfolio.html">categories</a></li>
-					<li><a href="about.html">buddy</a></li>
-					<li><a href="contact.html">dm</a></li>
-				</ul>
-			</nav>
-
-			<div class="fh5co-footer">
-				<p><small>&copy; 2016 Blend Free HTML5. All Rights Reserved.</span> <span>Designed by <p href="http://freehtml5.co/" target="_blank">FreeHTML5.co</p> </span> <span>Demo Images: <p href="https://unsplash.com/" target="_blank">Unsplash</p></span></small></p>
-				<ul>
-					<li><a href="#"><i class="icon-facebook2"></i></a></li>
-					<li><a href="#"><i class="icon-twitter2"></i></a></li>
-					<li><a href="#"><i class="icon-instagram"></i></a></li>
-					<li><a href="#"><i class="icon-linkedin2"></i></a></li>
-				</ul>
-			</div>
-
-		</aside>
+		@extends('common.aside')
 
 		<div id="fh5co-main">
 			<aside id="fh5co-hero" class="js-fullheight">
@@ -146,8 +105,8 @@
 								<i class="icon-settings"></i>
 							</div>
 							<div class="fh5co-text">
-								<h3>Strategy</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+								<h3>setting</h3>
+								<p>マイページ </p>
 							</div>
 						</div>
 					</div>
@@ -158,7 +117,7 @@
 							</div>
 							<div class="fh5co-text">
 								<h3>blog</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+								<p>Wordpress </p>
 							</div>
 						</div>
 					</div>
@@ -169,8 +128,8 @@
 								<i class="icon-paperplane"></i>
 							</div>
 							<div class="fh5co-text">
-								<h3>Direction</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+								<h3>dm</h3>
+								<p>ダイレクトメッセージ </p>
 							</div>
 						</div>
 					</div>
@@ -181,7 +140,7 @@
 							</div>
 							<div class="fh5co-text">
 								<h3>Expertise</h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+								<p> </p>
 							</div>
 						</div>
 					</div>
@@ -243,7 +202,7 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
 							<p class="fh5co-lead"></p>
-							<p><a href="#" class="btn btn-primary">お問合せ</a></p>
+							<p><a href="/contact" class="btn btn-primary">お問合せ</a></p>
 						</div>
 						
 					</div>

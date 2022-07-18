@@ -9,7 +9,7 @@ add_user_info
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('addLocalGovernment') }}">
+                    <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="row mb-3">
