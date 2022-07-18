@@ -6,6 +6,8 @@ use App\Http\Requests\StoreLocalGovernmentRequest;
 use App\Http\Requests\UpdateLocalGovernmentRequest;
 use App\Models\LocalGovernment;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LocalGovernmentController extends Controller
 {
@@ -21,19 +23,16 @@ class LocalGovernmentController extends Controller
 
     public function addUser() {
         $local_governments = DB::table('local_governments')->get();
-        // dd($local_governments);
-        foreach($local_governments as $local_government){
-            // dd($local_government);
-        }
-
-        // return view('add_user_info');
-        // return compact('add_user_info', $local_governments);
         return view('add_user_info',compact('local_governments'));
-        // return view('add_user_info',compact($local_governments));
     }
 
-    public function addLocalGovernment(){
-        
+    public function addLocalGovernment(Request $request){
+        $user = Auth::user();
+        $id = Auth::id();
+        $user->local_government_id = $request->local_government;
+        $user->save();
+        return view('main');
+        //ポップアップ
     }
 
     /**
