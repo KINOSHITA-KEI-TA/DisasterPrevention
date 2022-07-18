@@ -24,4 +24,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/ooo', [App\Http\Controllers\LocalGovernmentController::class, 'addUser']);
+Route::get('/view_localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'addUser']);
+Route::post('/save_localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'addLocalGovernment']);
