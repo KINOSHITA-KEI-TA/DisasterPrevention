@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('local_governments', function (Blueprint $table) {
             $table->id();
+            $table->integer("local_government_code");
             $table->string("name");
             $table->timestamps();
         });
