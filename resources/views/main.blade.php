@@ -102,7 +102,7 @@
 					<div class="col-md-6">
 						<div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
 							<div class="fh5co-icon">
-								<i class="icon-settings"></i>
+								<a href="/mypage"><i class="icon-settings"></i></a>
 							</div>
 							<div class="fh5co-text">
 								<h3>setting</h3>
@@ -113,7 +113,8 @@
 					<div class="col-md-6">
 						<div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
 							<div class="fh5co-icon">
-								<i class="icon-search4"></i>
+							<!-- Wordpressのurl -->
+								<a href="/"><i class="icon-document-text"></i></a>
 							</div>
 							<div class="fh5co-text">
 								<h3>blog</h3>
@@ -125,7 +126,7 @@
 					<div class="col-md-6">
 						<div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
 							<div class="fh5co-icon">
-								<i class="icon-paperplane"></i>
+								<a href="/"><i class="icon-paperplane"></i></a>
 							</div>
 							<div class="fh5co-text">
 								<h3>dm</h3>
@@ -136,10 +137,10 @@
 					<div class="col-md-6">
 						<div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
 							<div class="fh5co-icon">
-								<i class="icon-params"></i>
+								<a href="/buddy"><i class="icon-group"></i></a>
 							</div>
 							<div class="fh5co-text">
-								<h3>Expertise</h3>
+								<h3>Buddy</h3>
 								<p> </p>
 							</div>
 						</div>
