@@ -7,6 +7,10 @@
             <li><a href="/category">カテゴリー</a></li>
             <li><a href="/buddy">バディ</a></li>
             <li><a href="/contact">dm</a></li>
+            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </ul>
     </nav>
     <div class="fh5co-footer">
