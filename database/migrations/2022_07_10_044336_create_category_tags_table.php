@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('category_tags', function (Blueprint $table) {
             $table->id();
             $table->string("category_tag_name");
-            
+            $table->string("url");
             $table->timestamps();
         });
     }
