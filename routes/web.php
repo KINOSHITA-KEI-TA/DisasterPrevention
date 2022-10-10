@@ -18,6 +18,12 @@ Route::get('/', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+Route::get('/mypage', function () {
+    return view('mypage');
+});
+Route::get('/buddy', function () {
+    return view('buddy');
+});
 Route::get("/category", [App\Http\Controllers\CategoryController::class, 'index']);
 
 Auth::routes();

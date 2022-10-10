@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Request;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,11 @@ class CategoryController extends Controller
     {
         //
         
-        return view('category');
+        $data = \DB::table('categories')->get(); 
+
+        // dd($date);
+        return view('category', compact('data'));
+        // return view('category');
     }
 
     /**

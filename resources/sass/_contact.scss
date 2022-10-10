@@ -1,0 +1,11 @@
+
+.mskImg {
+  mask-image: url("img/star.svg");/*マスクレイヤーとして使用する画像*/
+  mask-repeat: no-repeat;
+  mask-position: 3% 0;
+  mask-size: auto 100%;
+  -webkit-mask-image: url("img/star.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: 3% 0;
+  -webkit-mask-size: auto 100%;
+}
