@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('user_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('category_id')->constrained();
+            // $table->foreignId('category_id')->constrained();
+            $table->foreignId('topic_id')->constrained();
+            $table->foreignId('category_tag_id')->constrained();
 
             // ボツ
             // $table->foreign('user_id')->references('id')->on('users');
