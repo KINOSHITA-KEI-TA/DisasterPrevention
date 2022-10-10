@@ -32,3 +32,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/view_localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'addUser']);
 Route::post('/save_localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'addLocalGovernment']);
+
+// Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout']);
