@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('buddy_id')->constrained();
-            $table->boolean("status")->default(true);
+            $table->boolean("status")->default(false);
             $table->timestamps();
         });
     }
