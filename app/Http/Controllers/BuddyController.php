@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBuddyRequest;
 use App\Http\Requests\UpdateBuddyRequest;
 use App\Models\Buddy;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use APP\Models\BuddyUser;
 
 class BuddyController extends Controller
 {
@@ -15,7 +18,10 @@ class BuddyController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return view('test_buddy',['users' => $users]);
+
     }
 
     /**
@@ -25,7 +31,39 @@ class BuddyController extends Controller
      */
     public function create()
     {
-        //
+        $from_user = new User();
+        $from_user = Auth::user();
+        // dd($to_user);
+        $to_user = Auth::user();
+        $to_user_id = 2;
+
+        $buddy = new Buddy();
+        $buddy->name = 'test';
+        $buddy->user_id = 1;
+        $buddy->status = false;
+        $buddy->save();
+        // dd($from_user);
+
+        // buddies()はuseモデルのfunction
+        $from_user->buddies()->attach($buddy->id);
+
+
+
+
+        // return BuddyUser::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        //     // 'local_government_id' => $data['id'],
+        // ]);
+
+
+
+
+        $test_users = Auth::id();
+        // dd($test_users);
+        //テスト用ルート
+        return view('test_buddy_create');
     }
 
     /**
