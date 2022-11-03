@@ -153,9 +153,13 @@ return [
     |
     */
 
+<<<<<<< Updated upstream
     'attributes' => [
         'password' => 'パスワード',
         
     ],
+=======
+    'attributes' => [],
+>>>>>>> Stashed changes
 
 ];
