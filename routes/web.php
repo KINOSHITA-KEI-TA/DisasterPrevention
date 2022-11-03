@@ -32,10 +32,10 @@ Route::get('/buddy', function () {
 Route::get('test_buddy',[App\Http\Controllers\BuddyController::class,'create'])->name('buddy_test.create');
 Route::get('test_buddy_index',[App\Http\Controllers\BuddyController::class,'index'])->name('buddy_test.index');
 Route::post('test_buddy_create',[App\Http\Controllers\BuddyController::class,'create'])->name('buddy_register.create');
-
 //ここまで
 
 Route::get("/category", [App\Http\Controllers\CategoryController::class, 'index']);
+Route::post("/create", [App\Http\Controllers\CategoryController::class, 'create']);
 
 Auth::routes();
 
