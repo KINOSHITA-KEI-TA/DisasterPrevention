@@ -47,6 +47,23 @@
 		@extends('common.aside')
 
 		<div id="fh5co-main">
+		<form class="row g-3" action="{{ url('/create') }}" method="POST">
+		{{ csrf_field() }}
+			<div class="col-md-6">
+				<input type="text" name="CategoryName" class="form-control" placeholder="カテゴリ名">
+			</div>
+			<div class="col-md-4">
+				<select id="inputState" name="TagName" class="form-select">
+				<option selected>タグ</option>
+				@foreach ($tag as $tag)
+                <option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
+                @endforeach
+				</select>
+			</div>
+			<div class="col-12">
+				<button type="submit" class="btn btn-primary">作成</button>
+			</div>
+		</form>
 			<div class="fh5co-narrow-content">
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Read Our Blog</h2>
 				<div class="row row-bottom-padded-md">

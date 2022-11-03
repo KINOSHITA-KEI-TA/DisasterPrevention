@@ -24,7 +24,9 @@ Route::get('/mypage', function () {
 Route::get('/buddy', function () {
     return view('buddy');
 });
+
 Route::get("/category", [App\Http\Controllers\CategoryController::class, 'index']);
+Route::post("/create", [App\Http\Controllers\CategoryController::class, 'create']);
 
 Auth::routes();
 

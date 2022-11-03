@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
-use Request;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -19,9 +19,10 @@ class CategoryController extends Controller
         //
         
         $data = \DB::table('categories')->get(); 
+        $tag = \DB::table('category_tags')->get(); 
 
         // dd($date);
-        return view('category', compact('data'));
+        return view('category', compact('data', 'tag'));
         // return view('category');
     }
 
@@ -30,8 +31,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request) 
     {
+        // dd($request);
+        $post = new Category();
+        $post->category_name = $request->CategoryName;
+        $post->category_tag_id = $request->TagName;
+        
+        $post->save();
+        
+        return redirect('category');
         //
     }
 
