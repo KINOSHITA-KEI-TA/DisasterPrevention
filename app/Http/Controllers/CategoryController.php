@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\CategoryTag;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -16,14 +17,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data = Category::with(['category_tags'])->get();
+        $tag = CategoryTag::get();
+        // dd($data);
+        return view('category', compact('data','tag'));
         
-        $data = \DB::table('categories')->get(); 
-        $tag = \DB::table('category_tags')->get(); 
-
-        // dd($date);
-        return view('category', compact('data', 'tag'));
-        // return view('category');
     }
 
     /**
@@ -37,7 +35,6 @@ class CategoryController extends Controller
         $post = new Category();
         $post->category_name = $request->CategoryName;
         $post->category_tag_id = $request->TagName;
-        
         $post->save();
         
         return redirect('category');

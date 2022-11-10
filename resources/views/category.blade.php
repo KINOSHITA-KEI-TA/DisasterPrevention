@@ -70,7 +70,7 @@
 					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
 						@foreach($data as $item)
 							<div class="blog-entry">
-								<a href="#" class="blog-img"><img src="images/img-1.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+								<a href="#" class="blog-img"><img src="{{asset($item->category_tags->url)}}" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
 								<div class="desc">
 									<h3><a href="#">{{ $item->category_name }}</a></h3>
 									<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
