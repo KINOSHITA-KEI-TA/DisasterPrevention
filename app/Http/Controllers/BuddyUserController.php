@@ -6,17 +6,40 @@ use App\Http\Requests\StoreBuddyUserRequest;
 use App\Http\Requests\UpdateBuddyUserRequest;
 use App\Models\BuddyUser;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BuddyUserController extends Controller
 {
 
     // 相互フォロー
-    public function follow()
+    public function addFollow(Request $request)
     {
-        // フォローを追加 user_idが自分
-        auth()->user()->follows()->attach(User::find(1));
+        $addFollowId = $request->get('addFollowId');
+        // フォローする user_idが自分
+        auth()->user()->follows()->attach(User::find($addFollowId));
+        
+    }
+    public function addFollower()
+    {
         // フォロワーを追加
         auth()->user()->followers()->attach(User::find(2));
+    }
+
+    public function deleteFollow(Request $request)
+    {
+        $loginUserId = Auth::id();
+        $followerUserId = $request->get('followerId');
+
+        DB::table('follower_user')->where(
+            [
+                ['user_id','=',$loginUserId],
+                ['follower_id','=', $followerUserId]
+            ])->delete();
+        // dd(auth()->user()->followers());
+        // $deleteFollowUser = 
+        return view('/home');
 
     }
 
@@ -27,7 +50,10 @@ class BuddyUserController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $users = User::all();
+
+        return view('o-test.follow-user',compact('user','users'));
     }
 
     /**
