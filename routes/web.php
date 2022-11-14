@@ -21,10 +21,10 @@ Route::get('/contact', function () {
 Route::get('/mypage', function () {
     return view('mypage');
 });
-Route::get('/buddy', function () {
-    return view('buddy');
-});
-
+// Route::get('/buddy', function () {
+//     return view('buddy');
+// });
+Route::get('/buddy',[App\Http\Controllers\BuddyController::class,'myrequestlist'])->name('buddy_user.index');
 // buddyテスト用
 // Route::get('/test_buddy', function () {
 //     return view('test_buddy');

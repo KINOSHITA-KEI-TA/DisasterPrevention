@@ -9,8 +9,27 @@
 	<meta name="keywords" content="free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FreeHTML5.co" />
 
+    <div style="text-align:center">
+        メモ（削除予定） <br>
+        ※左のバディは、自分のバディ一覧 <br>
+        ※バディを申請する際は、相手のマイページで申請する <br>
+        ※申請待ちのバディは、バディページで確認できる <br>
+   
+        以下バディ一覧 <br>
+        <br>
+        ※フォーム作成必須 <br>
+        @foreach($users as $user)
+            <p>{{ $user->name }}</p>
+          <button>申請</button>
+          <br>
+        @endforeach
+        <br>
+        ここまで <br>
+   
+    </div>
 
-	<!-- Facebook and Twitter integration -->
+	
+    <!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
 	<meta property="og:url" content=""/>
