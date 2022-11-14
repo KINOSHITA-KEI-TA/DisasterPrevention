@@ -48,4 +48,8 @@ Route::post('/save_localgovernment', [App\Http\Controllers\LocalGovernmentContro
 Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
 // 相互フォロー
-Route::get('/follow',[App\Http\Controllers\BuddyUserController::class, 'follow'])->name('follow');
+Route::post('/follow',[App\Http\Controllers\BuddyUserController::class, 'addFollow'])->name('addFollow');
+Route::get('/testusers',[App\Http\Controllers\BuddyUserController::class, 'index'])->name('index');
+Route::get('/testfollow',[App\Http\Controllers\BuddyUserController::class, 'addFollower'])->name('addFollower');
+// 解除
+Route::post('/deletefollow',[App\Http\Controllers\BuddyUserController::class, 'deleteFollow'])->name('deleteFollow');

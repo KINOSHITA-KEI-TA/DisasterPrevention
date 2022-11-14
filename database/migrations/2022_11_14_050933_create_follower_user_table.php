@@ -18,6 +18,9 @@ return new class extends Migration
             // $table->timestamps();
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('follower_id');
+
+            // 重複禁止、機能するか要確認
+            $table->unique(['user_id', 'follower_id']);
         });
     }
 

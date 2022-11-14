@@ -58,5 +58,14 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follower_user', 'user_id', 'follower_id');
     }
 
+    public function follow_each()
+    {
+        //ユーザーがフォロー中のユーザーを取得
+        $userIds = $this->follows()->pluck('users.id')->toArray();
+        //相互フォロー中のユーザーを取得
+        $follow_each = $this->followers()->whereIn('users.id',$userIds)->pluck('users.id')->toArray();
+        return $follow_each;
+
+    }
     
 }
