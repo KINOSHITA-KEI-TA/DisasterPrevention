@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBuddyUserRequest;
 use App\Http\Requests\UpdateBuddyUserRequest;
 use App\Models\BuddyUser;
+use App\Models\User;
 
 class BuddyUserController extends Controller
 {
+
+    // 相互フォロー
+    public function follow()
+    {
+        // フォローを追加 user_idが自分
+        auth()->user()->follows()->attach(User::find(1));
+        // フォロワーを追加
+        auth()->user()->followers()->attach(User::find(2));
+
+    }
+
     /**
      * Display a listing of the resource.
      *
