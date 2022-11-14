@@ -46,3 +46,6 @@ Route::post('/save_localgovernment', [App\Http\Controllers\LocalGovernmentContro
 
 // Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout']);
+
+// 相互フォロー
+Route::get('/follow',[App\Http\Controllers\BuddyUserController::class, 'follow'])->name('follow');
