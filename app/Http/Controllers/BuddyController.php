@@ -24,6 +24,13 @@ class BuddyController extends Controller
 
     }
 
+    public function myrequestlist()
+    {
+        $users = User::all();
+        
+        return view('buddy',['users' => $users]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
