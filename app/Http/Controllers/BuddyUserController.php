@@ -17,7 +17,7 @@ class BuddyUserController extends Controller
     public function addFollow(Request $request)
     {
         $addFollowId = $request->get('addFollowId');
-        // フォローする user_idが自分
+        // フォローする user_idはフォローされる側
         auth()->user()->follows()->attach(User::find($addFollowId));
         
     }
@@ -43,6 +43,34 @@ class BuddyUserController extends Controller
 
     }
 
+    //ユーザー検索 削除予定
+    public function searchIndex(Request $request)
+    {
+        //ユーザー一覧をページネイトで取得
+        $users = User::paginate(20);
+        //検索フォームで入力された値を取得する
+        $search = $request->input('search');
+        //クエリビルダ
+        $query = User::query();
+        if($search){
+            //全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($search, 's');
+            //単語を半角スペースで区切り、配列にする
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1,PREG_SPLIT_NO_EMPTY);
+
+            foreach($wordArraySearched as $value){
+                $query->where('name', 'like', '%'.$value.'%');
+            }
+            $users = $query->paginate(20);
+        }
+
+        //folloer_idはログインユーザー。user_idのユーザーを、ログインユーザーがフォローしている
+        //フォローしている（follower_idがログインユーザーのidである）ユーザーを配列で取得
+        $followUserIdArray = auth()->user()->follows()->pluck('users.id')->toArray();
+        return view('o-test.user_search',compact('users','search','followUserIdArray'));
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -52,8 +80,10 @@ class BuddyUserController extends Controller
     {
         $user = Auth::user();
         $users = User::all();
+        //フォローしている（follower_idがログインユーザーのidである）ユーザーを配列で取得
+        $followUserIdArray = auth()->user()->follows()->pluck('users.id')->toArray();
 
-        return view('o-test.follow-user',compact('user','users'));
+        return view('o-test.follow-user',compact('user','users','followUserIdArray'));
     }
 
     /**

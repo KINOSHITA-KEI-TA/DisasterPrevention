@@ -5,19 +5,22 @@
 <p>id,name</p>
 @foreach($users as $user)
 {{$user->id}} ,{{$user->name}}
-<form method="POST" action="{{route('addFollow',['addFollowId' => $user->id])}}">
-    @csrf
-    @if(Auth::user() != $user)
-        <button type="submit">フォローする</button>
-    @endif
-</form>  
-<form method="POST" action="{{route('deleteFollow',['followerId' => $user->id])}}">
-    @csrf
-    @if(Auth::user() != $user)
-        <button type="submit">フォロー解除</button>
-    @endif
-</form>  
-    
+@if(!in_array($user->id, $followUserIdArray))
+    <form method="POST" action="{{route('addFollow',['addFollowId' => $user->id])}}">
+        @csrf
+        @if(Auth::user() != $user)
+            <button type="submit">フォローする</button>
+        @endif
+    </form>  
+@endif
+@if(in_array($user->id, $followUserIdArray))
+    <form method="POST" action="{{route('deleteFollow',['followerId' => $user->id])}}">
+        @csrf
+        @if(Auth::user() != $user)
+            <button type="submit">フォロー解除</button>
+        @endif
+    </form>
+@endif
     <br>
 @endforeach
 
