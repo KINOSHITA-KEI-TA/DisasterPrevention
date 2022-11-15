@@ -17,7 +17,7 @@ class BuddyUserController extends Controller
     public function addFollow(Request $request)
     {
         $addFollowId = $request->get('addFollowId');
-        // フォローする user_idが自分
+        // フォローする user_idはフォローされる側
         auth()->user()->follows()->attach(User::find($addFollowId));
         
     }
@@ -63,7 +63,11 @@ class BuddyUserController extends Controller
             }
             $users = $query->paginate(20);
         }
-        return view('o-test.user_search',compact('users','search'));
+
+        //folloer_idはログインユーザー。user_idのユーザーを、ログインユーザーがフォローしている
+        //フォローしている（follower_idがログインユーザーのidである）ユーザーを配列で取得
+        $followUserIdArray = auth()->user()->follows()->pluck('users.id')->toArray();
+        return view('o-test.user_search',compact('users','search','followUserIdArray'));
 
     }
 
@@ -76,8 +80,10 @@ class BuddyUserController extends Controller
     {
         $user = Auth::user();
         $users = User::all();
+        //フォローしている（follower_idがログインユーザーのidである）ユーザーを配列で取得
+        $followUserIdArray = auth()->user()->follows()->pluck('users.id')->toArray();
 
-        return view('o-test.follow-user',compact('user','users'));
+        return view('o-test.follow-user',compact('user','users','followUserIdArray'));
     }
 
     /**
