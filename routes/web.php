@@ -53,3 +53,8 @@ Route::get('/testusers',[App\Http\Controllers\BuddyUserController::class, 'index
 Route::get('/testfollow',[App\Http\Controllers\BuddyUserController::class, 'addFollower'])->name('addFollower');
 // 解除
 Route::post('/deletefollow',[App\Http\Controllers\BuddyUserController::class, 'deleteFollow'])->name('deleteFollow');
+
+//ユーザー検索(仮置き)
+Route::get('/usersearch',[App\Http\Controllers\BuddyUserController::class, 'searchIndex'])->name('searchIndex');
+
+//ユーザーマイページ

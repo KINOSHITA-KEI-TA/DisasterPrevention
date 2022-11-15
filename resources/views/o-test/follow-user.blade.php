@@ -16,7 +16,7 @@
     @if(Auth::user() != $user)
         <button type="submit">フォロー解除</button>
     @endif
-</form>  
+</form>
     
     <br>
 @endforeach
