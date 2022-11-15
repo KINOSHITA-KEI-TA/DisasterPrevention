@@ -19,13 +19,14 @@ class BuddyUserController extends Controller
         $addFollowId = $request->get('addFollowId');
         // フォローする user_idはフォローされる側
         auth()->user()->follows()->attach(User::find($addFollowId));
+        return back();
         
     }
-    public function addFollower()
-    {
-        // フォロワーを追加
-        auth()->user()->followers()->attach(User::find(2));
-    }
+    // public function addFollower()
+    // {
+    //     // フォロワーを追加
+    //     auth()->user()->followers()->attach(User::find(2));
+    // }
 
     public function deleteFollow(Request $request)
     {
@@ -34,12 +35,13 @@ class BuddyUserController extends Controller
 
         DB::table('follower_user')->where(
             [
-                ['user_id','=',$loginUserId],
-                ['follower_id','=', $followerUserId]
+                // ['user_id','=',$loginUserId],
+                // ['follower_id','=', $followerUserId]
+                ['user_id','=',$followerUserId],
+                ['follower_id','=', $loginUserId]
             ])->delete();
         // dd(auth()->user()->followers());
-        // $deleteFollowUser = 
-        return view('/home');
+        return back();
 
     }
 
