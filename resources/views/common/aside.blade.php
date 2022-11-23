@@ -11,6 +11,13 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
+            {{-- テストページ一覧※削除予定 --}}
+            <li><a href="/testpagelist">【大野】テストページ一覧※削除予定</a></li>
+            @if(Auth::user())
+                <li>{{Auth::user()->name}}さんがログイン中</li>
+            @else
+                <li><a href="/login">ログイン</a></li>
+            @endif
         </ul>
     </nav>
     <div class="fh5co-footer">

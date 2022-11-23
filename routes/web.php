@@ -49,7 +49,7 @@ Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'
 
 // 相互フォロー /testusersで実験可能
 Route::post('/follow',[App\Http\Controllers\BuddyUserController::class, 'addFollow'])->name('addFollow');
-Route::get('/testusers',[App\Http\Controllers\BuddyUserController::class, 'index'])->name('index');
+Route::get('/testusers',[App\Http\Controllers\BuddyUserController::class, 'index'])->name('FollowIndex');
 Route::get('/testfollow',[App\Http\Controllers\BuddyUserController::class, 'addFollower'])->name('addFollower');
 // 解除
 Route::post('/deletefollow',[App\Http\Controllers\BuddyUserController::class, 'deleteFollow'])->name('deleteFollow');
@@ -58,3 +58,8 @@ Route::post('/deletefollow',[App\Http\Controllers\BuddyUserController::class, 'd
 Route::get('/usersearch',[App\Http\Controllers\BuddyUserController::class, 'searchIndex'])->name('searchIndex');
 
 //ユーザーマイページ
+
+//テスト用ページ一覧
+Route::get('/testpagelist', function(){
+    return view('o-test.pagelist');
+});
