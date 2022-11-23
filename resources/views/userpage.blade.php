@@ -52,26 +52,28 @@
 		<div id="fh5co-main">
 			<aside id="fh5co-hero" class="js-fullheight">
 				<div class="flexslider js-fullheight">
-                    <h3>【大野】一旦、ユーザー検索→ユーザー個人ページ遷移で実装。カテゴリー機能実装完了次第、修正予定。</h2>
-                    <br>
-                    {{$user->name}}さんのページ
-                    {{-- 相互フォロー機能追加予定 --}}
-                    @if(!in_array($user->id, $followUserIdArray))
-                    <form method="POST" action="{{route('addFollowFromUserPage',['addFollowId' => $user->id])}}">
-                        <h4>フォローのたびにリダイレクトのエラー発生（フォロー、フォロー解除自体はできる）※リダイレクトは非同期で実装予定。</h4>
-                        @csrf
-                        @if(Auth::user() != $user)
-                            <button style="background: skyblue" type="submit">フォローする</button>
-                        @endif
-                    </form>
-                    @endif
-                    @if(in_array($user->id, $followUserIdArray))
-                        <form method="POST" action="{{route('deleteFollow',['followerId' => $user->id])}}">
+                    @if($user != null)
+                        <h3>【大野】一旦、ユーザー検索→ユーザー個人ページ遷移で実装。カテゴリー機能実装完了次第、修正予定。</h2>
+                        <br>
+                        {{$user->name}}さんのページ
+                        {{-- 相互フォロー機能追加予定 --}}
+                        @if(!in_array($user->id, $followUserIdArray))
+                        <form method="POST" action="{{route('addFollowFromUserPage',['addFollowId' => $user->id])}}">
+                            <h4>フォローのたびにリダイレクトのエラー発生（フォロー、フォロー解除自体はできる）※リダイレクトは非同期で実装予定。</h4>
                             @csrf
                             @if(Auth::user() != $user)
-                                <button style="background: yellow" type="submit">フォロー解除</button>
+                                <button style="background: skyblue" type="submit">フォローする</button>
                             @endif
                         </form>
+                        @endif
+                        @if(in_array($user->id, $followUserIdArray))
+                            <form method="POST" action="{{route('deleteFollow',['followerId' => $user->id])}}">
+                                @csrf
+                                @if(Auth::user() != $user)
+                                    <button style="background: yellow" type="submit">フォロー解除</button>
+                                @endif
+                            </form>
+                        @endif
                     @endif
 				</div>
 			</aside>

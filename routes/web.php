@@ -52,7 +52,7 @@ Route::post('/follow',[App\Http\Controllers\BuddyUserController::class, 'addFoll
 Route::get('/testusers',[App\Http\Controllers\BuddyUserController::class, 'index'])->name('FollowIndex');
 Route::get('/testfollow',[App\Http\Controllers\BuddyUserController::class, 'addFollower'])->name('addFollower');
 //検索画面→ユーザー画面→フォロー
-Route::get('/', [App\Http\Controllers\UserPage::class, 'showUser'])->name('addFollowFromUserPage');
+Route::get('/addFollowFromUserPage', [App\Http\Controllers\UserPage::class, 'showUser'])->name('addFollowFromUserPage');
 Route::post('/userpage/{id}', [App\Http\Controllers\UserPage::class, 'showUser'])->name('addFollowFromUserPage');
 
 // 解除
