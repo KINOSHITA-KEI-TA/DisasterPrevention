@@ -61,3 +61,8 @@
     {{-- ページネーター --}}
     {{-- {{$institutions->appends(request()->input()->links())}} --}}
 </div>
+
+<br>
+<a href="/">ホームに戻る</a>
+<br>
+<a href="/testpagelist">テストページ一覧に戻る</a>

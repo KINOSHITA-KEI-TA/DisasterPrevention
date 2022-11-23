@@ -31,3 +31,8 @@
         <br>
     @endif
 @endforeach
+
+<br>
+<a href="/">ホームに戻る</a>
+<br>
+<a href="/testpagelist">テストページ一覧に戻る</a>
