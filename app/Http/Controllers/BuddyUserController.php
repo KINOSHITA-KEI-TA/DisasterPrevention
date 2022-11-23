@@ -20,8 +20,30 @@ class BuddyUserController extends Controller
         // フォローする user_idはフォローされる側
         auth()->user()->follows()->attach(User::find($addFollowId));
         return back();
-        
     }
+
+    //検索画面→ユーザー画面→フォロー
+    // public function addFollowFromUserPage(Request $request){
+    //     $addFollowId = $request->get('addFollowId');
+    //     // フォローする user_idはフォローされる側
+    //     auth()->user()->follows()->attach(User::find($addFollowId));
+    //     $user = User::find($request->id);
+    //     return redirect(route('showUser', ['id' => $user->id]));
+    //     // if($request->getMethod() == 'GET')
+    //     // {
+    //     //     return view('main');
+    //     // }
+    //     // elseif($request->getMethod() == 'POST')
+    //     // {
+    //     //     return back();
+    //     // }
+    //     // else
+    //     // {
+
+    //     // }
+    // }
+
+
     // public function addFollower()
     // {
     //     // フォロワーを追加

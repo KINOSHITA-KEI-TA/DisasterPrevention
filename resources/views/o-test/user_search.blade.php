@@ -8,8 +8,12 @@
 <div>相互フォローが完了したユーザー一覧</div>
 @foreach($users as $user)
     @if(in_array($user->id,Auth::user()->follow_each()))
-        <div style="background: greenyellow"">
+        <div style="background: greenyellow">
+            <form method="POST" action="{{route('showUser', ['id'=>$user->id])}}">
+            @csrf
             {{$user->id}} {{$user->name}}
+            <button type="submit">ユーザーページへ</button>
+            </form>
         </div>    
         <br>
     @endif
@@ -33,7 +37,11 @@
 <div>以下、ユーザー一覧</div>
 @foreach ($users as $user)
 #####################################################################################################
-<div style="background: #eeeeee">ID:{{$user->id}},ユーザー名：{{$user->name}}</div>
+<form method="POST" action="{{route('showUser', ['id' => $user->id])}}">
+    @csrf
+    <div style="background: #eeeeee">ID:{{$user->id}},ユーザー名：{{$user->name}}</div>
+    <button type="submit">ユーザーページへ</button>
+</form>
     {{-- @foreach($followUserIdArray as $a)
         <div>followUserIdArray:{{$a}}</div>
     @endforeach --}}

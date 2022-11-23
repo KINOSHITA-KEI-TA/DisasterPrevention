@@ -51,6 +51,10 @@ Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'
 Route::post('/follow',[App\Http\Controllers\BuddyUserController::class, 'addFollow'])->name('addFollow');
 Route::get('/testusers',[App\Http\Controllers\BuddyUserController::class, 'index'])->name('FollowIndex');
 Route::get('/testfollow',[App\Http\Controllers\BuddyUserController::class, 'addFollower'])->name('addFollower');
+//検索画面→ユーザー画面→フォロー
+Route::get('/', [App\Http\Controllers\UserPage::class, 'showUser'])->name('addFollowFromUserPage');
+Route::post('/userpage/{id}', [App\Http\Controllers\UserPage::class, 'showUser'])->name('addFollowFromUserPage');
+
 // 解除
 Route::post('/deletefollow',[App\Http\Controllers\BuddyUserController::class, 'deleteFollow'])->name('deleteFollow');
 
@@ -58,7 +62,8 @@ Route::post('/deletefollow',[App\Http\Controllers\BuddyUserController::class, 'd
 Route::get('/usersearch',[App\Http\Controllers\BuddyUserController::class, 'searchIndex'])->name('searchIndex');
 
 //ユーザーマイページ
-Route::get('/mypage', [App\Http\Controllers\User::class, 'show'])->name('mypage');
+Route::get('/mypage', [App\Http\Controllers\UserPage::class, 'show'])->name('mypage');
+Route::post('/userpage/{id}', [App\Http\Controllers\UserPage::class, 'showUser'])->name('showUser');
 
 //テスト用ページ一覧
 Route::get('/testpagelist', function(){
