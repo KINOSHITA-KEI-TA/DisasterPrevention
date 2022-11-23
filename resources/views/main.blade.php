@@ -205,8 +205,19 @@
 							<p class="fh5co-lead"></p>
 							<p><a href="/contact" class="btn btn-primary">お問合せ</a></p>
 						</div>
-						
 					</div>
+
+                    {{-- テストページ一覧※削除予定 --}}
+                    <div class="row">
+                        <h2>以下テスト用リンク</h2>
+                        <li><a href="/testpagelist">【大野】テストページ一覧※削除予定</a></li>
+                        @if(Auth::user())
+                            <li><a href="/mypage">マイページ</a></li>
+                            <li>【大野確認用】{{Auth::user()->name}}さんがログイン中</li>
+                        @else
+                            <li><a href="/login">ログイン</a></li>
+                        @endif
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -222,6 +233,8 @@
 	<script src="js/jquery.waypoints.min.js"></script>
 	<!-- Flexslider -->
 	<script src="js/jquery.flexslider-min.js"></script>
+
+
 	
 	
 	<!-- MAIN JS -->
