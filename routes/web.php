@@ -58,6 +58,7 @@ Route::post('/deletefollow',[App\Http\Controllers\BuddyUserController::class, 'd
 Route::get('/usersearch',[App\Http\Controllers\BuddyUserController::class, 'searchIndex'])->name('searchIndex');
 
 //ユーザーマイページ
+Route::get('/mypage', [App\Http\Controllers\User::class, 'show'])->name('mypage');
 
 //テスト用ページ一覧
 Route::get('/testpagelist', function(){
