@@ -212,7 +212,7 @@
                         <h2>以下テスト用リンク</h2>
                         <li><a href="/testpagelist">【大野】テストページ一覧※削除予定</a></li>
                         @if(Auth::user())
-                            <li><a href="/mypage">マイページ</a></li>
+                            {{-- <li><a href="/mypage">マイページ</a></li> --}}
                             <li>【大野確認用】{{Auth::user()->name}}さんがログイン中</li>
                         @else
                             <li><a href="/login">ログイン</a></li>
