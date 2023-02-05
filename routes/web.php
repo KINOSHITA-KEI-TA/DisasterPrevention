@@ -73,3 +73,5 @@ Route::get('/testpagelist', function(){
 
 //掲示板(作成中)
 Route::get('/board', [App\Http\Controllers\BoardController::class, 'index'])->name('board');
+Route::get('/board/create', [App\Http\Controllers\BoardController::class, 'create'])->name('create');
+Route::post('/board/post/{id}',[\App\Http\Controllers\BoardController::class, 'post'])->name('post');

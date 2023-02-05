@@ -18,14 +18,19 @@ class BoardController extends Controller
         return View('o-test.board');
     }
 
+    public function create() 
+    { 
+        return View('o-test.createpost');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function post()
     {
-        //
+        
     }
 
     /**

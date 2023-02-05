@@ -16,7 +16,11 @@
             <p>ナビ</p>
         </div>
         <div class="content">
-            <p>コンテンツ</p>
+            <p>スレッド一覧</p>
+            投稿 <br>
+            投稿 <br>
+            投稿 <br>
+            
         </div>
     </main>
 </body>
