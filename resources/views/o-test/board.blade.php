@@ -11,12 +11,13 @@
     <header class="header">
         ヘッダー
     </header>
-    <div class="container">
-        <p class="aaa">ナビ</p>
+    <main>
+        <div class="container">
+            <p>ナビ</p>
+        </div>
         <div class="content">
-            {{-- <p style="font-size: 89px;">コンテンツ</p> --}}
             <p>コンテンツ</p>
         </div>
-    </div>
+    </main>
 </body>
 </html>
