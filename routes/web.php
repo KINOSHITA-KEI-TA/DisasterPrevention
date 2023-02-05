@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BoardController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -71,4 +72,4 @@ Route::get('/testpagelist', function(){
 });
 
 //掲示板(作成中)
-// Route::get('/board', )
+Route::get('/board', [App\Http\Controllers\BoardController::class, 'index'])->name('board');

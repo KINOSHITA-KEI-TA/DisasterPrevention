@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class BoardController extends Controller
@@ -14,7 +15,7 @@ class BoardController extends Controller
      */
     public function index()
     {
-        //
+        return View('o-test.board');
     }
 
     /**
