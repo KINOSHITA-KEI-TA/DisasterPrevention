@@ -69,3 +69,6 @@ Route::post('/userpage/{id}', [App\Http\Controllers\UserPage::class, 'showUser']
 Route::get('/testpagelist', function(){
     return view('o-test.pagelist');
 });
+
+//掲示板(作成中)
+// Route::get('/board', )
