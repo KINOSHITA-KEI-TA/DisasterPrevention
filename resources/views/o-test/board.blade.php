@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset("./css/board.css") }}">
 </head>
 <body>
-    <header class="header">
+    <header>
         ヘッダー
     </header>
     <main>
