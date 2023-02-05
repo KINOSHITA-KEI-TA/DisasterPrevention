@@ -12,7 +12,7 @@
         ヘッダー
     </header>
     <main>
-        <div class="container">
+        <div class="navi">
             <p>ナビ</p>
         </div>
         <div class="content">
