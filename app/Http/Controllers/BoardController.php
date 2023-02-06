@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
 {
@@ -20,7 +21,8 @@ class BoardController extends Controller
 
     public function create() 
     { 
-        return View('o-test.createpost');
+        $user = Auth::user();
+        return View('o-test.createpost',compact('user'));
     }
 
     /**
@@ -30,7 +32,7 @@ class BoardController extends Controller
      */
     public function post()
     {
-        
+        //投稿を保存する処理
     }
 
     /**

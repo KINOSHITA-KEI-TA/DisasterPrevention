@@ -8,9 +8,11 @@
 </head>
 <body>
     投稿入力
-    <form method="POST" action="{{ route('post') }}">
-        <button type="submit">投稿する</button>
-    </form>
+    @if ($user)
+        <form method="POST" action="{{ route('post', ['user_id' => $user->id]) }}">
+            <button type="submit">投稿する</button>
+        </form>    
+    @endif
     
 </body>
 </html>
