@@ -8,7 +8,9 @@
 </head>
 <body>
     投稿入力
-    {{-- <form action="{{ route() }}"></form> --}}
+    <form method="POST" action="{{ route('post') }}">
+        <button type="submit">投稿する</button>
+    </form>
     
 </body>
 </html>
