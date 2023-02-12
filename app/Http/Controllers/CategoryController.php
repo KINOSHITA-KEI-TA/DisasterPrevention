@@ -18,10 +18,11 @@ class CategoryController extends Controller
     public function index()
     {
         $data = Category::with(['category_tags'])->get();
-        $tag = CategoryTag::get();
+        $tags = CategoryTag::get();
+        $genre = $tags;
         // dd($data);
-        return view('category', compact('data','tag'));
-        
+        return view('category', compact('data','tags', 'genre'));
+
     }
 
     /**
@@ -29,14 +30,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request) 
+    public function create(Request $request)
     {
         // dd($request);
         $post = new Category();
         $post->category_name = $request->CategoryName;
         $post->category_tag_id = $request->TagName;
         $post->save();
-        
         return redirect('category');
         //
     }
@@ -61,6 +61,9 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
+        $category_filter = User::where('age', '>', 20)
+            ->where('gender', '=', 'male')
+            ->get();
     }
 
     /**
