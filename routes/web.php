@@ -37,6 +37,13 @@ Route::post('test_buddy_create',[App\Http\Controllers\BuddyController::class,'cr
 Route::get("/category", [App\Http\Controllers\CategoryController::class, 'index']);
 Route::post("/create", [App\Http\Controllers\CategoryController::class, 'create']);
 
+Route::get('/category/{id}/topic', [App\Http\Controllers\TopicController::class, 'index']);
+
+Route::get('/topic/{id}/topic_message', [App\Http\Controllers\TopicMessageController::class,'index']);
+Route::post('/topic/{id}/topic_message', [App\Http\Controllers\TopicMessageController::class,'store']);
+// Route::get('/topic/{id}/topic_message', [App\Http\Controllers\TopicMessageController::class,'show']);
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

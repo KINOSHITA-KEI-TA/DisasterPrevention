@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Topic;
+use App\Models\Category;
+use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
@@ -13,9 +15,12 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
+        $category = Category::with('topics')->find($id);
+        // dd($category);
+        return view('topic', compact('category'));
     }
 
     /**
@@ -45,9 +50,10 @@ class TopicController extends Controller
      * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function show(Topic $topic)
+    public function show()
     {
         //
+
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTopicMessageRequest;
 use App\Http\Requests\UpdateTopicMessageRequest;
 use App\Models\TopicMessage;
+use App\Models\Topic;
 
 class TopicMessageController extends Controller
 {
@@ -13,9 +14,12 @@ class TopicMessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
+        $topic_messages = Topic::with('messages')->find($id);
+        // dd($messages);
+        return view('topic_message', compact('topic_messages'));
     }
 
     /**
@@ -34,9 +38,15 @@ class TopicMessageController extends Controller
      * @param  \App\Http\Requests\StoreTopicMessageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTopicMessageRequest $request)
+    public function store( $topic, $request)
     {
-        //
+        $message = new Message([
+            'body' => $request->get('body')
+        ]);
+
+        $topic->messages()->save($message);
+
+        return response()->json($message);
     }
 
     /**
@@ -45,9 +55,10 @@ class TopicMessageController extends Controller
      * @param  \App\Models\TopicMessage  $topicMessage
      * @return \Illuminate\Http\Response
      */
-    public function show(TopicMessage $topicMessage)
+    public function show()
     {
         //
+        
     }
 
     /**

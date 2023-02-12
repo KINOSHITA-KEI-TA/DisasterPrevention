@@ -25,7 +25,7 @@
 	<link rel="shortcut icon" href="favicon.ico">
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-	
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -36,7 +36,7 @@
 	<link rel="stylesheet" href="css/flexslider.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
-
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 
@@ -47,165 +47,39 @@
 		@extends('common.aside')
 
 		<div id="fh5co-main">
-		<form class="row g-3" action="{{ url('/create') }}" method="POST">
-		{{ csrf_field() }}
-			<div class="col-md-6">
-				<input type="text" name="CategoryName" class="form-control" placeholder="カテゴリ名">
-			</div>
-			<div class="col-md-4">
-				<select id="inputState" name="TagName" class="form-select">
-				<option selected>タグ</option>
-				@foreach ($tag as $tag)
-                <option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
-                @endforeach
-				</select>
-			</div>
-			<div class="col-12">
-				<button type="submit" class="btn btn-primary">作成</button>
-			</div>
-		</form>
+			<form class="category-form d-flex animate-box" action="{{ url('/create') }}" method="POST">
+			{{ csrf_field() }}
+				<div class="col-md-4 category-form-tag">
+					<select id="inputState" name="TagName" class="form-select category-form-input">
+					<option selected>ジャンル</option>
+					@foreach ($tags as $tag)
+					<option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
+					@endforeach
+					</select>
+				</div>
+				<div class="col-md-6 category-form-text">
+					<input type="text" name="CategoryName" class="form-control" placeholder="新規作成カテゴリ名入力">
+				</div>
+				<div class="col-12">
+					<button type="submit" class="btn btn-primary btn-category-form">新規作成</button>
+				</div>
+			</form>
 			<div class="fh5co-narrow-content">
-				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Read Our Blog</h2>
-				<div class="row row-bottom-padded-md">
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						@foreach($data as $item)
-							<div class="blog-entry">
-								<a href="#" class="blog-img"><img src="{{asset($item->category_tags->url)}}" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-								<div class="desc">
-									<h3><a href="#">{{ $item->category_name }}</a></h3>
-									<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-									<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-									<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-								</div>
-							</div>
-						@endforeach
-					</div>
-					<!-- <div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-2.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-3.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-4.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
+				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">カテゴリ一覧</h2>
+				<div class="row row-bottom-padded-md category-list animate-box">
 
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
+					@foreach($data as $item)
 						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-5.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+							<a href="{{ url('/category/'.$item->id.'/topic') }}" class="blog-img"><img src="{{asset($item->category_tags->url)}}" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
 							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
+								<h3><a href="{{ url('/category/'.$item->id.'/topic') }}">{{ $item->category_name }}</a></h3>
+								<a href="{{ url('/category/'.$item->id.'/topic') }}"class="lead">Read More <i class="icon-arrow-right3"></i></a>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-6.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-3.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-4.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-1.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-2.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-3.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/img-4.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">Inspirational Website</a></h3>
-								<span><small>by Admin </small> / <small> Web Design </small> / <small> <i class="icon-comment"></i> 14</small></span>
-								<p>Design must be functional and functionality must be translated into visual aesthetics</p>
-								<a href="#" class="lead">Read More <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div> -->
+					@endforeach
 				</div>
 			</div>
-		
+
 			<div id="get-in-touch">
 				<div class="fh5co-narrow-content">
 					<div class="row">
@@ -218,7 +92,6 @@
 							<p class="fh5co-lead"></p>
 							<p><a href="/contact" class="btn btn-primary">お問合せ</a></p>
 						</div>
-						
 					</div>
 				</div>
 			</div>
@@ -235,8 +108,7 @@
 	<script src="js/jquery.waypoints.min.js"></script>
 	<!-- Flexslider -->
 	<script src="js/jquery.flexslider-min.js"></script>
-	
-	
+
 	<!-- MAIN JS -->
 	<script src="js/main.js"></script>
 

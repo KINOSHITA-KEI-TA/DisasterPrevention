@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->text("message");
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('topic_id')->constrained();
 
             // ボツ
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

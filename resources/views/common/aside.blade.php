@@ -11,6 +11,25 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
+            @switch(Request::path())
+            @case('category')
+                <form class="category-select-form animate-box" action="{{ url('/show') }}" method="get">
+                {{ csrf_field() }}
+                    <select id="inputState" name="CategoryName" class="form-select category-select-input ">
+                    <option selected>ジャンル</option>
+                    @foreach ($genre as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
+                    @endforeach
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-category-select">検索</button>
+                </form>
+                @break
+
+            @case('about')
+                <p></p>
+                @break
+
+            @endswitch
         </ul>
     </nav>
     <div class="fh5co-footer">
