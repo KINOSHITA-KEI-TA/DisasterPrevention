@@ -1167,3 +1167,296 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+/* マイページ */
+.MyProfile{
+  display: flex;
+  }
+.MyList{
+  padding: 0 0 0 30px;
+  width: 70%;
+}
+#ListTitle{
+  margin-bottom: 0em !important;
+}
+.MyCategory-list{
+  display: flex;
+  height: 300px;
+  width: 100%;
+  overflow-x: scroll;
+}
+.Area{
+  display: flex;
+}
+/* .support-img {
+  height: 200px;
+  width: 20%;
+  margin: 30px;
+  flex-shrink: 0;
+} */
+.support-box {
+  display: flex;
+  width: 100%;
+  height: auto;
+  overflow-x: scroll;
+}
+.support-img {
+  height: 200px;
+  width: 200px;
+  margin: 30px;
+  flex-shrink: 0;
+  background-color: lightslategray;
+}
+.MyListContent{
+  font-size: 23px;
+}
+.MyListTitle{
+  font-size: 15px !important;
+}
+#toggle {
+  display: none;
+  cursor: pointer;
+  }
+#menu {
+  display: none;
+  list-style:none;
+  }
+#toggle:checked + #menu {
+  display: block;
+  }
+.MypageBuddyList{
+  margin-bottom: 1.5em;
+} 
+.fixed_btn
+{
+  position: fixed;
+  bottom: 20px; 
+  right: 75px;
+  padding: 10px 43px;
+  border-radius: 20px;
+  background-color:#46b8da;
+  border-color: #ebebeb;
+  font-weight: 300;
+  color: #ffffff;
+}
+.fixed_btn_question
+{
+  position: fixed;
+  bottom: 20px; 
+  right: 15px;
+  padding: 4px 20px;
+  border-radius: 10px;
+  background-color:#999999;
+  border-color: #ebebeb;
+  font-weight: 300;
+  color: #ffffff;
+}
+.fixed_btn_Application{
+  position: fixed;
+  bottom: 20px; 
+  right: 75px;
+  padding: 10px 43px;
+  border-radius: 20px;
+  background-color:#ceb538;
+  border-color: #ebebeb;
+  font-weight: 300;
+  color: #ffffff;
+}
+.fixed_btn_Member{
+  position: fixed;
+  bottom: 20px; 
+  right: 75px;
+  padding: 10px 43px;
+  border-radius: 20px;
+  background-color:#ce3b38;
+  border-color: #ebebeb;
+  font-weight: 300;
+  color: #ffffff;
+}
+/* モーダル表示 */
+.modal-wrapper {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 40px 10px;
+  text-align: center;
+}
+
+.modal-button {
+    color: #ffffff;
+    background-color: #999999;
+    font-weight: bold;
+    text-align: center;
+    cursor :pointer;
+    transition: all 0.3s;
+    display: block;
+    margin-bottom: 1px;
+    max-width:300px;
+    text-decoration: none;
+}
+.modal-button-a{
+  color: #fff;
+}
+.modal-button:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(2px);
+  transform: translateY(2px);/*下に動く*/
+
+}
+
+/*アイコンを表示*/
+.modal-button:after {
+}
+
+/*ラベルホバー時*/
+.modal-button:hover {
+  color: #FFFFFF;
+  opacity: 0.5;
+  transition: .6s;
+}
+
+.modal-wrapper:not(:target) {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+}
+
+.modal-wrapper:target {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .4s, visibility .4s;
+}
+
+.modal-wrapper::after {
+  display: inline-block;
+  height: 100%;
+  margin-left: -.05em;
+  vertical-align: middle;
+  content: ""
+}
+
+.modal-wrapper .modal-window {
+  box-sizing: border-box;
+  display: inline-block;
+  z-index: 20;
+  position: relative;
+  width: 70%;
+  max-width: 600px;
+  /* padding: 10px 30px 25px; */
+  border-radius: 2px;
+  /* background: #fff; */
+  box-shadow: 0 0 30px rgba(0, 0, 0, .6);
+  vertical-align: middle
+}
+
+.modal-wrapper .modal-window .modal-content {
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left
+}
+
+.modal_title {
+  font-size: 1.5em;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+.modal-content{
+  padding: 20px;
+}
+
+.modal_title::before,
+.modal_title::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+}
+
+/* h2 プライマリカラー*/
+.modal_title:before{
+  border-bottom: 4px solid #6bb6ff;
+  width: 100%;
+}
+/* h2 セカンダリカラー*/
+.modal_title:after{
+  border-bottom: 4px solid #c8e4ff;
+  width: 100%;
+}
+
+.modal-content p {
+  margin: 10px 0 0 0;
+}
+
+.modal-overlay {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .8)
+}
+
+.modal-wrapper .modal-close {
+  z-index: 20;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 35px;
+  color: #95979c !important;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 35px;
+  text-align: center;
+  text-decoration: none;
+  text-indent: 0
+}
+
+.modal-wrapper .modal-close:hover {
+  color: #2b2e38 !important
+}
+/* マイページ_バディリスト */
+.BuddyList{
+  width: 45%;
+  height: 70vh;
+  overflow: auto;
+}
+.BuddyListTitle{
+  border-bottom:solid 1px #d8e5f3;
+  padding-bottom: 10px;
+}
+.BuddyListContent{
+  display: flex;
+  align-items: center;
+  padding: 10px 10px 10px 20px;
+  background-color: #f0f0f0fe;
+}
+.BuddyListContentImage{
+  align-items: center;
+}
+.BuddyListContentImg{
+  border-radius: 10px;
+}
+.BuddyListContentName{
+  display: flex;
+  align-items: center;
+  height: 10vh;
+}
+.BuddyListName{
+  margin: 0px 10px;
+}
+.BuddyListName_btn_Member_box{
+  margin-right: 0;
+  margin-left: auto;
+}
+.BuddyListName_btn_Member{
+  border-radius: 20px;
+  background-color:#ce3b38;
+  color: #fff;
+  border-color: #ce3b38;
+}
+/*# sourceMappingURL=style.css.map */
+
