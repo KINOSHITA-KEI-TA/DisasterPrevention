@@ -21,6 +21,9 @@ Route::get('/contact', function () {
 Route::get('/mypage', function () {
     return view('mypage');
 });
+Route::get('/mypage_list', function () {
+    return view('mypage_list');
+});
 // Route::get('/buddy', function () {
 //     return view('buddy');
 // });
