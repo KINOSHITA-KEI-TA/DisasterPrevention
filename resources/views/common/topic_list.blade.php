@@ -5,7 +5,7 @@
             <li class="fh5co-active">
             @foreach($category->topics as $topic)
                 <li class="fh5co-active">
-                    <a href="{{ url('/topic/'.$topic->id.'/topic_message') }}">{{$topic->topic}}</a></li>
+                    <a href="{{ url('/topic/topic_message/'.$category->id.'/'.$topic->id.'') }}">{{$topic->topic}}</a></li>
                 </li>
             @endforeach
         </ul>

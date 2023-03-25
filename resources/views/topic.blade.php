@@ -46,8 +46,18 @@
 	<div id="fh5co-page">
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 		@extends('common.topic_list')
-
-
+		<div id="fh5co-main">
+			<form class="category-form d-flex animate-box" action="{{ url('/topic/create') }}" method="POST">
+			{{ csrf_field() }}
+				<div class="col-md-6 category-form-text">
+					<input type="hidden" name="category_id" value="{{ $id }}">
+					<input type="text" name="TopicName" class="form-control" placeholder="新規作成チャンネル">
+				</div>
+				<div class="col-12">
+					<button type="submit" class="btn btn-primary btn-category-form">新規作成</button>
+				</div>
+			</form>
+		</div>
 	</div>
 
 	<!-- jQuery -->

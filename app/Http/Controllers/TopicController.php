@@ -19,8 +19,7 @@ class TopicController extends Controller
     {
         //
         $category = Category::with('topics')->find($id);
-        // dd($category);
-        return view('topic', compact('category'));
+        return view('topic', compact('category', 'id'));
     }
 
     /**
@@ -28,9 +27,14 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $post = new Topic();
+        $post->topic = $request->TopicName;
+        $post->category_id = $request->category_id;
+        $post->save();
+        return redirect("/category/{$request->category_id}/topic");
     }
 
     /**

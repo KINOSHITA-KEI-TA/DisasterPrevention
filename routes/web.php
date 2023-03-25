@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::middleware(['web'])->group(function () {
+    // ...
+});
 Route::get('/', function () {
     return view('main');
 });
@@ -38,11 +40,9 @@ Route::get("/category", [App\Http\Controllers\CategoryController::class, 'index'
 Route::post("/create", [App\Http\Controllers\CategoryController::class, 'create']);
 
 Route::get('/category/{id}/topic', [App\Http\Controllers\TopicController::class, 'index']);
-
-Route::get('/topic/{id}/topic_message', [App\Http\Controllers\TopicMessageController::class,'index']);
-Route::post('/topic/{id}/topic_message', [App\Http\Controllers\TopicMessageController::class,'store']);
-// Route::get('/topic/{id}/topic_message', [App\Http\Controllers\TopicMessageController::class,'show']);
-
+Route::post('/topic/create', [App\Http\Controllers\TopicController::class, 'create']);
+Route::get('/topic/topic_message/{category_id}/{id}', [App\Http\Controllers\TopicMessageController::class,'index']);
+Route::post('/topic_message', [App\Http\Controllers\TopicMessageController::class, 'sendMessage'])->name('message.send');
 
 Auth::routes();
 
