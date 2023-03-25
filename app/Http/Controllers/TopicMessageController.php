@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTopicMessageRequest;
 use App\Http\Requests\UpdateTopicMessageRequest;
 use App\Models\TopicMessage;
 use App\Models\Topic;
+use App\Models\Category;
+use App\Events\MessageSent;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+
 
 class TopicMessageController extends Controller
 {
@@ -14,12 +20,26 @@ class TopicMessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($category_id, $id)
     {
         //
         $topic_messages = Topic::with('messages')->find($id);
-        // dd($messages);
-        return view('topic_message', compact('topic_messages'));
+        $category = Category::with('topics')->find($category_id);
+        return view('topic_message', compact('topic_messages', 'category', 'id'));
+    }
+
+    public function sendMessage(Request $request) : JsonResponse
+    {
+        $user = Auth::user();
+        $post = new TopicMessage([
+            'message' => $request->input('message'),
+            'user_id' => $user->id,
+            'topic_id' => $request->input('topic_id')
+        ]);
+        $post->save();
+        event(new MessageSent($post));
+
+        return response()->json(['message' => $post->message]);
     }
 
     /**
@@ -40,13 +60,13 @@ class TopicMessageController extends Controller
      */
     public function store( $topic, $request)
     {
-        $message = new Message([
-            'body' => $request->get('body')
-        ]);
+        // $message = new Message([
+        //     'body' => $request->get('body')
+        // ]);
 
-        $topic->messages()->save($message);
+        // $topic->messages()->save($message);
 
-        return response()->json($message);
+        // return response()->json($message);
     }
 
     /**

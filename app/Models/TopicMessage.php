@@ -9,6 +9,7 @@ class TopicMessage extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['message', 'user_id', 'topic_id'];
     public function topic()
     {
         return $this->belongsTo(Topic::class, 'topic_id');

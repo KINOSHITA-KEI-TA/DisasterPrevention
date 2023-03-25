@@ -57,3 +57,51 @@
   box-shadow: 14px 14px 27px #c5c5c5, -14px -14px 27px #fbfbfb;
   transition: 0.3s;
 }
+
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.table tr {
+  height: 50px;
+}
+
+.table-avatar {
+  width: 50px;
+}
+
+.table-avatar img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.table-message {
+  position: relative;
+  padding: 5px;
+}
+
+.message-box {
+  position: relative;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.message-arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  transform: rotate(45deg);
+  top: -5px;
+  right: 10px;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
