@@ -40,6 +40,29 @@
                             </div>
                         </div>
 
+                        {{-- 追加分 --}}
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Local Government') }}</label>
+                            <div class="col-md-6">
+                                {{-- <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('local_government_id') }}"> --}}
+                                <select type='text' class="form-control" name="local_government_id" required>
+                                    <option value="1">test1</option>
+                                    <option value="2">test2</option>
+                                    <option disabled style='display:none;' @if (empty($post->prefecture_id)) selected @endif>選択してください</option>
+                                    {{ $local_governments = DB::table('local_governments')->get(); }}
+                                    @foreach ($local_governments as $local_government)
+                                        <option value="{{ $local_government->id }}">{{ $local_government->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
