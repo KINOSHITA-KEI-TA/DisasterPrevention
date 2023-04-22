@@ -54,11 +54,6 @@
                                         <option value="{{ $local_government->id }}">{{ $local_government->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
                         
