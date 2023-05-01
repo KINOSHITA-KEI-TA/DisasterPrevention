@@ -9,6 +9,25 @@ add_user_info
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
+                                            {{-- 検証2 --}}
+                                            <form method="POST" action="{{ route('local_government.search') }}">
+                                                @csrf
+                                                <div>
+                                                    <label for="query">検索キーワード：</label>
+                                                    <input type="text" name="query" id="query">
+                                                </div>
+                                                <button type="submit">検索</button>
+                                            </form>
+                                            
+                                            <div id="search-results">
+                                                <!-- 検索結果を表示するための場所 -->
+                                            </div>
+                                            
+                                            <form method="POST" action="{{ route('local_government.save') }}">
+                                                @csrf
+                                                <input type="hidden" name="item_id" id="item_id">
+                                                <button type="submit" id="save-button" disabled>保存</button>
+                                            </form>
                     <form method="POST" action="{{ url('/save_localgovernment') }}">
                         @csrf
 
@@ -56,6 +75,7 @@ add_user_info
                                     @endforeach
                             </div>
                         </div>
+
                         {{-- ここまで --}}
 
 

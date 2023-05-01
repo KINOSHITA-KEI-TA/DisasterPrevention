@@ -18,7 +18,7 @@ class LocalGovernmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('local_government.index');
     }
 
     public function addUser() {
@@ -29,9 +29,10 @@ class LocalGovernmentController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
+        // dd($query);
 
         $local_governments = LocalGovernment::where('name', 'like', "%$query%")->get();
-
+        // dd($local_governments);
         return view('local_government.search', compact('local_governments'));
     }
 
