@@ -26,6 +26,27 @@ class LocalGovernmentController extends Controller
         return view('add_user_info',compact('local_governments'));
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $local_governments = LocalGovernment::where('name', 'like', "%$query%")->get();
+
+        return view('local_government.search', compact('local_governments'));
+    }
+
+    public function save(Request $request)
+    {
+        // $local_government_id = $request->input('local_government_id');
+
+        // 保存処理を実装する
+        $user = Auth::user();
+        // $id = Auth::id();
+        $user->local_government_id = $request->local_government;
+        $user->save();
+        return view('main');
+    }
+
     public function addLocalGovernment(Request $request){
         $user = Auth::user();
         $id = Auth::id();

@@ -51,7 +51,9 @@ add_user_info
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('検索') }}</label>
                             <div class="col-md-6">
                                 <input id="keyword" type="text" class="form-control">
-
+                                    @foreach ($local_governments as $local_government)
+                                        {{ $local_government->name }}
+                                    @endforeach
                             </div>
                         </div>
                         {{-- ここまで --}}
