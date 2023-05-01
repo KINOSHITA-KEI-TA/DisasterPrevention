@@ -33,7 +33,7 @@ class LocalGovernmentController extends Controller
 
         $local_governments = LocalGovernment::where('name', 'like', "%$query%")->get();
         // dd($local_governments);
-        return view('local_government.search', compact('local_governments'));
+        return view('local_government.index', compact('local_governments'));
     }
 
     public function save(Request $request)
@@ -42,8 +42,12 @@ class LocalGovernmentController extends Controller
 
         // 保存処理を実装する
         $user = Auth::user();
+        // dd($request);
         // $id = Auth::id();
-        $user->local_government_id = $request->local_government;
+
+        // 【未】ログインしていない場合、ログイン画面にリダイレクト
+        // dd($request);
+        $user->local_government_id = $request->local_government_id;
         $user->save();
         return view('main');
     }
@@ -53,7 +57,8 @@ class LocalGovernmentController extends Controller
         $id = Auth::id();
         $user->local_government_id = $request->local_government;
         $user->save();
-        return view('main');
+        // return view('main');
+        return redirect('main');
         //ポップアップ
     }
 

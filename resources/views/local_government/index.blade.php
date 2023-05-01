@@ -16,13 +16,17 @@
 
     <hr>
 
-    @if (isset($items))
+    @if (isset($local_governments))
         <div id="search-results">
             @foreach ($local_governments as $local_government)
             <div class="search-result" data-local_government-id="{{ $local_government->id }}">
                 <h3>{{ $local_government->name }}</h3>
-                <p>{{ $local_government->description }}</p>
-                <button class="select-button">選択する</button>
+                <form method="POST" action="{{ route('local_government.save') }}">
+                    @csrf
+                    
+                    <input type="hidden" name="local_government_id" value="{{ $local_government->id }}" id="local_government_id">
+                    <button class="select-button">選択する</button>
+                </form>
                 <hr>
             </div>
             @endforeach
