@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\TopicMessage;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -16,14 +17,19 @@ class MessageSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $message;
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(TopicMessage $message)
+    public function __construct(User $user, TopicMessage $message)
     {
+        $this->user = $user;
         $this->message = $message;
+        if ($message->replyTo) {
+            $this->message->reply_to = $message->replyTo;
+        }
     }
 
     /**
@@ -33,7 +39,7 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('DisasterPrevention.' . $this->message->topic_id);
+        return new Channel('DisasterPrevention_' . $this->message->topic_id);
     }
 
     public function broadcastAs()

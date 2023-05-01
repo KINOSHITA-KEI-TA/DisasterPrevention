@@ -39,6 +39,7 @@
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 	<!-- Modernizr JS -->
 	<link href="{{ asset('css/animate.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 	<script src="{{ asset('js/modernizr-2.6.2.min.js') }}" ></script>
 
 </head>
@@ -46,17 +47,24 @@
 	<div id="fh5co-page">
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 		@extends('common.topic_list')
-		<div id="fh5co-main">
-			<form class="category-form d-flex animate-box" action="{{ url('/topic/create') }}" method="POST">
-			{{ csrf_field() }}
-				<div class="col-md-6 category-form-text">
-					<input type="hidden" name="category_id" value="{{ $id }}">
-					<input type="text" name="TopicName" class="form-control" placeholder="新規作成チャンネル">
+		@section('back_link')
+			<a href="{{ url('/category') }}" class="text-muted mt-1"><i class="fas fa-chevron-left"></i> カテゴリ選択へ戻る</a>
+		@endsection
+		<div class="container-fluid sticky-top-form">
+			<div class="row">
+				<div class="col-12 d-flex justify-content-center animate-box">
+					<form class="category-form d-flex col-lg-8 col-md-9 col-12" action="{{ url('/topic/create') }}" method="POST">
+						{{ csrf_field() }}
+						<div class="col-10 category-form-text">
+							<input type="hidden" name="category_id" value="{{ $id }}">
+							<input type="text" name="TopicName" class="form-control" placeholder="新規作成チャンネル">
+						</div>
+						<div class="col-auto">
+							<button type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane"></i></button>
+						</div>
+					</form>
 				</div>
-				<div class="col-12">
-					<button type="submit" class="btn btn-primary btn-category-form">新規作成</button>
-				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 
@@ -73,7 +81,7 @@
 
 	<!-- MAIN JS -->
 	<script src="{{ asset('js/main.js') }}" ></script>
-
+	<script src="{{ asset('js/app.js') }}" ></script>
 	</body>
 </html>
 

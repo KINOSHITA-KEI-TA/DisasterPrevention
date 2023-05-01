@@ -18,6 +18,15 @@ class ReplyMessageController extends Controller
         //
     }
 
+    public function getReplies($messageId)
+{
+    $replies = ReplyMessage::with('replyToMessage.user')
+                ->where('message_id', $messageId)
+                ->get();
+    return response()->json($replies);
+}
+
+
     /**
      * Show the form for creating a new resource.
      *

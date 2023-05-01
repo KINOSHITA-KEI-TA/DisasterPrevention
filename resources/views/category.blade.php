@@ -36,6 +36,7 @@
 	<link rel="stylesheet" href="css/flexslider.css">
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -46,24 +47,26 @@
 		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
 		@extends('common.aside')
 
-		<div id="fh5co-main">
-			<form class="category-form d-flex animate-box" action="{{ url('/create') }}" method="POST">
-			{{ csrf_field() }}
-				<div class="col-md-4 category-form-tag">
-					<select id="inputState" name="TagName" class="form-select category-form-input">
-					<option selected>ジャンル</option>
-					@foreach ($tags as $tag)
-					<option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
-					@endforeach
-					</select>
-				</div>
-				<div class="col-md-6 category-form-text">
-					<input type="text" name="CategoryName" class="form-control" placeholder="新規作成カテゴリ名入力">
-				</div>
-				<div class="col-12">
-					<button type="submit" class="btn btn-primary btn-category-form">新規作成</button>
-				</div>
-			</form>
+		<div id="fh5co-main" class="container-fluid">
+			<div class="row">
+				<form class="category-form d-flex animate-box col-12" action="{{ url('/create') }}" method="POST">
+					{{ csrf_field() }}
+					<div class="col-lg-4 col-md-4 col-sm-12 col-12 category-form-tag">
+						<select id="inputState" name="TagName" class="form-select category-form-input">
+							<option selected>ジャンル</option>
+							@foreach ($tags as $tag)
+								<option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
+							@endforeach
+						</select>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12 col-12 category-form-text">
+						<input type="text" name="CategoryName" class="form-control" placeholder="新規作成カテゴリ名入力">
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-12 col-12 d-flex align-items-center">
+						<button type="submit" class="btn btn-primary btn-category-form w-100"><i class="fas fa-paper-plane"></i></button>
+					</div>
+				</form>
+			</div>
 			<div class="fh5co-narrow-content">
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">カテゴリ一覧</h2>
 				<div class="row row-bottom-padded-md category-list animate-box">
