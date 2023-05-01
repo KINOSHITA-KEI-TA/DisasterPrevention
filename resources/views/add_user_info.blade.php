@@ -29,6 +29,39 @@ add_user_info
                             </div>
                         </div>
 
+                        {{-- 検証 --}}
+                        <div class="row mb-3">
+                            <label for="local_government" class="col-md-4 col-form-label text-md-end">{{ __('local_government') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="local_government" id="local_government">
+                                    @foreach ($local_governments as $local_government)
+                                        <option value="{{ $local_government->id }}">{{ $local_government->name }}</option>    
+                                    @endforeach
+                                </select>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('検索') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- ここまで --}}
+
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -43,4 +76,5 @@ add_user_info
         </div>
     </div>
 </div>
+<script src="{{ asset('js/local_government.js') }}"></script>
 @endsection
