@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTopicMessageRequest;
 use App\Http\Requests\UpdateTopicMessageRequest;
+use App\Models\ReplyMessage;
 use App\Models\TopicMessage;
 use App\Models\Topic;
 use App\Models\Category;
+use App\Models\User;
 use App\Events\MessageSent;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -15,6 +17,10 @@ use Illuminate\Http\JsonResponse;
 
 class TopicMessageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,24 +29,49 @@ class TopicMessageController extends Controller
     public function index($category_id, $id)
     {
         //
-        $topic_messages = Topic::with('messages')->find($id);
+        $topic_messages = Topic::with(['messages',
+            'messages.user',
+            'messages.replyTo',
+            'messages.replyTo.originalMessage',
+            'messages.replyMessages'
+            ])->find($id);
+            $switch = true;
+            // dd($topic_messages->messages->pluck('replyTo.originalMessage'));
+
         $category = Category::with('topics')->find($category_id);
-        return view('topic_message', compact('topic_messages', 'category', 'id'));
+        $userDisplay = Auth::user()->userDisplay;
+        if (!$userDisplay) {
+            $userDisplay = ['display_flg' => false];
+        }
+        return view('topic_message', compact('topic_messages', 'category', 'id', 'switch', 'userDisplay'));
     }
 
     public function sendMessage(Request $request) : JsonResponse
     {
+
         $user = Auth::user();
-        $post = new TopicMessage([
+        $message = new TopicMessage([
             'message' => $request->input('message'),
             'user_id' => $user->id,
             'topic_id' => $request->input('topic_id')
         ]);
-        $post->save();
-        event(new MessageSent($post));
+        $message->save();
 
-        return response()->json(['message' => $post->message]);
+        if ($request->input('is_reply') == 1 && $request->input('message_id')) {
+            $reply = new ReplyMessage([
+                'topic_id' => $request->input('topic_id'),
+                'message_id' => $request->input('message_id'),
+                'reply_id' => $message->id
+            ]);
+            $reply->save();
+            $message->load('replyTo.originalMessage.user');
+        }
+
+        event(new MessageSent($user, $message));
+
+        return response()->json(['message' => $message->message]);
     }
+
 
     /**
      * Show the form for creating a new resource.

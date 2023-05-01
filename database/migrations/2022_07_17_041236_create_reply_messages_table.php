@@ -12,19 +12,16 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('reply_messages', function (Blueprint $table) {
-            $table->id();
-            $table->text("message");
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('topic_id')->constrained();
+{
+    Schema::create('reply_messages', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('topic_id')->constrained('topics')->onDelete('cascade');
+        $table->foreignId('message_id')->constrained('topic_messages')->onDelete('cascade');
+        $table->foreignId('reply_id')->constrained('topic_messages')->onDelete('cascade');
+        $table->timestamps();
+    });
+}
 
-            // ボツ
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            // $table->foreign('topic_id')->references('id')->on('topic_messages')->onDelete('cascade');
-            $table->timestamps();
-        });
-    }
 
     /**
      * Reverse the migrations.

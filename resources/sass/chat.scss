@@ -1,48 +1,165 @@
-.table-wrapper {
+.alt-display {
+    display: none;
+}
+// ヘッダー・フッター固定
+.sticky-top-form {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background-color: #f8f9fa;
+}
+
+.sticky-bottom-form {
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    background-color: #f8f9fa;
+    padding: 10px;
+}
+
+
+// メッセージエリア
+.topic_message_main {
+    overflow-y: scroll;
+    padding-left: 15px;
+}
+
+.message {
+    border-radius: 10px;
+    padding: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+    max-width: 100%;
+}
+.message-container {
     display: flex;
-    justify-content: center;
-  }
-  
-  .table {
-    border-collapse: collapse;
-    margin: 0 auto;
-  }
-  
-  .table tr {
-    height: 50px;
-  }
-  
-  .table-avatar {
-    width: 50px;
-  }
-  
-  .table-avatar img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-  }
-  
-  .table-message {
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+.username {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+#scrollable-nav {
+    overflow-y: scroll;
+    height: calc(100% - 10em);
+}
+.custom-aside {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 3em;
+}
+
+.back-link-wrapper {
+    margin-top: auto;
+    text-align: center;
+}
+#fh5co-hero {
+    overflow-y: scroll;
+    height: calc(100vh - 50px);
+}
+
+.message-container {
     position: relative;
-    padding: 5px;
-  }
-  
-  .message-box {
-    position: relative;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  }
-  
-  .message-arrow {
+}
+
+.reply-icon {
+    display: none;
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: #fff;
-    transform: rotate(45deg);
-    top: -5px;
-    right: 10px;
-    border-left: 1px solid rgba(0, 0, 0, 0.2);
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
-  }
-  
+    /* アイコンの位置を調整 */
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.message-container:hover .reply-icon {
+    display: block;
+}
+.message-container:hover {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+.reply-info {
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+.reply-info:hover {
+    text-decoration: underline;
+}
+@keyframes glowing {
+    0% {
+        background-color: #f8f9fa;
+    }
+    50% {
+        background-color: #f0f3f7;
+    }
+    100% {
+        background-color: #f8f9fa;
+    }
+}
+
+.highlighted-message {
+    animation: glowing 1s linear infinite;
+}
+
+// 表示切り替えスイッチ
+.switch {
+    --secondary-container: #908e94;
+    --primary: #0b1de9;
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.7em;
+    height: 1.8em;
+}
+
+.switch input {
+    display: none;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4e4f51;
+    transition: .2s;
+    border-radius: 30px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.4em;
+    width: 1.4em;
+    border-radius: 20px;
+    left: 0.2em;
+    bottom: 0.2em;
+    background-color: #908e94;
+    transition: .4s;
+}
+
+input:checked + .slider::before {
+    background-color: var(--primary);
+}
+
+input:checked + .slider {
+    background-color: var(--secondary-container);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--secondary-container);
+}
+
+input:checked + .slider:before {
+    transform: translateX(1.9em);
+}
+

@@ -39,13 +39,16 @@ Route::get('test_buddy_index',[App\Http\Controllers\BuddyController::class,'inde
 Route::post('test_buddy_create',[App\Http\Controllers\BuddyController::class,'create'])->name('buddy_register.create');
 //ここまで
 
+// カテゴリからトピックまでのルーティング
 Route::get("/category", [App\Http\Controllers\CategoryController::class, 'index']);
 Route::post("/create", [App\Http\Controllers\CategoryController::class, 'create']);
-
 Route::get('/category/{id}/topic', [App\Http\Controllers\TopicController::class, 'index']);
 Route::post('/topic/create', [App\Http\Controllers\TopicController::class, 'create']);
 Route::get('/topic/topic_message/{category_id}/{id}', [App\Http\Controllers\TopicMessageController::class,'index']);
 Route::post('/topic_message', [App\Http\Controllers\TopicMessageController::class, 'sendMessage'])->name('message.send');
+Route::post('/update-display-flag', [App\Http\Controllers\UserDisplayController::class, 'updateDisplayFlag']);
+Route::get('/get-replies/{messageId}', [App\Http\Controllers\ReplyMessageController::class, 'getReplies']);
+
 
 Auth::routes();
 

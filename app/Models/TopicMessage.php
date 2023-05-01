@@ -14,4 +14,17 @@ class TopicMessage extends Model
     {
         return $this->belongsTo(Topic::class, 'topic_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function replyTo()
+    {
+        return $this->hasOne(ReplyMessage::class, 'reply_id');
+    }
+    public function replyMessages()
+    {
+        return $this->hasMany(ReplyMessage::class, 'message_id');
+    }
+
 }
