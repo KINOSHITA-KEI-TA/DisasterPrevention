@@ -125,8 +125,8 @@
 		<div class="close-replies-window" style="position: absolute; top: -5px; right: 50px; font-size: 45px; cursor: pointer;">&times;</div>
 		<div class= "message_text d-flex justify-content-center" style="padding: 0px 10px 0px 10px; position: absolute; bottom: 20px; left: 0; right: 0;">
 			<input type="hidden" name="topic_id" value="{{ $id }}">
-			<textarea name="message" id="text" class="form-control" rows="1"></textarea>
-			<button id="submit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
+			<textarea name="message" id="text1" class="form-control" rows="1"></textarea>
+			<button id="repliesSubmit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
 		</div>
 	</div>
 
@@ -140,8 +140,8 @@
 			</div>
 			<div class= "message_text d-flex justify-content-center">
 				<input type="hidden" name="topic_id" value="{{ $id }}">
-				<textarea name="message" id="text" class="form-control" rows="1"></textarea>
-				<button id="submit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
+				<textarea name="message" id="text2" class="form-control" rows="1"></textarea>
+				<button id="messageSubmit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
 			</div>
 	</aside>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

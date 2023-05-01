@@ -64,15 +64,15 @@ channel.bind('MessageSent', function(data) {
 });
 
 // メッセージ送信
-$("#submit").on("click", function(event) {
-    event.preventDefault(); // デフォルトのフォーム送信を防止
+function sendMessage(textareaId) {
+
     const url = "/topic_message";
     const data = {
         '_token': $('meta[name="csrf-token"]').attr('content'),
-        'message': $("#text").val(),
+        'message': $("#" + textareaId).val(),
         'topic_id': $("input[name='topic_id']").val()
     };
-    console.log(messageId)
+    console.log(isReply)
     if (isReply) {
         data['message_id'] = messageId;
         data['is_reply'] = 1;
@@ -85,7 +85,7 @@ $("#submit").on("click", function(event) {
             xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
         },
         success: function () {
-            $("#text").val("");
+            $("#" + textareaId).val("");
             var repliesWindow = $('#replies-window');
             if (!repliesWindow.is(':visible')) {
                 resetReplyState();
@@ -95,7 +95,19 @@ $("#submit").on("click", function(event) {
             alert("Failed to send message.");
         }
     });
+}
+$(document).ready(function() {
+    $("#repliesSubmit").on("click", function(event) {
+        event.preventDefault();
+        sendMessage("text1");
+    });
+
+    $("#messageSubmit").on("click", function(event) {
+        event.preventDefault();
+        sendMessage("text2");
+    });
 });
+
 
 // 長押しで返信アイコンを表示
 $(document).ready(function() {
