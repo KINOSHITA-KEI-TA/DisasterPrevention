@@ -14,6 +14,8 @@ var topic_id = window.location.href.split('/').pop().replace('#', '');
 var channel = pusher.subscribe('DisasterPrevention_' + topic_id);
 
 channel.bind('MessageSent', function(data) {
+    const senderId = data.user.id;
+    const currentUserId = parseInt($("#current-user-id").val());
     var formattedMessage = data.message.message.replace(/\n/g, '<br>');
     const formattedDate = formatDate(data.message.created_at);
     let replyHtml = '';
@@ -41,6 +43,7 @@ channel.bind('MessageSent', function(data) {
             '</div>';
         if (data.message.reply_to) {
             $("#replies-container").append(messageContainer);
+            updateReplyCount({ messageId: data.message.reply_to.original_message.id });
         } else {
             $("#alternative-content").append(messageContainer);
         }
@@ -60,8 +63,44 @@ channel.bind('MessageSent', function(data) {
             '</div>'
         );
     }
-    $("#fh5co-hero").scrollTop($("#fh5co-hero")[0].scrollHeight);
+    if (senderId === currentUserId) {
+        $("#fh5co-hero").scrollTop($("#fh5co-hero")[0].scrollHeight);
+        $("#replies-container").scrollTop($("#replies-container")[0].scrollHeight);
+    }
 });
+
+// 返信カウント更新
+function updateReplyCount(data) {
+    const originalMessageId = data.messageId;
+    let repliesCountElem = $(`.replies-count[data-original-message-id='${originalMessageId}']`);
+    const repliesWindowCountElem = $("#replies-window .replies-count");
+
+    if (repliesCountElem.length === 0) {
+        repliesCountElem = $('<a>', {
+            href: '#',
+            class: 'replies-count text-primary',
+            style: 'cursor: pointer;',
+            'data-original-message-id': originalMessageId,
+            text: '1件の返信'
+        });
+
+        const messageContainer = $(`.message-container[data-message-id='${originalMessageId}']`);
+        messageContainer.append(repliesCountElem);
+
+        repliesCountElem.on('click', function () {
+            openRepliesWindow($(this));
+        });
+    } else {
+        const currentCount = parseInt(repliesCountElem.text());
+        const updatedCountText = currentCount + 1 + '件の返信';
+        repliesCountElem.text(updatedCountText);
+
+        if (repliesWindowCountElem.length > 0) {
+            repliesWindowCountElem.text(updatedCountText);
+        }
+    }
+}
+
 
 // メッセージ送信
 function sendMessage(textareaId) {
@@ -72,7 +111,6 @@ function sendMessage(textareaId) {
         'message': $("#" + textareaId).val(),
         'topic_id': $("input[name='topic_id']").val()
     };
-    console.log(isReply)
     if (isReply) {
         data['message_id'] = messageId;
         data['is_reply'] = 1;
@@ -89,6 +127,7 @@ function sendMessage(textareaId) {
             var repliesWindow = $('#replies-window');
             if (!repliesWindow.is(':visible')) {
                 resetReplyState();
+                $("#replying-to").addClass("d-none");
             }
         },
         error: function () {
@@ -126,7 +165,7 @@ $(document).ready(function() {
     });
 
     $(".reply-icon").on("click touchend", function(event) {
-        event.preventDefault(); // デフォルトのイベントをキャンセル
+        event.preventDefault();
         isReply = true;
         messageId = $(this).closest('.message-container').data('message-id');
     });
@@ -225,20 +264,24 @@ document.addEventListener('DOMContentLoaded', function () {
         updateDisplayFlag(this);
     });
 
-    // ページ読み込み時に表示を切り替える
+    // ページ読み込み時に表示を切替
     toggleDisplay(checkbox.checked);
 });
 
 // 返信ウィンドウ
 $(document).ready(function () {
     $('.replies-count').on('click', function () {
-        messageId = $(this).data('original-message-id');
+        openRepliesWindow($(this));
+    });
+});
+function openRepliesWindow(repliesCountElem) {
+        messageId = repliesCountElem.data('original-message-id');
         var originalMessage = $('#message-' + messageId);
         isReply = true;
         var originalMessageUsername = originalMessage.find('.username').text();
         var originalMessageDate = originalMessage.find('.post-date').text();
         var originalMessageContent = originalMessage.find('.message').html();
-        var replyCount = $(this).text();
+        var replyCount = repliesCountElem.text();
         var repliesContainer = $('#replies-container');
         repliesContainer.empty(); // コンテナの中身を空にする
         // 返信ウィンドウにオリジナルメッセージと返信件数を表示
@@ -296,8 +339,7 @@ $(document).ready(function () {
                 }
             }
         });
-    });
-});
+    }
 
 
 // ディスプレイサイズ考慮してサイズ調整
