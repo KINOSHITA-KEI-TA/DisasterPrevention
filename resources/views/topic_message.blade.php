@@ -120,11 +120,12 @@
 	</div>
 	<div id="replies-window" style="display: none; position: fixed; top: 0; right: -80%; width: 80%; height: 100%; background-color: white; overflow-y: scroll; padding: 20px; border-left: 1px solid #ccc; z-index: 1000;">
 		<div id="replies-container" style="overflow-y: scroll; height: calc(100% - 60px);">
-			<!-- オリジナルメッセージと返信件数はJSで追加されます -->
+			<!-- 内容はjsで追加 -->
 		</div>
 		<div class="close-replies-window" style="position: absolute; top: -5px; right: 50px; font-size: 45px; cursor: pointer;">&times;</div>
 		<div class= "message_text d-flex justify-content-center" style="padding: 0px 10px 0px 10px; position: absolute; bottom: 20px; left: 0; right: 0;">
 			<input type="hidden" name="topic_id" value="{{ $id }}">
+			<input type="hidden" id="current-user-id" value="{{ Auth::id() }}">
 			<textarea name="message" id="text1" class="form-control" rows="1"></textarea>
 			<button id="repliesSubmit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
 		</div>
@@ -140,6 +141,7 @@
 			</div>
 			<div class= "message_text d-flex justify-content-center">
 				<input type="hidden" name="topic_id" value="{{ $id }}">
+				<input type="hidden" id="current-user-id" value="{{ Auth::id() }}">
 				<textarea name="message" id="text2" class="form-control" rows="1"></textarea>
 				<button id="messageSubmit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
 			</div>
