@@ -18,49 +18,30 @@ class LocalGovernmentController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()) {
+            return redirect('login');
+        }
         return view('local_government.index');
-    }
-
-    public function addUser() {
-        $local_governments = DB::table('local_governments')->get();
-        return view('add_user_info',compact('local_governments'));
     }
 
     public function search(Request $request)
     {
         $query = $request->input('query');
-        // dd($query);
-
         $local_governments = LocalGovernment::where('name', 'like', "%$query%")->get();
-        // dd($local_governments);
         return view('local_government.index', compact('local_governments'));
     }
 
     public function save(Request $request)
     {
-        // $local_government_id = $request->input('local_government_id');
-
-        // 保存処理を実装する
         $user = Auth::user();
-        // dd($request);
-        // $id = Auth::id();
-
-        // 【未】ログインしていない場合、ログイン画面にリダイレクト
-        // dd($request);
         $user->local_government_id = $request->local_government_id;
         $user->save();
-        return view('main');
+        if(($user->save())) {
+            return redirect('home');
+        }
+        return route('local_government.index');
     }
 
-    public function addLocalGovernment(Request $request){
-        $user = Auth::user();
-        $id = Auth::id();
-        $user->local_government_id = $request->local_government;
-        $user->save();
-        // return view('main');
-        return redirect('main');
-        //ポップアップ
-    }
 
     /**
      * Show the form for creating a new resource.

@@ -54,13 +54,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/view_localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'addUser']);
-Route::post('/save_localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'addLocalGovernment']);
-// 検証
-Route::post('/search', [App\Http\Controllers\LocalGovernmentController::class, 'search'])->name('local_government.search');
-Route::post('/save', [App\Http\Controllers\LocalGovernmentController::class, 'save'])->name('local_government.save');
-// 削除予定
-Route::get('/test', [App\Http\Controllers\LocalGovernmentController::class, 'index'])->name('local_government.index');
+// 自治体登録画面、検索、保存
+Route::get('/localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'index'])->name('local_government.index');
+Route::post('/localgovernment_search', [App\Http\Controllers\LocalGovernmentController::class, 'search'])->name('local_government.search');
+Route::post('/localgovernment_save', [App\Http\Controllers\LocalGovernmentController::class, 'save'])->name('local_government.save');
+
 
 // Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout']);
