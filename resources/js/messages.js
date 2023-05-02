@@ -181,11 +181,14 @@ function resetReplyState() {
 $(document).on('click', '.reply-icon', function() {
     isReply = true;
     messageId = $(this).closest('.message-container').data('message-id');
+    const messageContent = $(this).closest('.message').text();
+    const truncatedMessageContent = messageContent.length > 40 ? messageContent.substr(0, 40) + '...' : messageContent;
     // 返信中のメッセージを表示
-    $("#replying-to .replying-text").text("返信中: " + messageId);
+    $("#replying-to .replying-text").text(truncatedMessageContent + "に返信中" );
     $("#replying-to").removeClass("d-none");
 });
-$(document).on('click', '.cancel-reply', function() {
+$(document).on('click', '.cancel-reply', function(event) {
+    event.preventDefault();
     resetReplyState();
     // 返信中のメッセージを非表示
     $("#replying-to").addClass("d-none");

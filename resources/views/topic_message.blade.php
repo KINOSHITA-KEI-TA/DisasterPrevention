@@ -136,7 +136,9 @@
 			<div class="text-center">
 				<div id="replying-to" class="replying-to-message d-none">
 					<span class="replying-text"></span>
-					<i class="fas fa-times cancel-reply"></i>
+					<a href="#" class="cancel-reply" style="text-decoration: none;">
+						<i class="fas pl-5 fa-times"></i>キャンセル
+					</a>
 				</div>
 			</div>
 			<div class= "message_text d-flex justify-content-center">
