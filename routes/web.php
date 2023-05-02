@@ -18,9 +18,6 @@ Route::get('/', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
-Route::get('/mypage', function () {
-    return view('mypage');
-});
 Route::get('/mypage_list', function () {
     return view('mypage_list');
 });
@@ -73,7 +70,10 @@ Route::get('/usersearch',[App\Http\Controllers\BuddyUserController::class, 'sear
 
 //ユーザーマイページ
 // Route::get('/mypage', [App\Http\Controllers\UserPage::class, 'show'])->name('mypage');
+Route::get('/userpage/{id}', [App\Http\Controllers\UserPage::class, 'showUser'])->name('showUser');
 Route::post('/userpage/{id}', [App\Http\Controllers\UserPage::class, 'showUser'])->name('showUser');
+Route::get('/userpage/{id}/edit', [App\Http\Controllers\UserPage::class, 'edit'])->name('edit');
+Route::post('/userpage/{id}/update', [App\Http\Controllers\UserPage::class, 'update'])->name('update');
 
 //テスト用ページ一覧
 Route::get('/testpagelist', function(){
