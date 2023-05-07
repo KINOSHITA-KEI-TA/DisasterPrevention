@@ -15,6 +15,7 @@
             @case('category')
                 <form class="category-select-form animate-box" action="{{ url('/show') }}" method="get">
                 {{ csrf_field() }}
+                <div class="d-flex align-items-center justify-content-center">
                     <select id="inputState" name="CategoryName" class="form-select category-select-input ">
                     <option selected>ジャンル</option>
                     @foreach ($genre as $tag)
@@ -22,6 +23,7 @@
                     @endforeach
                     </select>
                     <button type="submit" class="btn btn-primary btn-category-select">検索</button>
+                </div>
                 </form>
                 @break
 

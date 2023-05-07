@@ -358,7 +358,7 @@ $(document).ready(function () {
     function adjustContentWidth() {
         const windowWidth = $(window).width();
         if (windowWidth >= 768) {
-            const leftPosition = 302.4;
+            const leftPosition = $(".sidebar").outerWidth(true);
             $(".sticky-top-form, .sticky-bottom-form").css("left", `${leftPosition}px`);
             $(".sticky-top-form, .sticky-bottom-form").css("width", `calc(100% - ${leftPosition}px)`);
         } else {
