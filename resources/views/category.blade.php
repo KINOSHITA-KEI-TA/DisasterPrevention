@@ -80,13 +80,10 @@
 				<div class="row row-bottom-padded-md category-list animate-box">
 
 					@foreach($data as $item)
-					<a href="{{ url('/category/'.$item->id.'/topic') }}" class="category-entry-link">
-						<div class="blog-entry">
+					<a href="{{ url('/category/'.$item->id.'/topic') }}" class="blog-entry">
 						<div class="blog-img"><img src="{{asset($item->category_tags->url)}}" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></div>
-							<div class="desc">
-								<h3>{{ $item->category_name }}</h3>
-								<span class="lead">Show More <i class="icon-arrow-right3"></i></span>
-							</div>
+						<div class="desc">
+							<h3 class="category-name" title="{{ $item->category_name }}">{{ $item->category_name }}</h3>
 						</div>
 					</a>
 					@endforeach

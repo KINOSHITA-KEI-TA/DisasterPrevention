@@ -500,7 +500,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   transition: 0.9s;
 }
 .blog-entry .desc {
-  padding: 25px;
+  padding: 0 0 10px 25px;
 }
 .blog-entry .desc h3 {
   font-size: 15px;
@@ -515,7 +515,6 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 }
 .blog-entry .desc span {
   display: block;
-  margin-bottom: 20px;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1px;
