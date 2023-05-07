@@ -48,37 +48,47 @@
 		@extends('common.aside')
 
 		<div id="fh5co-main" class="container-fluid">
-			<div class="row">
-				<form class="category-form d-flex animate-box col-12" action="{{ url('/create') }}" method="POST">
-					{{ csrf_field() }}
-					<div class="col-lg-4 col-md-4 col-sm-12 col-12 category-form-tag">
-						<select id="inputState" name="TagName" class="form-select category-form-input">
-							<option selected>ジャンル</option>
-							@foreach ($tags as $tag)
-								<option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
-							@endforeach
-						</select>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-12 category-form-text">
-						<input type="text" name="CategoryName" class="form-control" placeholder="新規作成カテゴリ名入力">
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-12 col-12 d-flex align-items-center">
-						<button type="submit" class="btn btn-primary btn-category-form w-100"><i class="fas fa-paper-plane"></i></button>
-					</div>
-				</form>
+			<div class="container">
+				<div class="row">
+					<form class="category-form animate-box col-12" action="{{ url('/create') }}" method="POST">
+						{{ csrf_field() }}
+						<div class="category-form-row d-flex align-items-center justify-content-center">
+							<div class=" category-form-tag">
+								<select id="inputState" name="TagName" class="form-select category-form-input">
+									<option selected>ジャンル</option>
+									@foreach ($tags as $tag)
+										<option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 category-form-text">
+								<input type="text" name="CategoryName" class="form-control" placeholder="新規作成カテゴリ名入力">
+							</div>
+							<div class="d-flex align-items-center btn-category-form-container">
+								<button type="submit" class="btn btn-primary btn-category-form">
+									<span class="icon-wrapper">
+										<i class="fas fa-paper-plane"></i>
+									</span>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
 			<div class="fh5co-narrow-content">
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">カテゴリ一覧</h2>
 				<div class="row row-bottom-padded-md category-list animate-box">
 
 					@foreach($data as $item)
+					<a href="{{ url('/category/'.$item->id.'/topic') }}" class="category-entry-link">
 						<div class="blog-entry">
-							<a href="{{ url('/category/'.$item->id.'/topic') }}" class="blog-img"><img src="{{asset($item->category_tags->url)}}" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+						<div class="blog-img"><img src="{{asset($item->category_tags->url)}}" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></div>
 							<div class="desc">
-								<h3><a href="{{ url('/category/'.$item->id.'/topic') }}">{{ $item->category_name }}</a></h3>
-								<a href="{{ url('/category/'.$item->id.'/topic') }}"class="lead">Read More <i class="icon-arrow-right3"></i></a>
+								<h3>{{ $item->category_name }}</h3>
+								<span class="lead">Show More <i class="icon-arrow-right3"></i></span>
 							</div>
 						</div>
+					</a>
 					@endforeach
 				</div>
 			</div>

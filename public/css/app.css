@@ -17,26 +17,88 @@
   margin-bottom: 20px;
 }
 
-.category-form-input {
-  width: 100%;
-  height: 54px;
-  border: none;
-  padding: 1rem;
-  border-radius: 1rem;
-  background: #e8e8e8;
-  box-shadow: 14px 14px 27px #c5c5c5, -14px -14px 27px #fbfbfb;
-  transition: 0.3s;
+.category-form-text {
+  display: flex;
+  align-items: center;
 }
 
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 767px) {
+  .category-form-input {
+    height: 30px;
+    width: 80px;
+    font-size: 14px;
+    border: none;
+    border-radius: 1rem;
+    background: #e8e8e8;
+    transition: 0.3s;
+  }
+  .category-select-input {
+    height: 30px;
+    width: 100px;
+    border: none;
+    border-radius: 1rem;
+    background: #e8e8e8;
+    transition: 0.3s;
+  }
+  .category-form-text .form-control {
+    height: 30px;
+    width: 200px;
+    font-size: 14px;
+  }
+  .btn-category-form {
+    height: 30px;
+    width: 30px;
+  }
+  .btn-category-select {
+    height: 30px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .category-form-input {
+    border: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #e8e8e8;
+    transition: 0.3s;
+  }
+  .category-select-input {
+    border: none;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background: #e8e8e8;
+    transition: 0.3s;
+  }
+}
+@media (min-width: 992px) {
+  .category-form-input {
+    border: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #e8e8e8;
+    transition: 0.3s;
+  }
+  .category-select-input {
+    border: none;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background: #e8e8e8;
+    transition: 0.3s;
+  }
+}
 .btn-category-form {
-  height: 54px;
   border-radius: 17px;
   background: linear-gradient(145deg, #cacaca, #f0f0f0);
   box-shadow: 5px 5px 15px #c5c5c5, -5px -5px 15px #fbfbfb;
-}
-
-.category-select {
-  width: 30%;
+  display: inline-flex;
+  align-items: center;
 }
 
 .btn-category-select {
@@ -44,15 +106,6 @@
   border-radius: 17px;
   background: linear-gradient(145deg, #cacaca, #f0f0f0);
   box-shadow: 5px 5px 15px #c5c5c5, -5px -5px 15px #fbfbfb;
-}
-
-.category-select-input {
-  border: none;
-  padding: 1rem;
-  border-radius: 1rem;
-  background: #e8e8e8;
-  box-shadow: 14px 14px 27px #c5c5c5, -14px -14px 27px #fbfbfb;
-  transition: 0.3s;
 }
 
 .alt-display {
