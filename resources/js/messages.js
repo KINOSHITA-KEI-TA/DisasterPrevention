@@ -359,6 +359,7 @@ $(document).ready(function () {
         const windowWidth = $(window).width();
         if (windowWidth >= 768) {
             const leftPosition = $(".sidebar").outerWidth(true);
+            console.log(leftPosition);
             $(".sticky-top-form, .sticky-bottom-form").css("left", `${leftPosition}px`);
             $(".sticky-top-form, .sticky-bottom-form").css("width", `calc(100% - ${leftPosition}px)`);
         } else {
@@ -378,3 +379,11 @@ $(document).ready(function () {
     $("#fh5co-hero").scrollTop($("#fh5co-hero")[0].scrollHeight);
 });
 
+// register用のjs
+document.getElementById('agree').addEventListener('change', function() {
+    if (this.checked) {
+        document.getElementById('registerButton').disabled = false;
+    } else {
+        document.getElementById('registerButton').disabled = true;
+    }
+});

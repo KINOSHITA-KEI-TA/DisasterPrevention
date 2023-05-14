@@ -1,3 +1,3 @@
 // require('./bootstrap');
-require('./index');
+// require('./index');
 require('./messages');

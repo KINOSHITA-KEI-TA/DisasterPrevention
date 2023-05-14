@@ -59,7 +59,7 @@
 								<div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
 									<div class="slider-text-inner">
 										<h1>東日本大震災の祈り</h1>
-											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-monitor"></i> Live Preview</a> <a class="btn btn-primary btn-learn">Learn More<i class="icon-arrow-right3"></i></a></p>
+											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-monitor"></i> Live Preview</a></p>
 									</div>
 								</div>
 							</div>
@@ -72,7 +72,7 @@
 								<div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
 									<div class="slider-text-inner">
 										<h1>くらしを守る</h1>
-											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-monitor"></i> Live Preview</a> <a class="btn btn-primary btn-learn">Learn More<i class="icon-arrow-right3"></i></a></p>
+											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-monitor"></i> Live Preview</a></p>
 									</div>
 								</div>
 							</div>
@@ -85,7 +85,7 @@
 								<div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
 									<div class="slider-text-inner">
 										<h1>東日本大震災から復興した気仙沼</h1>
-											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-monitor"></i> Live Preview</a> <a class="btn btn-primary btn-learn">Learn More<i class="icon-arrow-right3"></i></a></p>
+											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-monitor"></i> Live Preview</a></p>
 									</div>
 								</div>
 							</div>
@@ -94,7 +94,6 @@
 					</ul>
 				</div>
 			</aside>
-			
 			<div class="fh5co-narrow-content">
 				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Services</h2>
 				<div class="row">
@@ -147,48 +146,21 @@
 				</div>
 			</div>
 			<div class="fh5co-narrow-content">
-				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Categories</h2>
+				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">カテゴリー</h2>
 				<div class="row row-bottom-padded-md">
+					@foreach($data as $item)
 					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
 						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/23880633_s.jpeg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">防災対策</a></h3>
-								<p>防災対策についての部屋</p>
-								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
-							</div>
+							<a href="{{ url('/category/'.$item->id.'/topic') }}" class="blog-entry">
+								<div class="blog-img"><img src="{{asset($item->category_tags->url)}}" class="img-responsive" alt="カテゴリー"></div>
+								<div class="desc">
+									<h3>{{ $item->category_tags->category_tag_name }}</h3>
+									<p class="text-muted">{{ \Illuminate\Support\Str::limit($item->category_name, 30, '...') }}</p>
+								</div>
+							</a>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/24151121_s.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">ハザードマップ</a></h3>
-								<p>各地域のハザードマップ</p>
-								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/23311032_s.jpeg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">防災グッズ</a></h3>
-								<p>こんなにある防災グッズ</p>
-								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/23845735_s.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">震災</a></h3>
-								<p>震災について話し合おう</p>
-								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
+					@endforeach
 				</div>
 			</div>
 
@@ -233,9 +205,6 @@
 	<!-- Flexslider -->
 	<script src="js/jquery.flexslider-min.js"></script>
 
-
-	
-	
 	<!-- MAIN JS -->
 	<script src="js/main.js"></script>
 
