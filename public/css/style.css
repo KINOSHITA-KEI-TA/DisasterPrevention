@@ -212,6 +212,7 @@ figure figcaption {
   -o-transform: scaleX(1);
   transform: scaleX(1);
 } */
+
 #fh5co-aside .fh5co-footer {
   position: absolute;
   bottom: 40px;
@@ -224,8 +225,8 @@ figure figcaption {
 }
 @media screen and (max-width: 844px) {
   #fh5co-aside .fh5co-footer {
-    position: relative;
-    bottom: 0;
+    position: absolute;
+    bottom: 20;
   }
 }
 #fh5co-aside .fh5co-footer span {
