@@ -15,7 +15,17 @@
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// require('./bootstrap');\n// require('./index');\n__webpack_require__(/*! ./messages */ \"./resources/js/messages.js\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvYXBwLmpzLmpzIiwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQUEsbUJBQU8sQ0FBQyw4Q0FBRCxDQUFQIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2pzL2FwcC5qcz9jZWQ2Il0sInNvdXJjZXNDb250ZW50IjpbIi8vIHJlcXVpcmUoJy4vYm9vdHN0cmFwJyk7XG4vLyByZXF1aXJlKCcuL2luZGV4Jyk7XG5yZXF1aXJlKCcuL21lc3NhZ2VzJyk7Il0sIm5hbWVzIjpbInJlcXVpcmUiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/js/app.js\n");
+eval("// require('./bootstrap');\n__webpack_require__(/*! ./index */ \"./resources/js/index.js\");\n\n__webpack_require__(/*! ./messages */ \"./resources/js/messages.js\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvYXBwLmpzLmpzIiwibWFwcGluZ3MiOiJBQUFBO0FBQ0FBLG1CQUFPLENBQUMsd0NBQUQsQ0FBUDs7QUFDQUEsbUJBQU8sQ0FBQyw4Q0FBRCxDQUFQIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2pzL2FwcC5qcz9jZWQ2Il0sInNvdXJjZXNDb250ZW50IjpbIi8vIHJlcXVpcmUoJy4vYm9vdHN0cmFwJyk7XG5yZXF1aXJlKCcuL2luZGV4Jyk7XG5yZXF1aXJlKCcuL21lc3NhZ2VzJyk7Il0sIm5hbWVzIjpbInJlcXVpcmUiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/js/app.js\n");
+
+/***/ }),
+
+/***/ "./resources/js/index.js":
+/*!*******************************!*\
+  !*** ./resources/js/index.js ***!
+  \*******************************/
+/***/ (() => {
+
+eval("document.getElementById('agree').addEventListener('change', function () {\n  if (this.checked) {\n    document.getElementById('registerButton').disabled = false;\n  } else {\n    document.getElementById('registerButton').disabled = true;\n  }\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvaW5kZXguanMuanMiLCJuYW1lcyI6WyJkb2N1bWVudCIsImdldEVsZW1lbnRCeUlkIiwiYWRkRXZlbnRMaXN0ZW5lciIsImNoZWNrZWQiLCJkaXNhYmxlZCJdLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2pzL2luZGV4LmpzP2JmN2UiXSwic291cmNlc0NvbnRlbnQiOlsiZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2FncmVlJykuYWRkRXZlbnRMaXN0ZW5lcignY2hhbmdlJywgZnVuY3Rpb24oKSB7XG4gICAgaWYgKHRoaXMuY2hlY2tlZCkge1xuICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncmVnaXN0ZXJCdXR0b24nKS5kaXNhYmxlZCA9IGZhbHNlO1xuICAgIH0gZWxzZSB7XG4gICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyZWdpc3RlckJ1dHRvbicpLmRpc2FibGVkID0gdHJ1ZTtcbiAgICB9XG59KTsiXSwibWFwcGluZ3MiOiJBQUFBQSxRQUFRLENBQUNDLGNBQVQsQ0FBd0IsT0FBeEIsRUFBaUNDLGdCQUFqQyxDQUFrRCxRQUFsRCxFQUE0RCxZQUFXO0VBQ25FLElBQUksS0FBS0MsT0FBVCxFQUFrQjtJQUNkSCxRQUFRLENBQUNDLGNBQVQsQ0FBd0IsZ0JBQXhCLEVBQTBDRyxRQUExQyxHQUFxRCxLQUFyRDtFQUNILENBRkQsTUFFTztJQUNISixRQUFRLENBQUNDLGNBQVQsQ0FBd0IsZ0JBQXhCLEVBQTBDRyxRQUExQyxHQUFxRCxJQUFyRDtFQUNIO0FBQ0osQ0FORCJ9\n//# sourceURL=webpack-internal:///./resources/js/index.js\n");
 
 /***/ }),
 

@@ -49,6 +49,15 @@ Route::post('/topic_message', [App\Http\Controllers\TopicMessageController::clas
 Route::post('/update-display-flag', [App\Http\Controllers\UserDisplayController::class, 'updateDisplayFlag']);
 Route::get('/get-replies/{messageId}', [App\Http\Controllers\ReplyMessageController::class, 'getReplies']);
 
+// 利用規約
+Route::get("/rules", function () {
+    return view('rules');
+});
+// プライバシーポリシー
+Route::get("/privacy", function () {
+    return view('privacy_policy');
+});
+
 
 Auth::routes();
 
