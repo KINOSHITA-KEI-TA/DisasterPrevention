@@ -61,10 +61,19 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
+                        <div class="row mb-1">
+                            <div class="col-md-6 offset-md-4">
+                                <input type="checkbox" name="agree" id="agree">
+                                <label for="agree">利用規約とプライバシーポリシーに同意します</label>
+                            </div>
+                            <div class="col-md-6 offset-md-4">
+                                <a class="rules" href="{{ url('/rules') }}">利用規約</a>
+                                <a class="privacy" href="{{ url('/privacy') }}">プライバシーポリシー</a>
+                            </div>
+                        </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="registerButton" disabled>
                                     {{ __('Register') }}
                                 </button>
                             </div>
