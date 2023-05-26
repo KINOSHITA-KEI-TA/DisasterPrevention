@@ -44,10 +44,12 @@ Route::get("/category", [App\Http\Controllers\CategoryController::class, 'index'
 Route::post("/create", [App\Http\Controllers\CategoryController::class, 'create']);
 Route::get('/category/{id}/topic', [App\Http\Controllers\TopicController::class, 'index']);
 Route::post('/topic/create', [App\Http\Controllers\TopicController::class, 'create']);
-Route::get('/topic/topic_message/{category_id}/{id}', [App\Http\Controllers\TopicMessageController::class,'index']);
+Route::get('/topic/topic_message/{category_id}/{id}', [App\Http\Controllers\TopicMessageController::class,'index'])->name('topic_message.index');
 Route::post('/topic_message', [App\Http\Controllers\TopicMessageController::class, 'sendMessage'])->name('message.send');
 Route::post('/update-display-flag', [App\Http\Controllers\UserDisplayController::class, 'updateDisplayFlag']);
 Route::get('/get-replies/{messageId}', [App\Http\Controllers\ReplyMessageController::class, 'getReplies']);
+Route::post('/message/{category_id}/{id}/delete', [App\Http\Controllers\TopicMessageController::class,'destroy']);
+
 
 // 利用規約
 Route::get("/rules", function () {

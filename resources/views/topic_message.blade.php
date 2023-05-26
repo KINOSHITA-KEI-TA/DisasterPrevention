@@ -80,10 +80,22 @@
 											<div class="post-date ml-2">{{ $post->created_at->format('Y/m/d') }}</div>
 										</div>
 										<div class="message">
-											{{ $post->message }}
-											<div class="reply-icon">
-												<i class="fas fa-reply"></i>
-											</div>
+											@if($post->trashed())
+												削除されたメッセージ
+											@else
+												{{ $post->message }}
+												<div class="reply-icon">
+													<i class="fas fa-reply"></i>
+												</div>
+												@if($post->user_id == Auth::id())
+												<form class="trash-icon" action="/message/{{ $category->id }}/{{ $post->id }}/delete" method="POST">
+													@csrf
+													<button type="submit" style="border: none; background: none;">
+														<i class="fas fa-trash-alt"></i>
+													</button>
+												</form>
+												@endif
+											@endif
 										</div>
 									</div>
 									@endforeach
@@ -98,10 +110,22 @@
 											<div class="post-date ml-2">{{ $post->created_at->format('Y/m/d') }}</div>
 										</div>
 										<div class="message">
-											{{ $post->message }}
-											<div class="reply-icon">
-												<i class="fas fa-reply"></i>
-											</div>
+											@if($post->trashed())
+												削除されたメッセージ
+											@else
+												{{ $post->message }}
+												<div class="reply-icon">
+													<i class="fas fa-reply"></i>
+												</div>
+												@if($post->user_id == Auth::id())
+												<form class="trash-icon" action="/message/{{ $category->id }}/{{ $post->id }}/delete" method="POST">
+													@csrf
+													<button type="submit" style="border: none; background: none;">
+														<i class="fas fa-trash-alt"></i>
+													</button>
+												</form>
+												@endif
+											@endif
 										</div>
 										@if ($post->replyMessages->count() > 0 && !$post->replyTo)
 											<a href="#" class="replies-count text-primary" style="cursor: pointer;" data-original-message-id="{{ $post->id }}">
@@ -148,6 +172,9 @@
 				<button id="messageSubmit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
 			</div>
 	</aside>
+	<script>
+		var csrfToken = "{{ csrf_token() }}";
+	</script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- jQuery Easing -->
 	<script src="{{ asset('js/jquery.easing.1.3.js') }}" ></script>

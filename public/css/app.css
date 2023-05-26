@@ -206,9 +206,22 @@
   display: none;
   position: absolute;
   /* アイコンの位置を調整 */
+  right: 60px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.trash-icon {
+  display: none;
+  position: absolute;
+  /* アイコンの位置を調整 */
   right: 20px;
   top: 10px;
   cursor: pointer;
+}
+
+.message-container:hover .trash-icon {
+  display: block;
 }
 
 .message-container:hover .reply-icon {
