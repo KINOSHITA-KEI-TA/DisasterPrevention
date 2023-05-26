@@ -40,6 +40,7 @@ channel.bind('MessageSent', function(data) {
                 '</button>' +
             '</form>';
         }
+        console.log(data.message.topic.category_id);
         let messageContainer =
             '<div class="message-container" data-message-id="' + messageId + '">' +
                 '<div class="d-flex align-items-center">' +
@@ -60,10 +61,11 @@ channel.bind('MessageSent', function(data) {
             $("#alternative-content").append(messageContainer);
         }
     } else {
+        let messageId = data.message.id;
         let deleteButton = '';
         if (data.user.id == currentUserId) {
             deleteButton =
-            '<form class="trash-icon" action="/message/' + data.category_id + '/' + messageId + '/delete" method="POST">' +
+            '<form class="trash-icon" action="/message/' + data.message.topic.category_id + '/' + messageId + '/delete" method="POST">' +
                 '<input type="hidden" name="_token" value="' + csrfToken + '">' +
                 '<button type="submit" style="border: none; background: none;">' +
                     '<i class="fas fa-trash-alt"></i>' +
