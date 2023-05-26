@@ -14,6 +14,7 @@ var topic_id = window.location.href.split('/').pop().replace('#', '');
 var channel = pusher.subscribe('DisasterPrevention_' + topic_id);
 
 channel.bind('MessageSent', function(data) {
+    // console.log(data.message.topic.category_id);
     const senderId = data.user.id;
     const currentUserId = parseInt($("#current-user-id").val());
     var formattedMessage = data.message.message.replace(/\n/g, '<br>');
@@ -29,6 +30,16 @@ channel.bind('MessageSent', function(data) {
     if ($("#alternative-content").is(":visible")) {
 
         let messageId = data.message.id;
+        let deleteButton = '';
+        if (data.user.id == currentUserId) {
+            deleteButton =
+            '<form class="trash-icon" action="/message/' + data.message.topic.category_id + '/' + messageId + '/delete" method="POST">' +
+                '<input type="hidden" name="_token" value="' + csrfToken + '">' +
+                '<button type="submit" style="border: none; background: none;">' +
+                    '<i class="fas fa-trash-alt"></i>' +
+                '</button>' +
+            '</form>';
+        }
         let messageContainer =
             '<div class="message-container" data-message-id="' + messageId + '">' +
                 '<div class="d-flex align-items-center">' +
@@ -39,6 +50,7 @@ channel.bind('MessageSent', function(data) {
                     '<div class="reply-icon">' +
                         '<i class="fas fa-reply"></i>' +
                     '</div>' +
+                    deleteButton +
                 '</div>' +
             '</div>';
         if (data.message.reply_to) {
@@ -48,6 +60,16 @@ channel.bind('MessageSent', function(data) {
             $("#alternative-content").append(messageContainer);
         }
     } else {
+        let deleteButton = '';
+        if (data.user.id == currentUserId) {
+            deleteButton =
+            '<form class="trash-icon" action="/message/' + data.category_id + '/' + messageId + '/delete" method="POST">' +
+                '<input type="hidden" name="_token" value="' + csrfToken + '">' +
+                '<button type="submit" style="border: none; background: none;">' +
+                    '<i class="fas fa-trash-alt"></i>' +
+                '</button>' +
+            '</form>';
+        }
         $("#board").append(
             replyHtml +
             '<div class="message-container" data-message-id="' + data.message.id + '">' +
@@ -59,6 +81,7 @@ channel.bind('MessageSent', function(data) {
                     '<div class="reply-icon">' +
                         '<i class="fas fa-reply"></i>' +
                     '</div>' +
+                    deleteButton +
                 '</div>' +
             '</div>'
         );
@@ -359,7 +382,6 @@ $(document).ready(function () {
         const windowWidth = $(window).width();
         if (windowWidth >= 768) {
             const leftPosition = $(".sidebar").outerWidth(true);
-            console.log(leftPosition);
             $(".sticky-top-form, .sticky-bottom-form").css("left", `${leftPosition}px`);
             $(".sticky-top-form, .sticky-bottom-form").css("width", `calc(100% - ${leftPosition}px)`);
         } else {

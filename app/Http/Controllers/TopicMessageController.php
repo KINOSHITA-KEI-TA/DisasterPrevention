@@ -29,7 +29,9 @@ class TopicMessageController extends Controller
     public function index($category_id, $id)
     {
         //
-        $topic_messages = Topic::with(['messages',
+        $topic_messages = Topic::with(['messages' => function ($query) {
+            $query->withTrashed();
+            },
             'messages.user',
             'messages.replyTo',
             'messages.replyTo.originalMessage',
@@ -37,8 +39,10 @@ class TopicMessageController extends Controller
             ])->find($id);
             $switch = true;
             // dd($topic_messages->messages->pluck('replyTo.originalMessage'));
+            // dd($topic_messages);
 
         $category = Category::with('topics')->find($category_id);
+        // dd($category);
         $userDisplay = Auth::user()->userDisplay;
         if (!$userDisplay) {
             $userDisplay = ['display_flg' => false];
@@ -56,7 +60,9 @@ class TopicMessageController extends Controller
             'topic_id' => $request->input('topic_id')
         ]);
         $message->save();
+        $topic = $message->topic;
 
+        $category_id = $topic->category->id;
         if ($request->input('is_reply') == 1 && $request->input('message_id')) {
             $reply = new ReplyMessage([
                 'topic_id' => $request->input('topic_id'),
@@ -141,8 +147,18 @@ class TopicMessageController extends Controller
      * @param  \App\Models\TopicMessage  $topicMessage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TopicMessage $topicMessage)
+    public function destroy($category_id, $id)
     {
         //
+        // dd($id);
+        $message = TopicMessage::find($id);
+        $topic_id = $message->topic_id;
+        if ($message->user_id != Auth::id()) {
+            return redirect()->route('topic_message.index', ['category_id' => $category_id, 'id' => $topic_id]);
+        }
+
+        $message->delete();
+
+        return redirect()->route('topic_message.index', ['category_id' => $category_id, 'id' => $topic_id]);
     }
 }
