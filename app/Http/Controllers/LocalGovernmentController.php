@@ -18,22 +18,30 @@ class LocalGovernmentController extends Controller
      */
     public function index()
     {
-        //
+        if(!Auth::user()) {
+            return redirect('login');
+        }
+        return view('local_government.index');
     }
 
-    public function addUser() {
-        $local_governments = DB::table('local_governments')->get();
-        return view('add_user_info',compact('local_governments'));
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $local_governments = LocalGovernment::where('name', 'like', "%$query%")->get();
+        return view('local_government.index', compact('local_governments'));
     }
 
-    public function addLocalGovernment(Request $request){
+    public function save(Request $request)
+    {
         $user = Auth::user();
-        $id = Auth::id();
-        $user->local_government_id = $request->local_government;
+        $user->local_government_id = $request->local_government_id;
         $user->save();
-        return view('main');
-        //ポップアップ
+        if(($user->save())) {
+            return redirect('home');
+        }
+        return route('local_government.index');
     }
+
 
     /**
      * Show the form for creating a new resource.

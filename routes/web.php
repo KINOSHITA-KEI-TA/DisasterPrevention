@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::middleware(['web'])->group(function () {
+    // ...
+});
 Route::get('/', function () {
     return view('main');
 });
@@ -34,22 +36,37 @@ Route::get('test_buddy_index',[App\Http\Controllers\BuddyController::class,'inde
 Route::post('test_buddy_create',[App\Http\Controllers\BuddyController::class,'create'])->name('buddy_register.create');
 //ここまで
 
+// カテゴリからトピックまでのルーティング
 Route::get("/category", [App\Http\Controllers\CategoryController::class, 'index']);
 Route::post("/create", [App\Http\Controllers\CategoryController::class, 'create']);
-
 Route::get('/category/{id}/topic', [App\Http\Controllers\TopicController::class, 'index']);
+Route::post('/topic/create', [App\Http\Controllers\TopicController::class, 'create']);
+Route::get('/topic/topic_message/{category_id}/{id}', [App\Http\Controllers\TopicMessageController::class,'index'])->name('topic_message.index');
+Route::post('/topic_message', [App\Http\Controllers\TopicMessageController::class, 'sendMessage'])->name('message.send');
+Route::post('/update-display-flag', [App\Http\Controllers\UserDisplayController::class, 'updateDisplayFlag']);
+Route::get('/get-replies/{messageId}', [App\Http\Controllers\ReplyMessageController::class, 'getReplies']);
+Route::post('/message/{category_id}/{id}/delete', [App\Http\Controllers\TopicMessageController::class,'destroy']);
 
-Route::get('/topic/{id}/topic_message', [App\Http\Controllers\TopicMessageController::class,'index']);
-Route::post('/topic/{id}/topic_message', [App\Http\Controllers\TopicMessageController::class,'store']);
-// Route::get('/topic/{id}/topic_message', [App\Http\Controllers\TopicMessageController::class,'show']);
+
+// 利用規約
+Route::get("/rules", function () {
+    return view('rules');
+});
+// プライバシーポリシー
+Route::get("/privacy", function () {
+    return view('privacy_policy');
+});
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/view_localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'addUser']);
-Route::post('/save_localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'addLocalGovernment']);
+// 自治体登録画面、検索、保存
+Route::get('/localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'index'])->name('local_government.index');
+Route::post('/localgovernment_search', [App\Http\Controllers\LocalGovernmentController::class, 'search'])->name('local_government.search');
+Route::post('/localgovernment_save', [App\Http\Controllers\LocalGovernmentController::class, 'save'])->name('local_government.save');
+
 
 // Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout']);

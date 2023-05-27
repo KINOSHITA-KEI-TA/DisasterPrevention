@@ -17,12 +17,13 @@ return new class extends Migration
             $table->id();
             $table->text("message");
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('topic_id')->constrained();
+            $table->foreignId('topic_id')->constrained()->index();
 
             // ボツ
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

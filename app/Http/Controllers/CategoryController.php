@@ -20,9 +20,7 @@ class CategoryController extends Controller
         $data = Category::with(['category_tags'])->get();
         $tags = CategoryTag::get();
         $genre = $tags;
-        // dd($data);
         return view('category', compact('data','tags', 'genre'));
-
     }
 
     /**
@@ -32,7 +30,6 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
-        // dd($request);
         $post = new Category();
         $post->category_name = $request->CategoryName;
         $post->category_tag_id = $request->TagName;
