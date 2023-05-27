@@ -99,13 +99,23 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
+						@if(Auth::check())
 							<div class="fh5co-icon">
-								<a href="/mypage"><i class="icon-settings"></i></a>
+								<a href="/userpage/{{Auth::user()->id}}"><i class="icon-settings"></i></a>
+							</div>
+							<div class="fh5co-text">
+								<h3>MyPage</h3>
+								<p>マイページ </p>
+							</div>
+						@else
+							<div class="fh5co-icon">
+								<a href="{{ route('logout') }}"><i class="icon-settings"></i></a>
 							</div>
 							<div class="fh5co-text">
 								<h3>setting</h3>
-								<p>マイページ </p>
+								<p>ログイン</p>
 							</div>
+						@endif
 						</div>
 					</div>
 					<div class="col-md-6">

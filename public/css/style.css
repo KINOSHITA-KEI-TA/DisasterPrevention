@@ -561,9 +561,10 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 .work .desc {
   display: table-cell;
   vertical-align: middle;
-  height: 270px;
+  height: 200px;
+  border-radius: 50%;
   background: #fff;
-  opacity: 0;
+  opacity: 1;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
@@ -1169,12 +1170,22 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 /*# sourceMappingURL=style.css.map */
 
 /* マイページ */
+.MyImage{
+  margin-bottom: 20px;
+}
+.Mypage-desc{
+  opacity: 1;
+}
 .MyProfile{
-  display: flex;
+  display: block;
   }
+.title-maypage{
+  color: #46b8da ;
+  font-weight: bold;
+}
 .MyList{
   padding: 0 0 0 30px;
-  width: 70%;
+  width: 75%;
 }
 #ListTitle{
   margin-bottom: 0em !important;
@@ -1273,9 +1284,126 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   font-weight: 300;
   color: #ffffff;
 }
+/* マイページ下段 */
+.Mypage-category{
+  width: 75%;
+  display: flex;
+}
+.Mypage-cat-1{
+  display: flex;
+  position: relative;
+  padding: 5px;
+  width: 25%;
+  height: 100%;
+}
+@media screen and (max-width: 844px){
+.Mypage-category{
+  width: 110%;
+  display: flex;
+  margin: 0 auto;
+}
+.Mypage-cat-1{
+  display: block;
+  position: relative;
+  text-align: center;
+  padding: 5px;
+  width: 30%;
+  height: 100%;
+}
+.Mypage-cat-2{
+  display: flex;
+  flex-direction: column;
+}
+.Mypage-category-banner{
+  display: flex;
+  flex-direction: column;
+}
+.Mypage-cat-ai{
+  margin: 0 auto !important;
+}
+.Mypage-cat-co {
+  padding: 0px !important;
+}
+.Mypage-cat-p{
+  font-size: 0;
+}
+}
+.Mypage-cat-1 a:hover{/* マウスオーバー時に色変更*/
+  opacity: 0.1;
+  background-color: #000000;
+}
+.Mypage-cat-2{
+  margin: 35px 10px 5px 15px;
+}
+.Mypage-cat-ai{
+  width: 60px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.05);
+  margin: auto 5px;
+  display: table;
+  text-align: center;
+}
+.Mypage-cat-co{
+  padding: 10px 0px 0px 0px;
+}
+.Mypage-cat-t{
+  margin: 0 0 0 0;
+}
+.cat-link{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.fa-regular.fa-comments{
+  display: table-cell;
+  vertical-align: middle;
+  color: #228896;
+  font-size: 30px;
+  height: 60px;
+}
+.fa-solid.fa-pencil{
+  display: table-cell;
+  vertical-align: middle;
+  color: #228896;
+  font-size: 30px;
+  height: 60px;
+}
+
+.fa-regular.fa-handshake{
+  display: table-cell;
+  vertical-align: middle;
+  color: #228896;
+  font-size: 30px;
+  height: 60px;
+}
+.fa-solid.fa-right-from-bracket{
+  display: table-cell;
+  vertical-align: middle;
+  color: #228896;
+  font-size: 30px;
+  height: 60px;
+}
+.fa-solid.fa-question{
+  display: table-cell;
+  vertical-align: middle;
+  color: #228896;
+  font-size: 30px;
+  height: 60px;
+}
+.fa-regular.fa-envelope{
+  display: table-cell;
+  vertical-align: middle;
+  color: #228896;
+  font-size: 30px;
+  height: 60px;
+}
+
 /* モーダル表示 */
 .modal-wrapper {
-  z-index: 999;
+  z-index: 1002;
   position: fixed;
   top: 0;
   right: 0;
@@ -1391,7 +1519,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 }
 
 .modal-overlay {
-  z-index: 10;
+  z-index: 15;
   position: absolute;
   top: 0;
   right: 0;
@@ -1417,6 +1545,33 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 
 .modal-wrapper .modal-close:hover {
   color: #2b2e38 !important
+}
+/* マイページ編集 */
+.MyListTitle_form{
+
+}
+.MyListContent_form{
+  width: 30%;
+  height: 40px;
+  border-radius: 15px;
+  border: 1px solid  rgba(0, 0, 0, 0.5);
+  margin-bottom: 30px;
+  padding: 10px;
+}
+.MyListContent_form_text{
+  width: 60%;
+  height: 80px;
+  border-radius: 15px;
+  border: 1px solid  rgba(0, 0, 0, 0.5);
+  margin-bottom: 30px;
+  padding: 10px;
+}
+.btn{
+  color: #fff;
+  background-color: #228896;
+  border: 2px solid #228896;
+  border-radius: 20px;
+  margin-bottom: 30px;
 }
 /* マイページ_バディリスト */
 .BuddyList{

@@ -50,12 +50,10 @@
 		<div id="fh5co-main">
 		<aside>
                     @if($user != null)
-					{{Auth::user()->name}}さんがログイン中
+					{{Auth::user()->name}}さんがログイン中（プロフィール編集中）
                         <!-- <h3>【大野】一旦、ユーザー検索→ユーザー個人ページ遷移で実装。カテゴリー機能実装完了次第、修正予定。</h2> -->
                         <br>
-                        <!-- {{$user->name}}さんのページ -->
                         {{-- 相互フォロー機能追加予定 --}}
-                        @if(!in_array($user->id, $followUserIdArray))
                         <form method="POST" action="{{route('addFollowFromUserPage',['addFollowId' => $user->id])}}">
                             <!-- <h4>フォローのたびにリダイレクトのエラー発生（フォロー、フォロー解除自体はできる）※リダイレクトは非同期で実装予定。</h4> -->
                             @csrf
@@ -65,23 +63,11 @@
                             @endif
                         </form>
                         @endif
-                        @if(in_array($user->id, $followUserIdArray))
-                            <form method="POST" action="{{route('deleteFollow',['followerId' => $user->id])}}">
-                                @csrf
-                                @if(Auth::user() != $user)
-                                    <button style="background: yellow" type="submit">フォロー解除</button>
-                                @endif
-                            </form>
-                        @endif
-                    @endif
 				</aside>
+            <form action="{{ route('update',$user->id)}}" method="POST">
+            @csrf
 			<div class="fh5co-narrow-content">
                 <h2 class="fh5co-heading animate-box title-maypage" data-animate-effect="fadeInLeft">マイページ</h2>
-				<!-- @if(Auth::user())
-							<p><a href="#">プロフィール編集</a></p>
-                        @else
-                            <li><a href="/login">ログイン</a></li>
-                        @endif -->
             <div class="row row-bottom-padded-md MyProfile">
                 	<div class="animate-box col-md-3 col-padding col-sm-6 fadeInUp text-center MyImage">
                     <a href="#" class="work image-popup" style="background-image: url(images/人物のアイコン素材.jpeg);">
@@ -92,24 +78,24 @@
                     </a>
                     </div>
                     <div class="MyList">
-                    <h2 class="MyListTitle">ニックネーム</h2>
-                    <p class="MyListContent">{{$user->name}}</p>
+                    <h2 class="MyListTitle" for="name">ニックネーム</h2>
+                    <!-- <div><label class="MyListTitle_form" for="name">ニックネーム</label></div> -->
+                    <div><input type="text" class="MyListContent_form" name="name" id="name" value="{{old('$user->name')?: $user->name}}"></div>
+                    <!-- <p class="MyListContent">{{$user->name}}</p> -->
                     <h2 class="MyListTitle">所属自治体</h2>
                     <div class="Area">
                         <p class="MyListContent">東京都</p>
                         <p class="MyListContent">&nbsp葛飾区</p>
                     </div>
-					<h2 class="MyListTitle">紹介文</h2>
+                    <h2 class="MyListTitle">紹介文</h2>
 					<div class="Area">
-                        <p class="MyListContent-text">{{$user->nickname}}</p>
+					<textarea rows="4" cols="40" type="text" class="MyListContent_form_text" name="nickname" id="nickname" value="{{old('$user->nickname')?: $user->nickname}}">{{old('$user->nickname')?: $user->nickname}}</textarea>
+                        <p class="MyListContent"></p>
                     </div>
                     <!-- <h2 class="MyListTitle">所属カテゴリー</h2> -->
                     <!-- <div class="MyCategory-list">
                     <div class="support-box">
                         <div class="support-img"><img src="images/23880633_s.jpeg" width="200px" height="200px" alt="カテゴリー画像"></div>
-                        <div class="support-img"></div>
-                        <div class="support-img"></div>
-                        <div class="support-img"></div>
                         <div class="support-img"></div>
                         <div class="support-img"></div>
                         <div class="support-img"></div>
@@ -143,7 +129,9 @@
                       <li class="MypageBuddyList ListMove"><a href="/userpage/{{Auth::user()->id}}">バディリスト</a></li>
                     </ul>
                     <label for="toggle" onclick=""  for="menuToggle">もっと見る</label>   -->
+                    <button type="submit" class="btn">保存</button>
                 </div>
+                </form>
 				@if(Auth::user() != $user)
 				@else
 				<div class="Mypage-category">
@@ -198,135 +186,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="Mypage-category Mypage-category-banner">
-					<div class="Mypage-cat-2">
-						<a href="https://disaportal.gsi.go.jp/index.html">
-							<img style="width:250px" src="/images/banner2_160_50.png" alt="ハザードマップポータルサイトのバナー画像" >
-						</a>
-					</div>
-					<div class="Mypage-cat-2">
-						<a href="https://suiboumap.gsi.go.jp/">
-							<img style="width:250px" src="/images/banner_shinsuinavi.jpg" alt="浸水ポータルサイトのバナー画像" >
-						</a>
-					</div>
-				</div> -->
 				@endif
-            <button class="fixed_btn">バディになる！（実装前）</button>
-            <!-- <button class="fixed_btn_Application">バディ申請中</button>
-            <button class="fixed_btn_Member">バディ解除</button> -->
-            <center>
-            <a href="#modal-01" class=""><button class="fixed_btn_question modal-button">？</button></a>
-            </center>
-            <div class="modal-wrapper" id="modal-01">
-            <a href="#!" class="modal-overlay"></a>
-            <div class="modal-window">
-            <div class="modal-content">
-            <p class="modal_title">防サイトーク内のバディとは？</p>
-            <p>離れた地域での助け合いや防災に関する情報交換を行える関係です。</p>
-            <p>不適切な言動は直ちに退会とさせていただきます。</p>
-			<p>実装までお待ちください。</p>
-            </div>
-            <a href="#!" class="modal-close"><i class="far fa-times-circle"></i></a>
-            </div>
-            </div>
-            </div>
-			<!-- <div class="fh5co-narrow-content">
-				<h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Services</h2>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
-							<div class="fh5co-icon">
-								<a href="/mypage"><i class="icon-settings"></i></a>
-							</div>
-							<div class="fh5co-text">
-								<h3>setting</h3>
-								<p>マイページ </p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
-							<div class="fh5co-icon"> -->
-							<!-- Wordpressのurl -->
-								<!-- <a href="/"><i class="icon-document-text"></i></a>
-							</div>
-							<div class="fh5co-text">
-								<h3>blog</h3>
-								<p>Wordpress </p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
-							<div class="fh5co-icon">
-								<a href="/"><i class="icon-paperplane"></i></a>
-							</div>
-							<div class="fh5co-text">
-								<h3>dm</h3>
-								<p>ダイレクトメッセージ </p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="fh5co-feature animate-box" data-animate-effect="fadeInLeft">
-							<div class="fh5co-icon">
-								<a href="/buddy"><i class="icon-group"></i></a>
-							</div>
-							<div class="fh5co-text">
-								<h3>Buddy</h3>
-								<p> </p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
-			
-				<!-- <h2 class="fh5co-heading animate-box" data-animate-effect="fadeInLeft">Categories</h2>
-				<div class="row row-bottom-padded-md">
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/23880633_s.jpeg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">防災対策</a></h3>
-								<p>防災対策についての部屋</p>
-								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/24151121_s.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">ハザードマップ</a></h3>
-								<p>各地域のハザードマップ</p>
-								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/23311032_s.jpeg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">防災グッズ</a></h3>
-								<p>こんなにある防災グッズ</p>
-								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 col-padding animate-box" data-animate-effect="fadeInLeft">
-						<div class="blog-entry">
-							<a href="#" class="blog-img"><img src="images/23845735_s.jpg" class="img-responsive" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
-							<div class="desc">
-								<h3><a href="#">震災</a></h3>
-								<p>震災について話し合おう</p>
-								<a href="#" class="lead">もっと見る <i class="icon-arrow-right3"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
-
 			<div id="get-in-touch">
 				<div class="fh5co-narrow-content">
 					<div class="row">

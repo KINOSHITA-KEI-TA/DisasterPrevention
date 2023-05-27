@@ -3,11 +3,13 @@
     <nav id="fh5co-main-menu" role="navigation">
         <ul>
             <li class="fh5co-active"><a href="/home">ホーム</a></li>
-            <li><a href="/mypage">マイページ</a></li>
+            @if(Auth::check())
+            <li><a href="/userpage/{{Auth::user()->id}}">マイページ</a></li>
+            @endif
             <li><a href="/category">カテゴリー</a></li>
             <li><a href="/buddy">バディ</a></li>
             <li><a href="/contact">dm</a></li>
-            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
+            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('ログイン/新規登録') }}</a></li>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
