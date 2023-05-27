@@ -68,8 +68,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
-
+    // 'timezone' => 'UTC',
+    'timezone' => 'Asia/Tokyo',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -107,7 +107,8 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    // 'faker_locale' => 'en_US',
+    'faker_locale' => 'ja_JP',
 
     /*
     |--------------------------------------------------------------------------
