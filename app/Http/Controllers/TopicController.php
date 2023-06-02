@@ -29,7 +29,13 @@ class TopicController extends Controller
      */
     public function create(Request $request)
     {
-        //
+        $request->validate([
+            'TopicName' => 'required',
+        ],
+        [
+            'TopicName.required' => 'チャンネルを入力してください。',
+        ]
+    );
         $post = new Topic();
         $post->topic = $request->TopicName;
         $post->category_id = $request->category_id;

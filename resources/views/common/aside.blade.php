@@ -15,24 +15,21 @@
             </form>
             @switch(Request::path())
             @case('category')
-                <form class="category-select-form animate-box" action="{{ url('/show') }}" method="get">
-                {{ csrf_field() }}
-                <div class="d-flex align-items-center justify-content-center">
-                    <select id="inputState" name="CategoryName" class="form-select category-select-input ">
-                    <option selected>ジャンル</option>
-                    @foreach ($genre as $tag)
-                    <option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
-                    @endforeach
-                    </select>
-                    <button type="submit" class="btn btn-primary btn-category-select">検索</button>
-                </div>
+                <form class="category-select-form animate-box">
+                    {{ csrf_field() }}
+                    <div class="d-flex align-items-center justify-content-center">
+                        <select id="inputTag" name="CategoryName" class="form-select category-select-input ">
+                            <option selected value="">ジャンル</option>
+                            @foreach ($genre as $tag)
+                                <option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </form>
                 @break
-
             @case('about')
                 <p></p>
                 @break
-
             @endswitch
         </ul>
     </nav>

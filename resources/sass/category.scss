@@ -58,12 +58,15 @@
     }
     .category-form-text .form-control {
         height: 30px;
-        width: 200px;
+        width: 100%;
         font-size: 14px;
     }
     .btn-category-form {
-        height: 30px;
-        width: 30px;
+        height: 30px !important;
+        width: 30px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
     .btn-category-select {
         height: 30px;
@@ -144,5 +147,10 @@
     cursor: pointer;
 }
 
+.invalid-feedback-custom {
+    display: block;
+    color: #dc3545;
+    font-size: 12.8px;
+}
 
 

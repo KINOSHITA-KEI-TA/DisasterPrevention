@@ -55,9 +55,14 @@
 				<div class="col-12 d-flex justify-content-center animate-box">
 					<form class="category-form d-flex col-lg-8 col-md-9 col-12" action="{{ url('/topic/create') }}" method="POST">
 						{{ csrf_field() }}
-						<div class="col-10 category-form-text">
+						<div class="col-10 category-form-text d-flex flex-column">
 							<input type="hidden" name="category_id" value="{{ $id }}">
-							<input type="text" name="TopicName" class="form-control" placeholder="新規作成チャンネル">
+							<input type="text" name="TopicName" class="form-control category-form-input @error('TopicName') is-invalid @enderror" placeholder="新規作成チャンネル">
+							@error('TopicName')
+								<span class="invalid-feedback-custom" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+							@enderror
 						</div>
 						<div class="col-auto">
 							<button type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane"></i></button>

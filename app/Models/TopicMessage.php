@@ -28,5 +28,9 @@ class TopicMessage extends Model
     {
         return $this->hasMany(ReplyMessage::class, 'message_id');
     }
+    public function emojiMessages()
+    {
+        return $this->hasMany(TopicMessageEmoji::class, 'message_id');
+    }
 
 }

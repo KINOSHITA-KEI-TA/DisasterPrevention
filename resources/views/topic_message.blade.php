@@ -43,9 +43,14 @@
 			<div class="col-12 d-flex justify-content-center animate-box">
 				<form class="category-form d-flex col-lg-8 col-md-9 col-12" action="{{ url('/topic/create') }}" method="POST">
 					{{ csrf_field() }}
-					<div class="col-10 category-form-text">
+					<div class="col-10 category-form-text d-flex flex-column">
 						<input type="hidden" name="category_id" value="{{ $id }}">
-						<input type="text" name="TopicName" class="form-control" placeholder="新規作成チャンネル">
+						<input type="text" name="TopicName" class="form-control class="form-control category-form-input @error('TopicName') is-invalid @enderror" placeholder="新規作成チャンネル">
+						@error('TopicName')
+							<span class="invalid-feedback-custom" role="alert">
+								<strong>{{ $message }}</strong>
+							</span>
+						@enderror
 					</div>
 					<div class="col-auto">
 						<button type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane"></i></button>
@@ -70,7 +75,6 @@
 									<div class="message-container" data-message-id="{{ $post->id }}" id="message-{{ $post->id }}">
 										@if ($post->replyTo && $post->replyTo->originalMessage)
 											<div class="reply-info d-flex align-items-center ml-4" data-reply-to="{{ $post->replyTo->originalMessage->id }}">
-
 												<div class="reply-username">{{ $post->replyTo->originalMessage->user->name }}</div>
 												<div class="reply-message pl-2">{{ $post->replyTo->originalMessage->message }}</div>
 											</div>
@@ -81,9 +85,17 @@
 										</div>
 										<div class="message">
 											@if($post->trashed())
+											<div class="originalMessage">
 												削除されたメッセージ
+											</div>
 											@else
-												{{ $post->message }}
+												<div class="originalMessage">
+													{{ $post->message }}
+												</div>
+												<div class="emoji-icon" data-target="#emoji-tool-{{ $post->id }}">
+													<i>&#9786;</i>
+												</div>
+												<div class="emoji-tool" id="emoji-tool-{{ $post->id }}"></div>
 												<div class="reply-icon">
 													<i class="fas fa-reply"></i>
 												</div>
@@ -95,6 +107,16 @@
 													</button>
 												</form>
 												@endif
+												<div class="emojiReactionContent">
+													@foreach($post->emojiMessages as $emojiMessage)
+														@if($emojiMessage->emoji)
+														<div class="emoji-reaction" style="left: {{ 20 + $loop->index * 15 }}px;">
+														<span class="tooltip-text">{{$emojiMessage->user->name}}</span>
+															{!! $emojiMessage->emoji->decimal_code !!}
+														</div>
+														@endif
+													@endforeach
+												</div>
 											@endif
 										</div>
 									</div>
@@ -105,33 +127,45 @@
 								@foreach($topic_messages->messages as $post)
 								@if (!$post->replyTo)
 								<div class="message-container" data-message-id="{{ $post->id }}" id="message-{{ $post->id }}">
-										<div class="d-flex align-items-center">
-											<div class="username">{{ $post->user->name }}</div>
-											<div class="post-date ml-2">{{ $post->created_at->format('Y/m/d') }}</div>
-										</div>
-										<div class="message">
-											@if($post->trashed())
-												削除されたメッセージ
-											@else
-												{{ $post->message }}
-												<div class="reply-icon">
-													<i class="fas fa-reply"></i>
-												</div>
-												@if($post->user_id == Auth::id())
-												<form class="trash-icon" action="/message/{{ $category->id }}/{{ $post->id }}/delete" method="POST">
-													@csrf
-													<button type="submit" style="border: none; background: none;">
-														<i class="fas fa-trash-alt"></i>
-													</button>
-												</form>
-												@endif
+									<div class="d-flex align-items-center">
+										<div class="username">{{ $post->user->name }}</div>
+										<div class="post-date ml-2">{{ $post->created_at->format('Y/m/d') }}</div>
+									</div>
+									<div class="message">
+										@if($post->trashed())
+											削除されたメッセージ
+										@else
+											{{ $post->message }}
+											<div class="emoji-icon" data-target="#emoji-tool2-{{ $post->id }}">
+												<i>&#9786;</i>
+											</div>
+											<div class="emoji-tool2" id="emoji-tool2-{{ $post->id }}"></div>
+											<div class="reply-icon">
+												<i class="fas fa-reply"></i>
+											</div>
+											@if($post->user_id == Auth::id())
+											<form class="trash-icon" action="/message/{{ $category->id }}/{{ $post->id }}/delete" method="POST">
+												@csrf
+												<button type="submit" style="border: none; background: none;">
+													<i class="fas fa-trash-alt"></i>
+												</button>
+											</form>
 											@endif
-										</div>
-										@if ($post->replyMessages->count() > 0 && !$post->replyTo)
-											<a href="#" class="replies-count text-primary" style="cursor: pointer;" data-original-message-id="{{ $post->id }}">
-												{{ $post->replyMessages->count() }}件の返信
-											</a>
+											@foreach($post->emojiMessages as $emojiMessage)
+												@if($emojiMessage->emoji)
+												<div class="emoji-reaction" style="left: {{ 20 + $loop->index * 15 }}px;">
+												<span class="tooltip-text">{{$emojiMessage->user->name}}</span>
+													{!! $emojiMessage->emoji->decimal_code !!}
+												</div>
+												@endif
+											@endforeach
 										@endif
+									</div>
+									@if ($post->replyMessages->count() > 0 && !$post->replyTo)
+										<a href="#" class="replies-count text-primary" style="cursor: pointer;" data-original-message-id="{{ $post->id }}">
+											{{ $post->replyMessages->count() }}件の返信
+										</a>
+									@endif
 								</div>
 								@endif
 								@endforeach
@@ -142,7 +176,7 @@
 			</div>
 		</aside>
 	</div>
-	<div id="replies-window" style="display: none; position: fixed; top: 0; right: -80%; width: 80%; height: 100%; background-color: white; overflow-y: scroll; padding: 20px; border-left: 1px solid #ccc; z-index: 1000;">
+	<div id="replies-window" style="display: none; position: fixed; top: 0; right: -80%; width: 80%; height: 100%; background-color: white; overflow-y: scroll; padding: 20px; border-left: 1px solid #ccc; z-index: 10000;">
 		<div id="replies-container" style="overflow-y: scroll; height: calc(100% - 60px);">
 			<!-- 内容はjsで追加 -->
 		</div>
@@ -174,6 +208,7 @@
 	</aside>
 	<script>
 		var csrfToken = "{{ csrf_token() }}";
+		var currentUser = {{ Auth::id() }};
 	</script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- jQuery Easing -->

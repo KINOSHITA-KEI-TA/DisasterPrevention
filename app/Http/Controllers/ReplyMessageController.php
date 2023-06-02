@@ -19,12 +19,19 @@ class ReplyMessageController extends Controller
     }
 
     public function getReplies($messageId)
-{
-    $replies = ReplyMessage::with('replyToMessage.user')
-                ->where('message_id', $messageId)
-                ->get();
-    return response()->json($replies);
-}
+    {
+        $replies = ReplyMessage::with([
+            'replyToMessage.user',
+            'replyToMessage.emojiMessages.emoji',
+            'replyToMessage.emojiMessages.user',
+            'replyToMessage' => function ($query) {
+            $query->withTrashed();
+            },
+        ])
+        ->where('message_id', $messageId)
+        ->get();
+        return response()->json($replies);
+    }
 
 
     /**
