@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
-@charset "UTF-8";
 .category-form {
   padding-top: 60px;
 }
@@ -62,12 +61,15 @@
   }
   .category-form-text .form-control {
     height: 30px;
-    width: 200px;
+    width: 100%;
     font-size: 14px;
   }
   .btn-category-form {
-    height: 30px;
-    width: 30px;
+    height: 30px !important;
+    width: 30px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
   .btn-category-select {
     height: 30px;
@@ -145,6 +147,12 @@
   cursor: pointer;
 }
 
+.invalid-feedback-custom {
+  display: block;
+  color: #dc3545;
+  font-size: 12.8px;
+}
+
 .alt-display {
   display: none;
 }
@@ -170,9 +178,10 @@
 }
 
 .message {
+  position: relative;
   border-radius: 10px;
   padding: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   display: inline-block;
   max-width: 100%;
 }
@@ -181,6 +190,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+  padding: 5px 0 0 5px;
 }
 
 .username {
@@ -214,10 +224,107 @@
   position: relative;
 }
 
+.emoji-icon {
+  font-size: 30px;
+  display: none;
+  position: absolute;
+  right: 90px;
+  top: -5px;
+  cursor: pointer;
+}
+
+.emoji-icon2 {
+  font-size: 30px;
+  display: none;
+  position: absolute;
+  right: 90px;
+  top: -5px;
+  cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  .emoji-tool {
+    transform: translate(-10%, 0);
+  }
+  .emoji-tool2 {
+    transform: translate(-10%, 0);
+  }
+}
+.emoji-tool {
+  display: none;
+  border-radius: 20px;
+  font-size: 30px;
+  position: absolute;
+  left: 40%;
+  top: 45px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 5px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.emoji-tool2 {
+  display: none;
+  border-radius: 20px;
+  font-size: 30px;
+  position: absolute;
+  left: 40%;
+  top: 45px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 5px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.emoji-container {
+  display: inline-block;
+}
+
+.emoji-container:hover .emoji {
+  transform: scale(1.2);
+}
+
+.emoji {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.emoji-reaction {
+  position: absolute;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  bottom: 100%;
+  opacity: 0;
+  font-size: 10px;
+  transition: opacity 0.3s;
+  width: auto;
+  white-space: nowrap;
+}
+
+.emoji-reaction:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.replies-count {
+  margin-top: 10px;
+}
+
 .reply-icon {
   display: none;
   position: absolute;
-  /* アイコンの位置を調整 */
   right: 60px;
   top: 10px;
   cursor: pointer;
@@ -226,10 +333,17 @@
 .trash-icon {
   display: none;
   position: absolute;
-  /* アイコンの位置を調整 */
   right: 20px;
   top: 10px;
   cursor: pointer;
+}
+
+.message-container:hover .emoji-icon {
+  display: block;
+}
+
+.message-container:hover .emoji-icon2 {
+  display: block;
 }
 
 .message-container:hover .trash-icon {

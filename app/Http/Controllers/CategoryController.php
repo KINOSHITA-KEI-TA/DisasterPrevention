@@ -30,6 +30,16 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+                'TagName' => 'required|not_in:""',
+                'CategoryName' => 'required',
+            ],
+            [
+                'TagName.required' => 'ジャンルを選択してください。',
+                'TagName.not_in' => 'タグ名が無効です。',
+                'CategoryName.required' => 'カテゴリ名を入力してください。',
+            ]
+        );
         $post = new Category();
         $post->category_name = $request->CategoryName;
         $post->category_tag_id = $request->TagName;
@@ -58,9 +68,6 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
-        $category_filter = User::where('age', '>', 20)
-            ->where('gender', '=', 'male')
-            ->get();
     }
 
     /**

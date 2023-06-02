@@ -14,12 +14,14 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::create('user_displays', function (Blueprint $table) {
+        Schema::create('topic_message_emoji', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->boolean('display_flg')->default(false);
+            $table->foreignId('message_id')->constrained('topic_messages');
+            $table->foreignId('emoji_id')->constrained('emojis');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -30,5 +32,6 @@ return new class extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('topic_message_emoji');
     }
 };

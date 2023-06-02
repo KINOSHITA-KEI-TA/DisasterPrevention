@@ -54,15 +54,25 @@
 						{{ csrf_field() }}
 						<div class="category-form-row d-flex align-items-center justify-content-center">
 							<div class=" category-form-tag">
-								<select id="inputState" name="TagName" class="form-select category-form-input">
-									<option selected>ジャンル</option>
+								<select id="inputState" name="TagName" class="form-select category-form-input @error('TagName') is-invalid @enderror">
+									<option selected value="">ジャンル</option>
 									@foreach ($tags as $tag)
 										<option value="{{ $tag->id }}">{{ $tag->category_tag_name }}</option>
 									@endforeach
 								</select>
+								@error('TagName')
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $message }}</strong>
+									</span>
+								@enderror
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 category-form-text">
-								<input type="text" name="CategoryName" class="form-control" placeholder="新規作成カテゴリ名入力">
+							<div class="col-lg-6 col-md-6 col-sm-6 category-form-text d-flex flex-column">
+								<input type="text" name="CategoryName" class="form-control @error('CategoryName') is-invalid @enderror" placeholder="新規作成カテゴリ名">
+								@error('CategoryName')
+									<span class="invalid-feedback-custom" role="alert">
+										<strong>{{ $message }}</strong>
+									</span>
+								@enderror
 							</div>
 							<div class="d-flex align-items-center btn-category-form-container">
 								<button type="submit" class="btn btn-primary btn-category-form">
@@ -80,7 +90,7 @@
 				<div class="row row-bottom-padded-md category-list animate-box">
 
 					@foreach($data as $item)
-					<a href="{{ url('/category/'.$item->id.'/topic') }}" class="blog-entry">
+					<a href="{{ url('/category/'.$item->id.'/topic') }}" class="blog-entry" data-category-id="{{ $item->category_tags->id }}">
 						<div class="blog-img"><img src="{{asset($item->category_tags->url)}}" class="img-responsive" alt="カテゴリー"></div>
 						<div class="desc">
 							<h3 class="category-name" title="{{ $item->category_name }}">{{ $item->category_name }}</h3>
@@ -121,7 +131,7 @@
 
 	<!-- MAIN JS -->
 	<script src="js/main.js"></script>
-
+	<script src="js/category.js"></script>
 	</body>
 </html>
 

@@ -28,7 +28,6 @@ channel.bind('MessageSent', function(data) {
             '</div>';
     }
     if ($("#alternative-content").is(":visible")) {
-
         let messageId = data.message.id;
         let deleteButton = '';
         if (data.user.id == currentUserId) {
@@ -48,6 +47,10 @@ channel.bind('MessageSent', function(data) {
                     '<div class="post-date ml-2">' + formattedDate + '</div>' +
                 '</div>' +
                 '<div class="message">' + formattedMessage +
+                    '<div class="emoji-icon" data-target="#emoji-tool-' + messageId + '">' +
+                        '<i>&#9786;</i>' +
+                    '</div>' +
+                    '<div class="emoji-tool" id="emoji-tool-' + messageId + '"></div>' +
                     '<div class="reply-icon">' +
                         '<i class="fas fa-reply"></i>' +
                     '</div>' +
@@ -80,6 +83,10 @@ channel.bind('MessageSent', function(data) {
                     '<div class="post-date ml-2">' + formattedDate + '</div>' +
                 '</div>' +
                 '<div class="message">' + formattedMessage +
+                    '<div class="emoji-icon" data-target="#emoji-tool-' + messageId + '">' +
+                        '<i>&#9786;</i>' +
+                    '</div>' +
+                    '<div class="emoji-tool" id="emoji-tool-' + messageId + '"></div>' +
                     '<div class="reply-icon">' +
                         '<i class="fas fa-reply"></i>' +
                     '</div>' +
@@ -257,7 +264,7 @@ function toggleDisplay(isChecked) {
 }
 function updateDisplayFlag(checkbox) {
     const isChecked = checkbox.checked;
-    toggleDisplay(isChecked);
+    // toggleDisplay(isChecked);
 
     // CSRFトークンを取得
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -278,6 +285,7 @@ function updateDisplayFlag(checkbox) {
     .then(data => {
         if (data.success) {
             console.log('UserDisplayのdisplay_flgが更新されました');
+            location.reload();
         } else {
             console.error('UserDisplayのdisplay_flgの更新に失敗しました');
         }
@@ -303,71 +311,100 @@ $(document).ready(function () {
     });
 });
 function openRepliesWindow(repliesCountElem) {
-        messageId = repliesCountElem.data('original-message-id');
-        var originalMessage = $('#message-' + messageId);
-        isReply = true;
-        var originalMessageUsername = originalMessage.find('.username').text();
-        var originalMessageDate = originalMessage.find('.post-date').text();
-        var originalMessageContent = originalMessage.find('.message').html();
-        var replyCount = repliesCountElem.text();
-        var repliesContainer = $('#replies-container');
-        repliesContainer.empty(); // コンテナの中身を空にする
-        // 返信ウィンドウにオリジナルメッセージと返信件数を表示
-        repliesContainer.html(`
-        <div class="original-message">
-            <div class="d-flex align-items-center">
-                <div class="username">${originalMessageUsername}</div>
-                <div class="post-date ml-2">${originalMessageDate}</div>
-            </div>
-            <div class="message">${originalMessageContent}</div>
-        </div>
-        <div class="replies-count" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">
-            ${replyCount}
-        </div>
-        `);
-
-        // AJAX を使用して返信メッセージを取得
-        $.ajax({
-            url: '/get-replies/' + messageId,
-            type: 'GET',
-            dataType: 'json',
-            success: function (replies) {
-                replies.forEach(function(reply) {
-                    const Dateformat = formatDate(reply.created_at);
-                    // 返信メッセージのHTMLを作成
-                    var replyHtml = `
-                        <div class="reply-message">
-                            <div class="d-flex align-items-center">
-                                <div class="username">${reply.reply_to_message.user.name}</div>
-                                <div class="post-date ml-2">${Dateformat}</div>
-                            </div>
-                            <div class="message">
-                            ${reply.reply_to_message.message}
-                            </div>
-                        </div>`;
-
-                    // 返信メッセージをコンテナに追加
-                    repliesContainer.append(replyHtml);
-                });
-
-                $('.close-replies-window').on('click', function () {
-                    var repliesWindow = $('#replies-window');
-                    repliesWindow.animate({right: '-80%'}, 500, function() {
-                        repliesWindow.hide();
-                    });
-                    resetReplyState();
-                });
-                var repliesWindow = $('#replies-window');
-                if (repliesWindow.is(':visible')) {
-                    repliesWindow.animate({right: '-80%'}, 500, function() {
-                        repliesWindow.hide();
-                    });
-                } else {
-                    repliesWindow.show().animate({right: '0'}, 500);
-                }
-            }
-        });
+    messageId = repliesCountElem.data('original-message-id');
+    var originalMessage = $('#message-' + messageId);
+    isReply = true;
+    var originalMessageUsername = originalMessage.find('.username').text();
+    var originalMessageDate = originalMessage.find('.post-date').text();
+    var originalMessageContent = originalMessage.find('.originalMessage').html();
+    var emojiReactionContent = originalMessage.find('.emojiReactionContent').html();
+    var emojiReactionElement = '';
+    // 削除されたメッセージの場合は絵文字も表示されないためemojiReactionContentはundefinedとなるため
+    if (emojiReactionContent) {
+        emojiReactionElement = `
+                            ${emojiReactionContent}`;
     }
+    // console.log(emojiReactionContent)
+    var replyCount = repliesCountElem.text();
+    var repliesContainer = $('#replies-container');
+    repliesContainer.empty(); // コンテナの中身を空にする
+    // 返信ウィンドウにオリジナルメッセージと返信件数を表示
+    repliesContainer.html(`
+    <div class="original-message">
+        <div class="d-flex align-items-center">
+            <div class="username">${originalMessageUsername}</div>
+            <div class="post-date ml-2">${originalMessageDate}</div>
+        </div>
+        <div class="message">${originalMessageContent}
+            ${emojiReactionElement}
+        </div>
+    </div>
+    <div class="replies-count" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+        ${replyCount}
+    </div>
+    `);
+
+    // AJAX を使用して返信メッセージを取得
+    $.ajax({
+        url: '/get-replies/' + messageId,
+        type: 'GET',
+        dataType: 'json',
+        success: function (replies) {
+            console.log(replies);
+            replies.forEach(function(reply) {
+                const Dateformat = formatDate(reply.created_at);
+                // 返信メッセージのHTMLを作成
+                var replyHtml = `
+                    <div class="reply-message">
+                        <div class="d-flex align-items-center">
+                            <div class="username">${reply.reply_to_message.user.name}</div>
+                            <div class="post-date ml-2">${Dateformat}</div>
+                        </div>
+                        <div class="message" style="margin-bottom: 40px;">
+                        ${
+                            reply.reply_to_message.deleted_at
+                            ? '削除されたメッセージ'
+                            : `${reply.reply_to_message.message}
+                                ${
+                                    reply.reply_to_message.emoji_messages
+                                    ? reply.reply_to_message.emoji_messages.map((emojiMessage, index) =>
+                                        `
+                                        <div class="emoji-reaction" style="left: ${20 + index * 15}px;">
+                                            <span class="tooltip-text">${emojiMessage.user ? emojiMessage.user.name : ''}</span>
+                                            ${emojiMessage.emoji ? emojiMessage.emoji.decimal_code : ''}
+                                        </div>
+                                        `
+                                    ).join('')
+                                    : ''
+                                }
+                            </div>
+                        `
+                        }
+                    </div>`;
+
+                // 返信メッセージをコンテナに追加
+                repliesContainer.append(replyHtml);
+                console.log(reply);
+            });
+
+            $('.close-replies-window').on('click', function () {
+                var repliesWindow = $('#replies-window');
+                repliesWindow.animate({right: '-80%'}, 300, function() {
+                    repliesWindow.hide();
+                });
+                resetReplyState();
+            });
+            var repliesWindow = $('#replies-window');
+            if (repliesWindow.is(':visible')) {
+                repliesWindow.animate({right: '-80%'}, 300, function() {
+                    repliesWindow.hide();
+                });
+            } else {
+                repliesWindow.show().animate({right: '0'}, 300);
+            }
+        }
+    });
+}
 
 
 // ディスプレイサイズ考慮してサイズ調整
@@ -402,6 +439,68 @@ $(document).ready(function () {
     });
     $("#fh5co-hero").scrollTop($("#fh5co-hero")[0].scrollHeight);
 });
+// 絵文字表示
+$(document).ready(function() {
+    $("#board").on('click', ".emoji-icon", function() {
+        var target = $(this).data('target');
+        $.get("/emojis", function(data) {
+            let tooltipContent = '';
+            data.forEach(function(emoji) {
+                tooltipContent += `<span class="emoji-container"><span class="emoji" data-emoji-id="${emoji.id}">${emoji.decimal_code}</span></span>`;
+            });
+            $(target).html(tooltipContent).show();
+        });
+    });
+
+    $(document).on('click', function(e) {
+        if ($(e.target).hasClass('emoji-icon')) {
+            return;
+        }
+        $(".emoji-tool").hide();
+    });
+});
+$(document).ready(function() {
+    $("#alternative-content").on('click', ".emoji-icon", function() {
+        var target = $(this).data('target');
+        $.get("/emojis", function(data) {
+            let tooltipContent = '';
+            data.forEach(function(emoji) {
+                tooltipContent += `<span class="emoji-container"><span class="emoji" data-emoji-id="${emoji.id}">${emoji.decimal_code}</span></span>`;
+            });
+            $(target).html(tooltipContent).show();
+        });
+    });
+
+    $(document).on('click', function(e) {
+        if ($(e.target).hasClass('emoji-icon')) {
+            return;
+        }
+        $(".emoji-tool2").hide();
+    });
+});
+$(document).on("click", ".emoji", function() {
+    var messageId = $(this).closest('.message-container').data('message-id');
+    var emojiId = $(this).closest('.emoji').data('emoji-id');
+    var userId = currentUser;
+    $.ajax({
+        url: '/emojis/create',
+        type: 'POST',
+        data: {
+            'message_id': messageId,
+            'emoji_id': emojiId,
+            'user_id': userId,
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function() {
+            location.reload();
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+});
 
 // register用のjs
 document.getElementById('agree').addEventListener('change', function() {
@@ -411,3 +510,4 @@ document.getElementById('agree').addEventListener('change', function() {
         document.getElementById('registerButton').disabled = true;
     }
 });
+
