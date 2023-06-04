@@ -77,6 +77,11 @@
   .blog-entry {
     width: calc(50% - 20px);
     margin-right: 20px;
+    border-radius: 10px;
+  }
+  .blog-img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -97,6 +102,11 @@
   .blog-entry {
     width: calc(50% - 20px);
     margin-right: 20px;
+    border-radius: 20px;
+  }
+  .blog-img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 }
 @media (min-width: 992px) {
@@ -118,6 +128,11 @@
     width: calc(33.33% - 20px);
     margin-right: 20px;
     margin-bottom: 20px;
+    border-radius: 20px;
+  }
+  .blog-img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 }
 .btn-category-form {
@@ -287,14 +302,28 @@
 }
 
 .emoji {
+  color: black;
   display: inline-block;
   transition: transform 0.3s ease;
 }
 
+.originalMessage {
+  padding-bottom: 10px;
+}
+
 .emoji-reaction {
   position: absolute;
-  padding-top: 5px;
   cursor: pointer;
+  color: black;
+}
+
+.self-emoji-reaction {
+  border: 1px solid rgb(29, 155, 209);
+  background-color: rgba(29, 155, 209, 0.1019607843);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tooltip-text {

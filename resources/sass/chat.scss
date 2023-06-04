@@ -125,14 +125,26 @@
     transform: scale(1.2);
 }
 .emoji {
+    color: black;
     display: inline-block;
     transition: transform 0.3s ease;
+}
+.originalMessage {
+    padding-bottom: 10px;
 }
 // コメントに付いたリアクション
 .emoji-reaction {
     position: absolute;
-    padding-top: 5px;
     cursor: pointer;
+    color: black;
+}
+.self-emoji-reaction {
+    border: 1px solid rgba(29,155,209,1);
+    background-color: #1D9BD11A;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 // リアクションの名前表示
 .tooltip-text {

@@ -110,7 +110,7 @@
 												<div class="emojiReactionContent">
 													@foreach($post->emojiMessages as $emojiMessage)
 														@if($emojiMessage->emoji)
-														<div class="emoji-reaction" style="left: {{ 20 + $loop->index * 15 }}px;">
+														<div class="emoji-reaction @if(auth()->user()->id == $emojiMessage->user->id) self-emoji-reaction @endif" style="left: {{ 20 + $loop->index * 17 }}px;">
 														<span class="tooltip-text">{{$emojiMessage->user->name}}</span>
 															{!! $emojiMessage->emoji->decimal_code !!}
 														</div>
@@ -135,7 +135,9 @@
 										@if($post->trashed())
 											削除されたメッセージ
 										@else
-											{{ $post->message }}
+											<div class="originalMessage">
+												{{ $post->message }}
+											</div>
 											<div class="emoji-icon" data-target="#emoji-tool2-{{ $post->id }}">
 												<i>&#9786;</i>
 											</div>
@@ -153,7 +155,7 @@
 											@endif
 											@foreach($post->emojiMessages as $emojiMessage)
 												@if($emojiMessage->emoji)
-												<div class="emoji-reaction" style="left: {{ 20 + $loop->index * 15 }}px;">
+												<div class="emoji-reaction @if(auth()->user()->id == $emojiMessage->user->id) self-emoji-reaction @endif" style="left: {{ 20 + $loop->index * 17 }}px;">
 												<span class="tooltip-text">{{$emojiMessage->user->name}}</span>
 													{!! $emojiMessage->emoji->decimal_code !!}
 												</div>
