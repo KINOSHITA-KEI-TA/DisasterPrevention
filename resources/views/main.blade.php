@@ -72,7 +72,7 @@
 								<div class="col-md-8 col-md-offset-2 text-center js-fullheight slider-text">
 									<div class="slider-text-inner">
 										<h1>くらしを守る</h1>
-											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-monitor"></i> Live Preview</a></p>
+											<p><a class="btn btn-primary btn-demo popup-vimeo" href="https://www.youtube.com/channel/UCc62qvfW1jRsNH2X71_O9hg"> <i class="icon-monitor"></i> Live Preview</a></p>
 									</div>
 								</div>
 							</div>
