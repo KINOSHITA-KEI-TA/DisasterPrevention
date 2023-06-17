@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/auth.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
