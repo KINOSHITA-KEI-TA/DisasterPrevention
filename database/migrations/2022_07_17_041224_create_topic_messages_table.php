@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('topic_messages', function (Blueprint $table) {
             $table->id();
-            $table->text("message");
+            $table->text("message")->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('topic_id')->constrained()->index();
 

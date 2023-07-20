@@ -45,7 +45,7 @@
 					{{ csrf_field() }}
 					<div class="col-10 category-form-text d-flex flex-column">
 						<input type="hidden" name="category_id" value="{{ $id }}">
-						<input type="text" name="TopicName" class="form-control class="form-control category-form-input @error('TopicName') is-invalid @enderror" placeholder="新規作成チャンネル">
+						<input type="text" name="TopicName" class="form-control category-form-input @error('TopicName') is-invalid @enderror" placeholder="新規作成チャンネル">
 						@error('TopicName')
 							<span class="invalid-feedback-custom" role="alert">
 								<strong>{{ $message }}</strong>
@@ -76,7 +76,11 @@
 										@if ($post->replyTo && $post->replyTo->originalMessage)
 											<div class="reply-info d-flex align-items-center ml-4" data-reply-to="{{ $post->replyTo->originalMessage->id }}">
 												<div class="reply-username">{{ $post->replyTo->originalMessage->user->name }}</div>
-												<div class="reply-message pl-2">{{ $post->replyTo->originalMessage->message }}</div>
+												@if($post->replyTo->originalMessage->trashed())
+													<div class="reply-message pl-2">削除されたメッセージ</div>
+												@else
+													<div class="reply-message pl-2">{{ $post->replyTo->originalMessage->message }}</div>
+												@endif
 											</div>
 										@endif
 										<div class="d-flex align-items-center">
@@ -92,6 +96,13 @@
 												<div class="originalMessage">
 													{{ $post->message }}
 												</div>
+												@if($post->images)
+													<div class="post-images">
+														@foreach($post->images as $image)
+															<img src="{{ $image->image_url }}" alt="Message Image" class="responsive-image">
+														@endforeach
+													</div>
+												@endif
 												<div class="emoji-icon" data-target="#emoji-tool-{{ $post->id }}">
 													<i>&#9786;</i>
 												</div>
@@ -138,6 +149,13 @@
 											<div class="originalMessage">
 												{{ $post->message }}
 											</div>
+											@if($post->images)
+												<div class="post-images">
+													@foreach($post->images as $image)
+														<img src="{{ $image->image_url }}" alt="Message Image" class="responsive-image">
+													@endforeach
+												</div>
+											@endif
 											<div class="emoji-icon" data-target="#emoji-tool2-{{ $post->id }}">
 												<i>&#9786;</i>
 											</div>
@@ -201,11 +219,18 @@
 					</a>
 				</div>
 			</div>
-			<div class= "message_text d-flex justify-content-center">
+			<div class="message_text d-flex justify-content-center">
 				<input type="hidden" name="topic_id" value="{{ $id }}">
 				<input type="hidden" id="current-user-id" value="{{ Auth::id() }}">
-				<textarea name="message" id="text2" class="form-control" rows="1"></textarea>
-				<button id="messageSubmit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
+				<div class="form-control editable-container" style="min-height: 54px; overflow: auto;">
+					<div id="text2" class="editable-text" contenteditable="true" onfocus="this.parentNode.style.borderColor='#228896'" onblur="this.parentNode.style.borderColor=''"></div>
+					<div id="image-container"></div>
+				</div>
+				<input type="file" name="image[]" id="image" class="form-control" accept="image/*" style="display: none;" multiple>
+				<div class="btn-container">
+					<button id="uploadButton" type="button" class="btn btn-primary btn-category-form"><i class="fas fa-paperclip d-flex align-items-center"></i></button>
+					<button id="messageSubmit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
+				</div>
 			</div>
 	</aside>
 	<script>

@@ -1,5 +1,5 @@
 <aside id="fh5co-aside" role="complementary" class="border custom-aside sidebar">
-    <h1 id="fh5co-logo"><a href="/home">Disaster<br>Prevention</a></h1>
+    <h1 id="fh5co-logo"><a href="/">Disaster<br>Prevention</a></h1>
     <div id="scrollable-nav">
         <nav id="fh5co-main-menu" role="navigation">
             <ul>

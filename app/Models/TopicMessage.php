@@ -32,5 +32,10 @@ class TopicMessage extends Model
     {
         return $this->hasMany(TopicMessageEmoji::class, 'message_id');
     }
+    public function images()
+    {
+        return $this->hasMany(MessageImage::class, 'message_id');
+    }
+
 
 }

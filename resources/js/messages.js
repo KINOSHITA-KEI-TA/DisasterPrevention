@@ -27,6 +27,15 @@ channel.bind('MessageSent', function(data) {
                 '<div class="reply-message pl-2">' + data.message.reply_to.original_message.message + '</div>' +
             '</div>';
     }
+    let imageHtml = '';
+    if (data.message.images && data.message.images.length > 0) {
+        data.message.images.forEach(function (image) {
+            // 画像URLを取得
+            const imageUrl = image.image_url;
+            // 画像要素を作成
+            imageHtml += '<img src="' + imageUrl + '" class="responsive-image">';
+        });
+    }
     if ($("#alternative-content").is(":visible")) {
         let messageId = data.message.id;
         let deleteButton = '';
@@ -39,7 +48,7 @@ channel.bind('MessageSent', function(data) {
                 '</button>' +
             '</form>';
         }
-        console.log(data.message.topic.category_id);
+        // console.log(data.message.topic.category_id);
         let messageContainer =
             '<div class="message-container" data-message-id="' + messageId + '">' +
                 '<div class="d-flex align-items-center">' +
@@ -47,6 +56,7 @@ channel.bind('MessageSent', function(data) {
                     '<div class="post-date ml-2">' + formattedDate + '</div>' +
                 '</div>' +
                 '<div class="message">' + formattedMessage +
+                    '<div class="post-images">' + imageHtml + '</div>' +
                     '<div class="emoji-icon" data-target="#emoji-tool-' + messageId + '">' +
                         '<i>&#9786;</i>' +
                     '</div>' +
@@ -83,6 +93,7 @@ channel.bind('MessageSent', function(data) {
                     '<div class="post-date ml-2">' + formattedDate + '</div>' +
                 '</div>' +
                 '<div class="message">' + formattedMessage +
+                '<div class="post-images">' + imageHtml + '</div>' +
                     '<div class="emoji-icon" data-target="#emoji-tool-' + messageId + '">' +
                         '<i>&#9786;</i>' +
                     '</div>' +
@@ -133,37 +144,58 @@ function updateReplyCount(data) {
     }
 }
 
-
 // メッセージ送信
+let selectedFiles = [];
 function sendMessage(textareaId) {
+    // バリデーション
+    const messageElement = $("#" + textareaId);
+    const message = messageElement.text();
+    const files = selectedFiles;
+    messageElement.removeClass('is-invalid');
+    if (!message && (!files || files.length === 0)) {
+        messageElement.addClass('is-invalid');
+        return;
+    }
 
+    // メッセージ送信処理
     const url = "/topic_message";
-    const data = {
-        '_token': $('meta[name="csrf-token"]').attr('content'),
-        'message': $("#" + textareaId).val(),
-        'topic_id': $("input[name='topic_id']").val()
-    };
+    let data = new FormData();
+    data.append('_token', $('meta[name="csrf-token"]').attr('content'));
+    data.append('message', message);
+    data.append('topic_id', $("input[name='topic_id']").val());
+
+    // Add files
+    for (let i = 0; i < files.length; i++) {
+        data.append('image[' + i + ']', files[i]);
+    }
     if (isReply) {
-        data['message_id'] = messageId;
-        data['is_reply'] = 1;
+        data.append('message_id', messageId);
+        data.append('is_reply', 1);
     }
     $.ajax({
         url: url,
         data: data,
         method: "POST",
+        processData: false,
+        contentType: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
         },
         success: function () {
-            $("#" + textareaId).val("");
+            $("#" + textareaId).text("");
             var repliesWindow = $('#replies-window');
             if (!repliesWindow.is(':visible')) {
                 resetReplyState();
                 $("#replying-to").addClass("d-none");
             }
+            $('#image-container').empty();
+            let editableTextHeight = Math.min(editableText.scrollHeight + 20, 170);
+            let editableImageHeight = $('#image-container').children().length > 0 ? Math.min(editableImage.scrollHeight, 170) : 0;
+            editableContainer.style.height = `${editableTextHeight + editableImageHeight}px`;
+            selectedFiles = [];
         },
         error: function () {
-            alert("Failed to send message.");
+            alert("メッセージの送信に失敗しました。");
         }
     });
 }
@@ -502,12 +534,88 @@ $(document).on("click", ".emoji", function() {
     });
 });
 
-// register用のjs
-document.getElementById('agree').addEventListener('change', function() {
-    if (this.checked) {
-        document.getElementById('registerButton').disabled = false;
-    } else {
-        document.getElementById('registerButton').disabled = true;
+$(document).ready(function () {
+    $('#uploadButton').click(function () {
+        $('#image').click();
+    });
+
+    $('#image').change(function () {
+        for (let file of this.files) {
+            let reader = new FileReader();
+                reader.onload = function (e) {
+                var img = $('<img>').attr('src', e.target.result);
+                img.css({
+                    width: '62px',
+                    height: '62px',
+                    objectFit: 'cover',
+                    borderRadius: '20px',
+                });
+                var closeButton = $('<span>&times;</span>').css({
+                    position: 'absolute',
+                    right: '-3px',
+                    top: '-3px',
+                    cursor: 'pointer',
+                    border: '1px solid white',
+                    backgroundColor: 'Black',
+                    color: 'white',
+                    fontSize: '10px',
+                    borderRadius: '50%',
+                    width: '15px',
+                    height: '15px',
+                    textAlign: 'center',
+                    alignItem: 'center',
+                    lineHeight: '12px',
+                });
+                // アイコンがクリックされたときに画像を削除
+                closeButton.click(function () {
+                    let parent = $(this).parent();
+                    let index = $('#image-container').children().index(parent);
+                    parent.remove();
+                    let editableTextHeight = Math.min(editableText.scrollHeight + 20, 170);
+                    let editableImageHeight = $('#image-container').children().length > 0 ? Math.min(editableImage.scrollHeight, 170) : 0;
+                    editableContainer.style.height = `${editableTextHeight + editableImageHeight}px`;
+
+                    selectedFiles.splice(index, 1);
+                });
+                let imgContainer = $('<div>').css({
+                    position: 'relative',
+                    display: 'inline-block'
+                }).append(img, closeButton);
+                $('#image-container').append(imgContainer);
+            }
+            reader.readAsDataURL(file);
+            selectedFiles.push(file);
+        }
+    });
+});
+
+let editableText = document.getElementById('text2');
+let editableImage = document.getElementById('image-container');
+let editableContainer = document.querySelector('.editable-container');
+let imageInput = document.getElementById('image');
+editableText.addEventListener('input', () => {
+    let newHeight = Math.min(editableText.scrollHeight + 20, 170);
+    let imageHeight = $('#image-container').children().length > 0 ? Math.min(editableImage.scrollHeight, 170) : 0;
+    editableContainer.style.height = `${newHeight + imageHeight}px`;
+
+});
+
+imageInput.addEventListener('change', () => {
+    let file = imageInput.files[0];
+    if (file) {
+        const img = new Image();
+        img.onload = function () {
+            let imageHeight = $('#image-container').children().length > 0 ? Math.min(editableImage.scrollHeight, 170) : 0;
+            editableImage.style.height = `${imageHeight}px`;
+            let newHeight = Math.min(editableText.scrollHeight + 20, 170);
+            editableContainer.style.height = `${newHeight + imageHeight}px`;
+            URL.revokeObjectURL(this.src);
+        }
+        img.src = URL.createObjectURL(file);
     }
 });
+
+function displayModalImage(src) {
+    document.getElementById('modalImage').src = src;
+}
 

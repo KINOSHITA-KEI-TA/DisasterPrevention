@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreTopicMessageRequest;
 use App\Http\Requests\UpdateTopicMessageRequest;
 use App\Models\ReplyMessage;
@@ -10,10 +11,13 @@ use App\Models\TopicMessage;
 use App\Models\Topic;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\MessageImage;
 use App\Events\MessageSent;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\Emoji;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 
 class TopicMessageController extends Controller
@@ -38,10 +42,12 @@ class TopicMessageController extends Controller
             'messages.replyTo.originalMessage',
             'messages.replyMessages',
             'messages.emojiMessages',
-            'messages.emojiMessages.emoji'
+            'messages.emojiMessages.emoji',
+            'messages.images'
             ])->find($id);
             $switch = true;
             // dd($topic_messages->messages->pluck('replyTo.originalMessage'));
+            // dd($topic_messages->messages);
             // dd($topic_messages->messages);
             $emojis = Emoji::get();
         $category = Category::with('topics')->find($category_id);
@@ -75,12 +81,29 @@ class TopicMessageController extends Controller
             $reply->save();
             $message->load('replyTo.originalMessage.user');
         }
+        if ($request->has('image')) {
+            $files = $request->file('image');
+            foreach ($files as $file) {
+                // ファイル名を生成 (ここでは時間とランダムな文字列、元の拡張子を使用)
+                $filename = time() . Str::random(10) . '.' . $file->getClientOriginalExtension();
+                // S3に画像をアップロード
+                try {
+                    Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+                } catch (\Exception $e) {
+                    Log::error('Failed to upload image to S3: ' . $e->getMessage());
+                    throw $e;
+                }
+                // 画像のURLを取得
+                $image_url = Storage::disk('s3')->url($filename);
+                // メッセージに関連する新しい画像レコードを作成
+                $message->images()->create(['image_url' => $image_url]);
+            }
+        }
 
         event(new MessageSent($user, $message));
 
         return response()->json(['message' => $message->message]);
     }
-
 
     /**
      * Show the form for creating a new resource.

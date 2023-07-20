@@ -37,7 +37,7 @@ class LocalGovernmentController extends Controller
         $user->local_government_id = $request->local_government_id;
         $user->save();
         if(($user->save())) {
-            return redirect('home');
+            return redirect('/');
         }
         return route('local_government.index');
     }
