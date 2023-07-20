@@ -27,6 +27,7 @@ class MessageSent implements ShouldBroadcast
     {
         $this->user = $user;
         $this->message = $message;
+        $this->message->load('images');
         if ($message->replyTo) {
             $this->message->reply_to = $message->replyTo;
         }

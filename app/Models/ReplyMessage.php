@@ -16,11 +16,11 @@ class ReplyMessage extends Model
 
     public function originalMessage()
     {
-        return $this->belongsTo(TopicMessage::class, 'message_id');
+        return $this->belongsTo(TopicMessage::class, 'message_id')->withTrashed();
     }
     public function replyToMessage()
     {
-        return $this->belongsTo(TopicMessage::class, 'reply_id');
+        return $this->belongsTo(TopicMessage::class, 'reply_id')->withTrashed();
     }
 
 }

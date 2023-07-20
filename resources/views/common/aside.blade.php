@@ -1,8 +1,8 @@
 <aside id="fh5co-aside" role="complementary" class="border js-fullheight">
-    <h1 id="fh5co-logo"><a href="/home">Disaster<br>Prevention</a></h1>
+    <h1 id="fh5co-logo"><a href="/">Disaster<br>Prevention</a></h1>
     <nav id="fh5co-main-menu" role="navigation">
         <ul>
-            <li class="fh5co-active"><a href="/home">ホーム</a></li>
+            <li class="fh5co-active"><a href="/">ホーム</a></li>
             @if(Auth::check())
             <li><a href="/userpage/{{Auth::user()->id}}">マイページ</a></li>
             @endif

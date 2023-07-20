@@ -147,6 +147,14 @@
     margin: 4px 2px;
     cursor: pointer;
 }
+.btn-container {
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+}
 
 .btn-category-select {
     font-size: 10px;

@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['web'])->group(function () {
     // ...
 });
-Route::get('/', function () {
-    return view('main');
-});
+// Route::get('/', function () {
+//     return view('main');
+// });
 Route::get('/contact', function () {
     return view('contact');
 });
@@ -61,7 +61,7 @@ Route::get("/privacy", function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // 自治体登録画面、検索、保存
 Route::get('/localgovernment', [App\Http\Controllers\LocalGovernmentController::class, 'index'])->name('local_government.index');

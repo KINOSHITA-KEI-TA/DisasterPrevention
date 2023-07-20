@@ -148,6 +148,15 @@
   cursor: pointer;
 }
 
+.btn-container {
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .btn-category-select {
   font-size: 10px;
   border-radius: 17px;
@@ -481,4 +490,27 @@ input:focus + .slider {
 
 input:checked + .slider:before {
   transform: translateX(1.9em);
+}
+
+.editable-container {
+  display: block;
+  margin-right: 150px;
+}
+
+@media (max-width: 767px) {
+  .editable-container {
+    margin-right: 100px;
+  }
+}
+#text2 {
+  outline: none;
+}
+
+.responsive-image {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 15px;
+  padding-bottom: 3px;
 }
