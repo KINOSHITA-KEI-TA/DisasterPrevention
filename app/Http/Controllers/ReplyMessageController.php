@@ -24,6 +24,7 @@ class ReplyMessageController extends Controller
             'replyToMessage.user',
             'replyToMessage.emojiMessages.emoji',
             'replyToMessage.emojiMessages.user',
+            'replyToMessage.images',
             'replyToMessage' => function ($query) {
             $query->withTrashed();
             },
