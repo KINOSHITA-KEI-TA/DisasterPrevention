@@ -152,10 +152,11 @@
 											@if($post->images)
 												<div class="post-images">
 													@foreach($post->images as $image)
-														<img src="{{ $image->image_url }}" alt="Message Image" class="responsive-image">
+														<img src="{{ $image->image_url }}" alt="Message Image" class="responsive-image clickable-image">
 													@endforeach
 												</div>
 											@endif
+
 											<div class="emoji-icon" data-target="#emoji-tool2-{{ $post->id }}">
 												<i>&#9786;</i>
 											</div>
@@ -204,8 +205,15 @@
 		<div class= "message_text d-flex justify-content-center" style="padding: 0px 10px 0px 10px; position: absolute; bottom: 20px; left: 0; right: 0;">
 			<input type="hidden" name="topic_id" value="{{ $id }}">
 			<input type="hidden" id="current-user-id" value="{{ Auth::id() }}">
-			<textarea name="message" id="text1" class="form-control" rows="1"></textarea>
-			<button id="repliesSubmit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
+			<div class="form-control replies-editable-container" style="min-height: 54px; overflow: auto;">
+				<div id="text1" class="editable-text" contenteditable="true" onfocus="this.parentNode.style.borderColor='#228896'" onblur="this.parentNode.style.borderColor=''"></div>
+				<div id="replies-image-container"></div>
+			</div>
+			<input type="file" name="image[]" id="replies-image" class="form-control" accept="image/*" style="display: none;" multiple>
+			<div class="btn-container">
+				<button id="repliesUploadButton" type="button" class="btn btn-primary btn-category-form"><i class="fas fa-paperclip d-flex align-items-center"></i></button>
+				<button id="repliesSubmit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>
+			</div>
 		</div>
 	</div>
 
@@ -226,7 +234,7 @@
 					<div id="text2" class="editable-text" contenteditable="true" onfocus="this.parentNode.style.borderColor='#228896'" onblur="this.parentNode.style.borderColor=''"></div>
 					<div id="image-container"></div>
 				</div>
-				<input type="file" name="image[]" id="image" class="form-control" accept="image/*" style="display: none;" multiple>
+				<input type="file" name="image[]" id="main-image" class="form-control" accept="image/*" style="display: none;" multiple>
 				<div class="btn-container">
 					<button id="uploadButton" type="button" class="btn btn-primary btn-category-form"><i class="fas fa-paperclip d-flex align-items-center"></i></button>
 					<button id="messageSubmit" type="submit" class="btn btn-primary btn-category-form"><i class="fas fa-paper-plane d-flex align-items-center"></i></button>

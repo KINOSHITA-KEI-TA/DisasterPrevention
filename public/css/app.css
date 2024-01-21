@@ -497,11 +497,25 @@ input:checked + .slider:before {
   margin-right: 150px;
 }
 
+.replies-editable-container {
+  display: block;
+  margin-right: 150px;
+}
+
 @media (max-width: 767px) {
   .editable-container {
     margin-right: 100px;
   }
 }
+@media (max-width: 767px) {
+  .replies-editable-container {
+    margin-right: 100px;
+  }
+}
+#text1 {
+  outline: none;
+}
+
 #text2 {
   outline: none;
 }

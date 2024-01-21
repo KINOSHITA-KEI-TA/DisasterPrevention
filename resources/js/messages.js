@@ -17,7 +17,11 @@ channel.bind('MessageSent', function(data) {
     // console.log(data.message.topic.category_id);
     const senderId = data.user.id;
     const currentUserId = parseInt($("#current-user-id").val());
-    var formattedMessage = data.message.message.replace(/\n/g, '<br>');
+    if (data.message.message) {
+        var formattedMessage = data.message.message.replace(/\n/g, '<br>');
+    } else {
+        var formattedMessage = "";
+    }
     const formattedDate = formatDate(data.message.created_at);
     let replyHtml = '';
     if (data.message.reply_to) {
@@ -48,7 +52,7 @@ channel.bind('MessageSent', function(data) {
                 '</button>' +
             '</form>';
         }
-        // console.log(data.message.topic.category_id);
+        // console.log(imageHtml);
         let messageContainer =
             '<div class="message-container" data-message-id="' + messageId + '">' +
                 '<div class="d-flex align-items-center">' +
@@ -356,10 +360,18 @@ function openRepliesWindow(repliesCountElem) {
         emojiReactionElement = `
                             ${emojiReactionContent}`;
     }
+    var originalMessageImages = originalMessage.find('.post-images img');
+    var imageHtml = '';
+    if (originalMessageImages.length > 0) {
+        originalMessageImages.each(function () {
+            var imgSrc = $(this).attr('src');
+            imageHtml += `<img src="${imgSrc}" alt="Message Image" class="img-fluid responsive-image">`;
+        });
+    }
     // console.log(emojiReactionContent)
     var replyCount = repliesCountElem.text();
     var repliesContainer = $('#replies-container');
-    repliesContainer.empty(); // コンテナの中身を空にする
+    repliesContainer.empty();
     // 返信ウィンドウにオリジナルメッセージと返信件数を表示
     repliesContainer.html(`
     <div class="original-message">
@@ -367,11 +379,17 @@ function openRepliesWindow(repliesCountElem) {
             <div class="username">${originalMessageUsername}</div>
             <div class="post-date ml-2">${originalMessageDate}</div>
         </div>
-        <div class="message">${originalMessageContent}
+        <div class="message">
+            ${originalMessageContent}
+        </div>
+        <div class="post-images">
+            ${imageHtml}
+        </div>
+        <div class="emoji-reactions">
             ${emojiReactionElement}
         </div>
     </div>
-    <div class="replies-count" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+    <div class="replies-count mt-4" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">
         ${replyCount}
     </div>
     `);
@@ -385,6 +403,7 @@ function openRepliesWindow(repliesCountElem) {
             console.log(replies);
             replies.forEach(function(reply) {
                 const Dateformat = formatDate(reply.created_at);
+                // console.log(reply.reply_to_message.images);
                 // 返信メッセージのHTMLを作成
                 var replyHtml = `
                     <div class="reply-message">
@@ -397,6 +416,16 @@ function openRepliesWindow(repliesCountElem) {
                             reply.reply_to_message.deleted_at
                             ? '削除されたメッセージ'
                             : `${reply.reply_to_message.message}
+                            ${
+                                // 画像データの配列をループして、各画像を表示
+                                reply.reply_to_message.images && reply.reply_to_message.images.length > 0
+                                ? reply.reply_to_message.images.map(image =>
+                                    `<div class="post-images">
+                                    <img src="${image.image_url}" alt="投稿された画像" class="img-fluid responsive-image">
+                                    </div>`
+                                ).join('')
+                                : ''
+                            }
                                 ${
                                     reply.reply_to_message.emoji_messages
                                     ? reply.reply_to_message.emoji_messages.map((emojiMessage, index) =>
@@ -416,7 +445,7 @@ function openRepliesWindow(repliesCountElem) {
 
                 // 返信メッセージをコンテナに追加
                 repliesContainer.append(replyHtml);
-                console.log(reply);
+                // console.log(reply);
             });
 
             $('.close-replies-window').on('click', function () {
@@ -536,10 +565,14 @@ $(document).on("click", ".emoji", function() {
 
 $(document).ready(function () {
     $('#uploadButton').click(function () {
-        $('#image').click();
+        $('#main-image').click();
     });
 
-    $('#image').change(function () {
+    $('#main-image').change(function () {
+        if (this.files.length + selectedFiles.length > 3) {
+            alert('一回の投稿で画像は3枚までです。');
+            return; // 処理を中断
+        }
         for (let file of this.files) {
             let reader = new FileReader();
                 reader.onload = function (e) {
@@ -589,17 +622,82 @@ $(document).ready(function () {
     });
 });
 
-let editableText = document.getElementById('text2');
+// 返信ウィンドウ画像選択
+$(document).ready(function () {
+    $('#repliesUploadButton').click(function () {
+        $('#replies-image').click();
+    });
+
+    $('#replies-image').change(function () {
+        if (this.files.length + selectedFiles.length > 3) {
+            alert('一回の投稿で画像は3枚までです。');
+            return; // 処理を中断
+        }
+        for (let file of this.files) {
+            let reader = new FileReader();
+                reader.onload = function (e) {
+                var img = $('<img>').attr('src', e.target.result);
+                img.css({
+                    width: '62px',
+                    height: '62px',
+                    objectFit: 'cover',
+                    borderRadius: '20px',
+                });
+                var closeButton = $('<span>&times;</span>').css({
+                    position: 'absolute',
+                    right: '-3px',
+                    top: '-3px',
+                    cursor: 'pointer',
+                    border: '1px solid white',
+                    backgroundColor: 'Black',
+                    color: 'white',
+                    fontSize: '10px',
+                    borderRadius: '50%',
+                    width: '15px',
+                    height: '15px',
+                    textAlign: 'center',
+                    alignItem: 'center',
+                    lineHeight: '12px',
+                });
+                // アイコンがクリックされたときに画像を削除
+                closeButton.click(function () {
+                    let parent = $(this).parent();
+                    let index = $('#replies-image-container').children().index(parent);
+                    parent.remove();
+                    let editableTextHeight = Math.min(editableText.scrollHeight + 20, 170);
+                    let editableImageHeight = $('#replies-image-container').children().length > 0 ? Math.min(editableImage.scrollHeight, 170) : 0;
+                    editableContainer.style.height = `${editableTextHeight + editableImageHeight}px`;
+
+                    selectedFiles.splice(index, 1);
+                });
+                let imgContainer = $('<div>').css({
+                    position: 'relative',
+                    display: 'inline-block'
+                }).append(img, closeButton);
+                $('#replies-image-container').append(imgContainer);
+            }
+            reader.readAsDataURL(file);
+            selectedFiles.push(file);
+        }
+    });
+});
+
+
+let editableText2 = document.getElementById('text2');
+let editableText1 = document.getElementById('text1');
 let editableImage = document.getElementById('image-container');
+let repliesEditableImage = document.getElementById('replies-image-container');
+let repliesEditableContainer = document.querySelector('.replies-editable-container');
 let editableContainer = document.querySelector('.editable-container');
-let imageInput = document.getElementById('image');
-editableText.addEventListener('input', () => {
-    let newHeight = Math.min(editableText.scrollHeight + 20, 170);
+let imageInput = document.getElementById('main-image');
+let repliesImageInput = document.getElementById('replies-image');
+
+editableText2.addEventListener('input', () => {
+    let newHeight = Math.min(editableText2.scrollHeight + 20, 170);
     let imageHeight = $('#image-container').children().length > 0 ? Math.min(editableImage.scrollHeight, 170) : 0;
     editableContainer.style.height = `${newHeight + imageHeight}px`;
 
 });
-
 imageInput.addEventListener('change', () => {
     let file = imageInput.files[0];
     if (file) {
@@ -607,7 +705,7 @@ imageInput.addEventListener('change', () => {
         img.onload = function () {
             let imageHeight = $('#image-container').children().length > 0 ? Math.min(editableImage.scrollHeight, 170) : 0;
             editableImage.style.height = `${imageHeight}px`;
-            let newHeight = Math.min(editableText.scrollHeight + 20, 170);
+            let newHeight = Math.min(editableText2.scrollHeight + 20, 170);
             editableContainer.style.height = `${newHeight + imageHeight}px`;
             URL.revokeObjectURL(this.src);
         }
@@ -615,7 +713,32 @@ imageInput.addEventListener('change', () => {
     }
 });
 
-function displayModalImage(src) {
-    document.getElementById('modalImage').src = src;
-}
+editableText1.addEventListener('input', () => {
+    let repliesNewHeight = Math.min(editableText1.scrollHeight + 20, 170);
+    let repliesImageHeight = $('#replies-image-container').children().length > 0 ? Math.min(repliesEditableImage.scrollHeight, 170) : 0;
+    repliesEditableContainer.style.height = `${repliesNewHeight + repliesImageHeight}px`;
+
+});
+repliesImageInput.addEventListener('change', () => {
+    let file = repliesImageInput.files[0];
+    if (file) {
+        const img = new Image();
+        img.onload = function () {
+            let imageHeight = $('#replies-image-container').children().length > 0 ? Math.min(repliesEditableImage.scrollHeight, 170) : 0;
+            repliesEditableImage.style.height = `${imageHeight}px`;
+            let newHeight = Math.min(editableText1.scrollHeight + 20, 170);
+            repliesEditableContainer.style.height = `${newHeight + imageHeight}px`;
+            URL.revokeObjectURL(this.src);
+        }
+        img.src = URL.createObjectURL(file);
+    }
+});
+
+// function displayModalImage(src) {
+//     document.getElementById('modalImage').src = src;
+// }
+
+
+
+
 
